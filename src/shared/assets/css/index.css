@@ -1,0 +1,35 @@
+@import "layout";
+@import "plugins";
+@import "ui";
+@import "utils";
+
+body {
+    @apply overflow-x-hidden bg-gray-100 text-gray-800 dark:bg-gray-950 dark:text-white;
+
+    &,
+    * {
+        &::-webkit-scrollbar {
+            @apply h-1 w-1 rounded-xl;
+        }
+
+        &::-webkit-scrollbar-thumb {
+            @apply rounded-md bg-gray-200 dark:bg-gray-800;
+        }
+
+        &::-webkit-scrollbar-track {
+            @apply m-0.5 rounded-md bg-gray-50 dark:bg-gray-950;
+        }
+
+        &::-webkit-scrollbar-corner {
+            background: transparent;
+        }
+    }
+
+    &:has(.hide-body-scroll)::-webkit-scrollbar {
+        @apply w-0;
+    }
+}
+
+.no-scrollbar::-webkit-scrollbar {
+    @apply hidden;
+}

@@ -1,0 +1,421 @@
+<script lang="ts" setup>
+import AppSection from "~/widgets/layout/app-section.vue"
+import { useSpecialistsApi } from "~/entities/specialists/specialists.api"
+import { useRegionApi } from "~/api/region/api"
+
+const { t, locale, locales, tm, rt } = useI18n({ useScope: "local" })
+const specialistsApi = useSpecialistsApi()
+const regionApi = useRegionApi()
+const emits = defineEmits<{
+  (e: "on:filter"): void
+}>()
+
+const specizalizations = ref({
+  data: [],
+  query: {
+    page: 1,
+    total: 0,
+    limit: 10
+  }
+})
+const regions = ref({
+  data: [],
+  query: {
+    page: 1,
+    total: 0,
+    limit: 10
+  }
+})
+const route = useRoute()
+const router = useRouter()
+const query = reactive({ ...route.query })
+const showFilterBottomSheet = ref(false)
+const showSortBottomSheet = ref(false)
+
+if (Array.isArray(query.specialization_type) === false) {
+  query.specialization_type = query.specialization_type ? [query.specialization_type] : []
+}
+if (Array.isArray(query.region) === false) {
+  query.region = query.region ? [query.region] : []
+}
+if (Array.isArray(query.specialist_lang) === false) {
+  query.specialist_lang = query.specialist_lang ? [query.specialist_lang] : []
+}
+if (Array.isArray(query.city) === false) {
+  query.city = query.city ? [query.city] : []
+}
+if (!query.gender) {
+  query.gender = undefined
+}
+
+onMounted(() => {
+  specialistsApi.getSpecizalizationsList(specizalizations.value.query).then((response) => {
+    specizalizations.value.data = response.data || []
+    specizalizations.value.query = response.pagination || {
+      page: 1,
+      total: 0,
+      limit: 10
+    }
+  })
+  regionApi.getRegionList(regions.value.query).then((response) => {
+    regions.value.data = response.data || []
+    regions.value.query = response.pagination || {
+      page: 1,
+      total: 0,
+      limit: 10
+    }
+  })
+})
+
+const genders = {
+  male: "genders.male",
+  female: "genders.female"
+}
+const sortItems = {
+  rating: "sort_items.rating",
+  expensive: "sort_items.expensive",
+  price: "sort_items.price",
+  experience: "sort_items.experience"
+}
+
+const changeRoute = () => {
+  console.log("changeRoute", query)
+  router
+    .replace({
+      query: {
+        ...query,
+        page: undefined
+      }
+    })
+    .then(() => {
+      emits("on:filter")
+    })
+}
+
+const clearSort = () => {
+  query.sort_by = undefined
+  changeRoute()
+  showSortBottomSheet.value = false
+}
+const clearFilters = () => {
+  query.specialization_type = []
+  query.gender = []
+  query.specialist_lang = []
+  query.city = []
+  changeRoute()
+  showFilterBottomSheet.value = false
+}
+</script>
+
+<template>
+  <app-section>
+    <div
+      class="flex flex-nowrap items-center justify-between rounded-[20px] bg-[#fff] p-[12px] md:px-[20px] md:py-[25px]"
+    >
+      <div class="hidden w-[953px] shrink-0 flex-nowrap items-center gap-[20px] md:flex">
+        <ui-dropdown body-class="max-h-[200px]" :distance="16">
+          <div
+            class="flex w-[223px] shrink-0 flex-nowrap items-center justify-between rounded-[100px] pb-[15px] pl-[20px] pr-[20px] pt-[15px]"
+            :class="{
+              'bg-[#F0F4F1] text-green-500': query.specialization_type?.length > 0,
+              'bg-[#f7f7f7] text-[#323232]': !query.specialization_type?.length
+            }"
+          >
+            <span class="font-['Onest'] text-body-18 font-normal">
+              {{ t("filters.specialization") }}
+            </span>
+            <icon class="h-[24px] w-[24px] rotate-[90deg]" name="h-icon:arrow"></icon>
+          </div>
+          <template #body>
+            <ui-dropdown-item v-for="specizalization in specizalizations.data" :key="specizalization.id">
+              <ui-checkbox
+                v-model="query.specialization_type"
+                :value="specizalization.id"
+                :label="getValue(specizalization, 'name', locale)"
+                @update:model-value="changeRoute"
+              />
+            </ui-dropdown-item>
+          </template>
+        </ui-dropdown>
+        <ui-dropdown body-class="max-h-[200px]" :distance="16">
+          <div
+            class="relative z-[55] flex w-[223px] shrink-0 flex-nowrap items-center justify-between rounded-[100px] pb-[15px] pl-[20px] pr-[20px] pt-[15px]"
+            :class="{
+              'bg-[#F0F4F1] text-green-500': query?.gender,
+              'bg-[#f7f7f7] text-[#323232]': !query?.gender
+            }"
+          >
+            <span class="font-['Onest'] text-body-18 font-normal">
+              {{ t("filters.gender") }}
+            </span>
+            <icon class="h-[24px] w-[24px] rotate-[90deg]" name="h-icon:arrow"></icon>
+          </div>
+          <template #body>
+            <ui-dropdown-item v-for="(value, key) in genders" :key="key">
+              <ui-radio v-model="query.gender" :value="key" :label="t(value)" @update:model-value="changeRoute" />
+            </ui-dropdown-item>
+          </template>
+        </ui-dropdown>
+        <ui-dropdown body-class="max-h-[200px]" :distance="16">
+          <div
+            class="relative z-[58] flex w-[223px] shrink-0 flex-nowrap items-center justify-between rounded-[100px] pb-[15px] pl-[20px] pr-[20px] pt-[15px]"
+            :class="{
+              'bg-[#F0F4F1] text-green-500': query.specialist_lang?.length > 0,
+              'bg-[#f7f7f7] text-[#323232]': !query.specialist_lang?.length
+            }"
+          >
+            <span class="font-['Onest'] text-body-18 font-normal">
+              {{ t("filters.language") }}
+            </span>
+            <icon class="h-[24px] w-[24px] rotate-[90deg]" name="h-icon:arrow"></icon>
+          </div>
+          <template #body>
+            <ui-dropdown-item v-for="{ code, name } in locales" :key="code">
+              <ui-checkbox v-model="query.specialist_lang" :value="code" :label="name" @update:model-value="changeRoute" />
+            </ui-dropdown-item>
+          </template>
+        </ui-dropdown>
+        <ui-dropdown body-class="max-h-[200px]" :distance="16">
+          <div
+            class="relative z-[61] flex w-[223px] shrink-0 flex-nowrap items-center justify-between rounded-[100px] pb-[15px] pl-[20px] pr-[20px] pt-[15px]"
+            :class="{
+              'bg-[#F0F4F1] text-green-500': query.city?.length > 0,
+              'bg-[#f7f7f7] text-[#323232]': !query.city?.length
+            }"
+          >
+            <span class="font-['Onest'] text-body-18 font-normal">
+              {{ t("filters.city") }}
+            </span>
+            <icon class="h-[24px] w-[24px] rotate-[90deg]" name="h-icon:arrow"></icon>
+          </div>
+          <template #body>
+            <ui-dropdown-item v-for="region in regions.data" :key="region.id">
+              <ui-checkbox
+                v-model="query.city"
+                :value="region.id"
+                :label="getValue(region, 'name', locale)"
+                @update:model-value="changeRoute"
+              />
+            </ui-dropdown-item>
+          </template>
+        </ui-dropdown>
+      </div>
+      <div class="flex w-full items-center gap-3 md:w-auto">
+        <div
+          class="flex w-full flex-nowrap items-center justify-between rounded-[100px] bg-[#f7f7f7] p-[12px] md:hidden md:w-[228px] md:gap-[12px] md:px-[20px] md:py-[15px]"
+          @click="showFilterBottomSheet = true"
+        >
+          <span class="font-['Onest'] text-mobile-body-15 font-medium text-[#323232]">
+            {{ t("filters.labels") }}
+          </span>
+          <icon class="h-[24px] w-[24px] rotate-[90deg]" name="h-icon:arrow"></icon>
+        </div>
+
+        <ui-dropdown class="!hidden md:!flex" body-class="max-h-[200px]" :distance="16">
+          <div
+            class="flex w-auto shrink-0 flex-nowrap items-center rounded-[100px] bg-[#f7f7f7] p-[12px] md:min-w-[228px] md:gap-[12px] md:px-[20px] md:py-[15px]"
+          >
+            <span class="font-['Onest'] text-mobile-body-15 font-medium text-[#323232] md:text-body-18">
+              {{ !query.sort_by ? t("filters.rating") : t(`sort_items.${query.sort_by}`) }}
+            </span>
+            <icon class="h-[24px] w-[24px] rotate-[90deg]" name="h-icon:arrow"></icon>
+          </div>
+          <template #body>
+            <ui-dropdown-item v-for="(value, key) in sortItems" :key="key">
+              <ui-radio
+                v-model="query.sort_by"
+                class="sort-item"
+                :value="key"
+                :label="t(value)"
+                @update:model-value="changeRoute"
+              />
+            </ui-dropdown-item>
+          </template>
+        </ui-dropdown>
+        <div
+          class="flex w-full flex-nowrap items-center justify-between rounded-[100px] bg-[#f7f7f7] p-[12px] md:hidden md:w-[228px] md:gap-[12px] md:px-[20px] md:py-[15px]"
+          @click="showSortBottomSheet = true"
+        >
+          <span class="font-['Onest'] text-mobile-body-15 font-medium text-[#323232] md:text-body-18">
+            {{ t("filters.rating") }}
+          </span>
+          <icon class="h-[24px] w-[24px] rotate-[90deg]" name="h-icon:arrow"></icon>
+        </div>
+      </div>
+    </div>
+    <ui-bottom-sheet v-model="showSortBottomSheet">
+      <div class="py-5">
+        <p class="mb-5 font-['Onest'] text-subtitle-20 font-semibold text-[#323232]">
+          {{ t("filters.rating") }}
+        </p>
+        <div class="flex w-full flex-col gap-3">
+          <div v-for="(value, key) in sortItems" :key="key">
+            <ui-radio v-model="query.sort_by" :value="key" :label="t(value)" @update:model-value="changeRoute" />
+          </div>
+        </div>
+      </div>
+      <template #footer>
+        <ui-button
+          class="mb-[10px] w-full"
+          type="button"
+          :label="t('save-filters')"
+          @click="showSortBottomSheet = false"
+        ></ui-button>
+        <ui-button
+          class="w-full"
+          type="button"
+          variant="outline"
+          :label="t('clear-filters')"
+          @click="clearSort"
+        ></ui-button>
+      </template>
+    </ui-bottom-sheet>
+    <ui-bottom-sheet v-model="showFilterBottomSheet">
+      <div class="py-5">
+        <p class="mb-5 font-['Onest'] text-subtitle-20 font-semibold text-[#323232]">
+          {{ t("filters.specialization") }}
+        </p>
+        <ui-hidden-card class="mb-5 border-b border-[#E8E8E8] pb-5">
+          <div class="flex w-full flex-col gap-3">
+            <div v-for="specizalization in specizalizations.data" :key="specizalization.id">
+              <ui-checkbox
+                v-model="query.specialization_type"
+                :value="specizalization.id"
+                :label="getValue(specizalization, 'name', locale)"
+                @update:model-value="changeRoute"
+              />
+            </div>
+          </div>
+        </ui-hidden-card>
+        <div class="mb-5 flex w-full flex-col gap-3 border-b border-[#E8E8E8] pb-5">
+          <p class="mb-[2px] font-['Onest'] text-subtitle-20 font-semibold text-[#323232]">
+            {{ t("filters.gender") }}
+          </p>
+          <div v-for="(value, key) in genders" :key="key">
+            <ui-radio v-model="query.gender" :value="key" :label="t(value)" @update:model-value="changeRoute" />
+          </div>
+        </div>
+
+        <ui-hidden-card class="mb-5 border-b border-[#E8E8E8] pb-5">
+          <div class="flex w-full flex-col gap-3">
+            <p class="mb-[2px] font-['Onest'] text-subtitle-20 font-semibold text-[#323232]">
+              {{ t("filters.language") }}
+            </p>
+            <div v-for="{ code, name } in locales" :key="code">
+              <ui-checkbox v-model="query.specialist_lang" :value="code" :label="name" @update:model-value="changeRoute" />
+            </div>
+          </div>
+        </ui-hidden-card>
+        <ui-hidden-card class="border-b border-[#E8E8E8] pb-5">
+          <div class="flex w-full flex-col gap-3">
+            <p class="mb-[2px] font-['Onest'] text-subtitle-20 font-semibold text-[#323232]">
+              {{ t("filters.city") }}
+            </p>
+            <div v-for="region in regions.data" :key="region.id">
+              <ui-checkbox
+                v-model="query.city"
+                :value="region.id"
+                :label="getValue(region, 'name', locale)"
+                @update:model-value="changeRoute"
+              />
+            </div>
+          </div>
+        </ui-hidden-card>
+      </div>
+      <template #footer>
+        <ui-button
+          class="mb-[10px] w-full"
+          type="button"
+          :label="t('save-filters')"
+          @click="showFilterBottomSheet = false"
+        ></ui-button>
+        <ui-button
+          class="w-full"
+          type="button"
+          variant="outline"
+          :label="t('clear-filters')"
+          @click="clearFilters"
+        ></ui-button>
+      </template>
+    </ui-bottom-sheet>
+  </app-section>
+</template>
+
+<style>
+.sort-item {
+  input {
+    display: none;
+  }
+}
+</style>
+
+<i18n>
+{
+  "ru": {
+    "filters": {
+      "labels": "Фильтр",
+      "specialization": "Специализация",
+      "gender": "Пол специалиста",
+      "language": "Язык",
+      "city": "Город",
+      "rating": "Сортировать"
+    },
+    "genders": {
+      "male": "Мужчина",
+      "female": "Женщина"
+    },
+    "sort_items": {
+      "rating": "Высокий рейтинг",
+      "expensive": "Сначала дороже",
+      "price": "Сначала дешевле",
+      "experience": "Более опытные"
+    },
+    "save-filters": "Сохранить фильтры",
+    "clear-filters": "Сбросить фильтры"
+  },
+  "uz": {
+    "filters": {
+      "labels": "Filtr",
+      "specialization": "Mutaxassislik",
+      "gender": "Mutaxassis jinsi",
+      "language": "Til",
+      "city": "Shahar",
+      "rating": "Saralash"
+    },
+    "genders": {
+      "male": "Erkak",
+      "female": "Ayol"
+    },
+    "sort_items": {
+      "rating": "Yuqori reyting",
+      "expensive": "Birinchi navbatda qimmatroq",
+      "price": "Avval arzonroq",
+      "experience": "Ko'proq tajribali"
+    },
+    "save-filters": "Filtrlarni saqlash",
+    "clear-filters": "Filtrlarni tozalash"
+  },
+  "en": {
+    "filters": {
+      "labels": "Filter",
+      "specialization": "Specialization",
+      "gender": "Gender of the specialist",
+      "language": "Language",
+      "city": "City",
+      "rating": "Sort"
+    },
+    "genders": {
+      "male": "Male",
+      "female": "Female"
+    },
+    "sort_items": {
+      "rating": "High rating",
+      "expensive": "More expensive first",
+      "price": "Cheaper first",
+      "experience": "More experienced"
+    },
+    "save-filters": "Save filters",
+    "clear-filters": "Clear filters"
+  }
+}
+</i18n>
