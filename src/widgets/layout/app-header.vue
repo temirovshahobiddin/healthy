@@ -5,6 +5,8 @@ import Logo from "~/shared/assets/Logo.svg"
 import AppMenu from "~/widgets/layout/app-menu.vue"
 import { useSiteSettingsStore } from "~/entities/site-settings/site-settings.store"
 
+const { orderModalOpen } = useModal()
+
 const isScrolled = ref(false)
 
 const handleScroll = () => {
@@ -132,7 +134,7 @@ onUnmounted(() => {
         <!--          ></icon>-->
         <!--        </ui-button>-->
         <ui-button
-          class="!hidden rounded-[15px] border-0 border-white !p-0 max-[1240px]:!flex  max-[1240px]:!border-0"
+          class="!hidden rounded-[15px] border-0 border-white !p-0 max-[1240px]:!flex max-[1240px]:!border-0"
           variant="outline"
           @click="showMenu = !showMenu"
         >
@@ -163,6 +165,7 @@ onUnmounted(() => {
             '!bg-white !text-green-500': !isScrolled,
             '!bg-green-500 !text-white': isScrolled
           }"
+          @click="orderModalOpen = true"
         >
           {{ t("actions.sign") }}
         </ui-button>

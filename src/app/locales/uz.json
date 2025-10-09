@@ -43,6 +43,29 @@
     "sum": "sum",
     "price": "{ price } so'mdan"
   },
+  "order_modal": {
+    "step": "Qadam",
+    "of": "dan",
+    "select_service": "Xizmatni tanlang",
+    "select_specialist": "Mutaxassisni tanlang",
+    "personal_data": "Shaxsiy ma'lumotlar",
+    "search_service": "Xizmat qidirish...",
+    "search_specialist": "Mutaxassis qidirish...",
+    "recommended_options": "Tavsiya etilgan variantlar",
+    "option_not_found": "Variant topilmadi",
+    "full_name": "F.I.O",
+    "phone_number": "Telefon raqami",
+    "visit_date": "Tashrif sanasi va vaqti",
+    "comment": "Izoh",
+    "next": "Keyingisi",
+    "skip": "O'tkazib yuborish",
+    "submit_request": "So'rov yuborish",
+    "request_sent": "So'rov yuborildi!",
+    "request_success_message": "Sizning so'rovingiz muvaffaqiyatli yuborildi va ko'rib chiqiladi. Biz siz bilan 15 daqiqa ichida bog'lanamiz",
+    "ok": "Ok",
+    "privacy_policy_agreement": "Men maxfiylik siyosati va shaxsiy ma'lumotlarni qayta ishlash bilan roziman",
+    "privacy_policy": "maxfiylik siyosati"
+  },
   "messages": {
     "confirm": {
       "delete": "O'chirishga ishonchingiz komilmi?",

@@ -9,6 +9,7 @@ interface IProps {
   tokens?: MaskTokens
   unmasked?: boolean
   modelValue?: string
+  defaultInput?: boolean
 }
 
 const props = withDefaults(defineProps<IProps>(), { unmasked: true })
@@ -54,5 +55,12 @@ watch(
 </script>
 
 <template>
-  <ui-input v-bind="$attrs" :model-value="maskedValue" @vue:mounted="onMounted" @vue:unmounted="onUnmounted" />
+  <ui-input
+    v-if="!defaultInput"
+    v-bind="$attrs"
+    :model-value="maskedValue"
+    @vue:mounted="onMounted"
+    @vue:unmounted="onUnmounted"
+  />
+  <input v-else v-bind="$attrs" :model-value="maskedValue" @vue:mounted="onMounted" @vue:unmounted="onUnmounted" />
 </template>

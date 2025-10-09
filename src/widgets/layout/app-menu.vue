@@ -9,8 +9,10 @@
         <nuxt-link class="mobile-menu__item" to="/blog">Блог</nuxt-link>
       </ul>
       <div class="mt-[100%] flex w-full flex-col gap-[10px]">
-        <ui-button>Записаться</ui-button>
-        <ui-button class="!bg-[#63845C33] !text-green-500" @click="$router.push('/for-psychologists')">Специалистам</ui-button>
+        <ui-button @click="orderModalOpen = true">Записаться</ui-button>
+        <ui-button class="!bg-[#63845C33] !text-green-500" @click="$router.push('/for-psychologists')">
+          Специалистам
+        </ui-button>
       </div>
     </div>
   </transition>
@@ -24,6 +26,8 @@ interface IProps {
 }
 
 defineProps<IProps>()
+
+const { orderModalOpen } = useModal()
 
 // Toggle isMenuOpen to show/hide menu
 </script>

@@ -73,5 +73,28 @@
     "minLength": "Minimum required length is {min}",
     "required": "This field is required",
     "sameAs": "Value must match the field \"{otherName}\""
+  },
+  "order_modal": {
+    "step": "Step",
+    "of": "of",
+    "select_service": "Select Service",
+    "select_specialist": "Select Specialist",
+    "personal_data": "Personal Data",
+    "search_service": "Search service...",
+    "search_specialist": "Search specialist...",
+    "recommended_options": "Recommended Options",
+    "option_not_found": "Option not found",
+    "full_name": "Full Name",
+    "phone_number": "Phone Number",
+    "visit_date": "Visit Date and Time",
+    "comment": "Comment",
+    "next": "Next",
+    "skip": "Skip",
+    "submit_request": "Submit Request",
+    "request_sent": "Request Sent!",
+    "request_success_message": "Your request has been successfully sent and will be reviewed. We will contact you within 15 minutes",
+    "ok": "Ok",
+    "privacy_policy_agreement": "I agree with the privacy policy and personal data processing",
+    "privacy_policy": "privacy policy"
   }
 }

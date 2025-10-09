@@ -34,6 +34,7 @@ const model = defineModel<T>()
       :class="labelClass"
     >
       {{ label }}
+      <slot name="label"></slot>
     </label>
   </div>
 </template>
