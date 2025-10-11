@@ -15,7 +15,7 @@
               {{ course.type.name}}
             </h-tag>
             <h-tag>
-              {{ course.format }}
+              {{ t('format') }}
             </h-tag>
           </div>
           <div class="z-[13] flex shrink-0 flex-col flex-nowrap items-start gap-[12px] self-stretch">
@@ -94,11 +94,13 @@ const formattedDate = computed(() => {
 {
   "ru": {
     "title": "Обучающие курсы и тренинги  ",
-    "description": "Мы проводим офлайн-курсы по психологии и психотерапии для разных аудиторий – от тех, кто хочет лучше понять себя, до практикующих специалистов, желающих повысить квалификацию"
+    "description": "Мы проводим офлайн-курсы по психологии и психотерапии для разных аудиторий – от тех, кто хочет лучше понять себя, до практикующих специалистов, желающих повысить квалификацию",
+    "format": "Офлайн"
   },
   "uz": {
     "title": "Sharhlar va muvaffaqiyat hikoyalari",
-    "description": "Bu yerda bizning platformamizning malakali psixoterapevtlari, psixologlari va psixiatrlarining ro'yxati mavjud. Sizning so'rovingizga mos mutaxassisni topish uchun filtrlarni ishlating"
+    "description": "Bu yerda bizning platformamizning malakali psixoterapevtlari, psixologlari va psixiatrlarining ro'yxati mavjud. Sizning so'rovingizga mos mutaxassisni topish uchun filtrlarni ishlating",
+    "format": "Offline"
   }
 }
 </i18n>

@@ -209,10 +209,10 @@
         </div>
       </div>
       <div
-        class="absolute left-[240px] top-1/2 z-[73] flex h-[393px] w-[710px] translate-x-0 translate-y-[-52.42%] flex-col flex-nowrap items-start gap-[40px]"
+        class="absolute left-[240px] top-1/2 z-[73] flex h-[393px] w-[710px] translate-x-0  translate-y-[-52.42%] flex-col flex-nowrap items-start gap-[40px]"
       >
         <div
-          class="relative z-[74] flex shrink-0 flex-col flex-nowrap items-start justify-center gap-[20px] self-stretch pb-[2px] pl-0 pr-0 pt-[2px]"
+          class="relative z-[74] flex shrink-0  flex-col flex-nowrap items-start justify-center gap-[20px] self-stretch pb-[2px] pl-0 pr-0 pt-[2px]"
         >
           <div
             class="relative z-[75] w-[710px] shrink-0 text-left font-['Onest'] text-[58px] font-semibold leading-[73.95px]"
@@ -237,10 +237,10 @@
           </span>
         </div>
         <div
-          class="relative z-[77] flex w-[223px] shrink-0 flex-nowrap items-center justify-center gap-[10px] rounded-[15px] bg-[#fff] pb-[16px] pl-[20px] pr-[20px] pt-[16px]"
+          class="relative z-[77] flex w-full shrink-0 flex-nowrap items-center justify-center gap-[10px] rounded-[15px] bg-[#fff] pb-[16px] pl-[20px] pr-[20px] pt-[16px]"
         >
           <span
-            class="relative z-[78] h-[23px] shrink-0 basis-auto whitespace-nowrap text-left font-['Manrope'] text-[17px] font-bold leading-[23px] text-[#63845c]"
+            class="relative z-[78] h-[23px] shrink-0 basis-auto whitespace-nowrap text-center font-['Manrope'] text-[17px] font-bold leading-[23px] text-[#63845c]"
           >
             Присоедениться
           </span>

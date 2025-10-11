@@ -41,7 +41,7 @@ defineProps<IProps>()
     <template #default>
       <div class="pb-[10px] md:pb-[15px]">
         <div class="relative flex shrink-0 flex-col flex-nowrap items-start gap-[15px] self-stretch">
-          <ul class="relative grid !list-disc gap-[10px] md:gap-[15px]">
+          <!-- <ul class="relative grid !list-disc gap-[10px] md:gap-[15px]">
             <li v-for="education in specialist.education" class="flex flex-col flex-nowrap items-start gap-[2px]"
               :key="education.year">
               <span class="text-mobile-body-15 font-bold text-[#323232] md:text-body-18">
@@ -52,7 +52,24 @@ defineProps<IProps>()
               </span>
             </li>
 
-          </ul>
+          </ul> -->
+          <ul class="relative grid gap-[10px] md:gap-[15px]">
+  <li
+    v-for="education in specialist.education"
+    :key="education.year"
+    class="relative pl-[18px] flex flex-col flex-nowrap items-start gap-[2px]
+           before:absolute before:left-0 before:top-[8px]
+           before:h-[6px] before:w-[6px] before:rounded-full before:bg-[#323232]"
+  >
+    <span class="text-mobile-body-15 font-bold text-[#323232] md:text-body-18">
+      {{ education.year }}
+    </span>
+    <span class="text-mobile-body-15 font-normal text-[#323232] md:text-body-18">
+      {{ getValue(education, 'description', 'ru') }}
+    </span>
+  </li>
+</ul>
+
         </div>
       </div>
     </template>
@@ -63,9 +80,10 @@ defineProps<IProps>()
     </template>
     <template #default>
       <div class="pb-[10px] md:pb-[15px]">
-        <ul class="relative grid gap-[10px] md:gap-[15px]">
+        <!-- <ul class="relative grid gap-[10px] md:gap-[15px]">
           <li v-for="experience in specialist.experience_list"
-            class="flex !list-disc flex-col flex-nowrap items-start gap-[2px]" :key="experience.id">
+            class="flex  flex-col flex-nowrap items-start gap-[2px]" :key="experience.id">
+
             <span class="text-mobile-body-15 font-bold text-[#323232] md:text-body-18">
               {{ experience.start_year }} -
               {{ experience.end_year ? experience.end_year : t("current_exp_year") }}
@@ -74,7 +92,25 @@ defineProps<IProps>()
               {{ getValue(experience, "description", 'ru') }}
             </span>
           </li>
-        </ul>
+        </ul> -->
+        <ul class="relative grid gap-[10px] md:gap-[15px]">
+  <li
+    v-for="experience in specialist.experience_list"
+    :key="experience.id"
+    class="relative pl-[18px] flex flex-col flex-nowrap items-start gap-[2px]
+           before:absolute before:left-0 before:top-[8px]
+           before:h-[6px] before:w-[6px] before:rounded-full before:bg-[#323232]"
+  >
+    <span class="text-mobile-body-15 font-bold text-[#323232] md:text-body-18">
+      {{ experience.start_year }} -
+      {{ experience.end_year ? experience.end_year : t('current_exp_year') }}
+    </span>
+    <span class="text-mobile-body-15 font-normal text-[#323232] md:text-body-18">
+      {{ getValue(experience, 'description', 'ru') }}
+    </span>
+  </li>
+</ul>
+
       </div>
     </template>
   </ui-accordion>
@@ -86,7 +122,7 @@ defineProps<IProps>()
       <div class="pb-[10px] md:pb-[15px]">
         <ul class="relative grid gap-[10px] md:gap-[15px]">
           <li v-for="(achievement, index) in specialist.achievements"
-            class="flex !list-disc flex-col flex-nowrap items-start gap-[2px]" :key="index">
+            class="flex  flex-col flex-nowrap items-start gap-[2px]" :key="index">
             <span class="text-mobile-body-15 font-normal text-[#323232] md:text-body-18">
               {{ getValue(achievement, "description", 'ru') }}
             </span>

@@ -27,7 +27,7 @@ const carouselConfig = computed<Partial<CarouselConfig>>(() => ({
 <template>
   <carousel v-bind="carouselConfig" ref="carouselRef">
     <slide v-for="item in items" :key="item" class="h-full">
-      <img class="h-[302px]" :src="item" alt="" />
+      <img class="h-[302px] rounded-[12px] border border-solid border-[#838383]" :src="item" alt="" />
     </slide>
   </carousel>
   <div class="relative ml-auto mt-[21px] flex w-[130px] flex-nowrap items-center gap-[10px] md:mt-[40px]">

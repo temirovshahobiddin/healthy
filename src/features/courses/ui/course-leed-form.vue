@@ -48,11 +48,11 @@ const submit = async () => {
     <div class="flex flex-col gap-[40px] overflow-hidden md:flex-row md:items-center md:justify-between">
       <div class="flex flex-col flex-nowrap items-start gap-[30px] md:w-[50.63%]">
         <div class="relative flex shrink-0 flex-col flex-nowrap items-start gap-[10px] self-stretch md:gap-[15px]">
-          <span class="text-left font-['Onest'] text-mobile-headline-1 font-semibold text-[#fff] md:text-headline-2">
-            {{ t("title") }}
+          <span class="text-left font-['Onest'] whitespace-nowrap mb-[20px] text-mobile-headline-1 font-semibold text-[#fff] md:text-headline-2">
+            Присоединяйтесь к обучению
           </span>
           <span class="text-left font-['Onest'] text-mobile-body-16 font-normal text-[#fff] md:text-body-18">
-            {{ t("description") }}
+            Освойте новые навыки, получайте поддержку от экспертов и применяйте знания на практике
           </span>
         </div>
         <div

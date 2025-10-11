@@ -4,8 +4,8 @@
       <div>
         <div class="flex flex-col items-start gap-[15px] md:gap-[40px] md:flex-row">
           <div class="flex flex-col flex-nowrap items-start justify-center gap-[20px] rounded-[20px] bg-[#fff] px-[10px] py-[15px] md:w-[447px] md:p-[15px]">
-            <div class="relative shrink-0 self-stretch rounded-[10px]">
-              <img class="object-cover" alt="" :src="specialist.photo" />
+            <div class="relative shrink-0 self-stretch rounded-[10px] h-[485px] overflow-hidden">
+              <img class="h-full w-full object-cover" alt="" :src="specialist.photo" />
             </div>
             <ui-button class="!hidden w-full md:!flex" @click="orderModalOpen = true">Записаться</ui-button>
           </div>

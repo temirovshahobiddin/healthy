@@ -1,8 +1,8 @@
 <template>
   <app-section-fluid class="min-h-[735px] overflow-hidden !bg-[#6f8f6e] md:min-h-[820px]">
     <div class="relative flex h-full w-full items-start pt-[30px] md:items-center md:pt-0">
-      <div class="flex w-[328px] flex-col flex-nowrap items-start gap-[25px] md:w-[710px] md:gap-[42px]">
-        <div class="flex flex-col flex-nowrap items-start gap-[10px] self-stretch md:gap-[20px]">
+      <div class="flex w-[328px] flex-1 flex-col flex-nowrap items-start gap-[25px] md:w-full md:gap-[42px] md:flex-0">
+        <div class="flex flex-col flex-1 flex-nowrap items-start gap-[10px] self-stretch md:gap-[20px]">
           <h1
             v-html="t('title')"
             class="font-['Onest'] text-mobile-headline-1 font-semibold text-[#fff] md:text-headline-1"

@@ -27,7 +27,7 @@ defineProps<IProps>()
       <div class="flex shrink-0 flex-nowrap items-start justify-between self-stretch">
         <div class="shrink-0 whitespace-nowrap text-left font-['Onest'] font-normal">
           <span class="font-['Onest'] text-mobile-body-15 font-normal text-[#63845c] underline md:text-body-17">
-            {{ getUserFullName(blog.author) }}
+            {{ blog.author.full_name }}
           </span>
         </div>
         <span class="text-left font-['Onest'] text-mobile-body-15 font-normal text-[#848484] md:text-body-17">
