@@ -44,7 +44,8 @@ const { t } = useI18n({
           </div>
         </div>
         <span class="text-[22px] font-semibold text-[#63845c] md:text-subtitle-24">
-          {{ course.price }} {{ t("currency") }}
+          {{ Number(course.price).toLocaleString('ru-RU', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) }}
+           {{ t("currency") }}
         </span>
       </div>
       <div class="flex flex-nowrap items-center gap-[10px] self-stretch">

@@ -20,7 +20,7 @@ function getEmbedUrl(url?: string) {
 
 defineProps<IProps>()
 </script>
-
+ 
 <template>
   <ui-accordion class="detail-accordion w-full !border-b border-none border-b-[#E8E8E8] !bg-white md:mb-[10px]">
     <template #header>

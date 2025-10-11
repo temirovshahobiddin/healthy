@@ -30,4 +30,4 @@ const { t } = useI18n({ useScope: "local" })
     "description": "Bu yerda bizning platformamizning malakali psixoterapevtlari, psixologlari va psixiatrlarining ro'yxati mavjud. Sizning so'rovingizga mos mutaxassisni topish uchun filtrlarni ishlating"
   }
 }
-</i18n>
+</i18n> 

@@ -55,7 +55,9 @@
                 </div>
               </div>
               <div class="border-t border-solid border-t-[#E8E8E8] pt-[15px] md:!hidden">
-                <span class="text-mobile-subtitle-22 font-semibold text-[#323232]">от {{ specialist.price }} сум</span>
+                <span class="text-mobile-subtitle-22 font-semibold text-[#323232]">
+                от  {{ Number(specialist.price).toLocaleString('ru-RU', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) }} сум</span>
+
               </div>
             </div>
             <div class="mb-[40px] hidden h-[402px] flex-col flex-nowrap items-start gap-[30px] rounded-[20px] bg-[#fff] md:flex md:p-[30px]">
@@ -122,7 +124,7 @@
                 <span
                   class="relative h-[38px] shrink-0 basis-auto self-stretch text-left font-['Onest'] text-[30px] font-semibold leading-[38px] text-[#323232]"
                 >
-                  от {{ specialist.price }} сум
+                  от {{ Number(specialist.price).toLocaleString('ru-RU', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) }} сум
                 </span>
               </div>
             </div>
@@ -233,6 +235,10 @@ const blogsPagination = ref({
   page: 1,
   limit: 10
 })
+const formatCurrency = (amount: number) => {
+  if (typeof amount !== 'number' || isNaN(amount)) return '0 so\'m';
+  return new Intl.NumberFormat('uz-UZ').format(amount) + ' so\'m';
+};
 
 const blogParams = ref({
   page: 1

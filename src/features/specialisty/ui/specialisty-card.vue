@@ -88,7 +88,7 @@ defineProps<IProps>()
       </div>
       <span
         class="!hidden shrink-0 basis-auto self-stretch text-left font-['Onest'] text-[24px] font-semibold text-[#63845c] md:!block">
-        {{ $t("labels.price", { price: specialist.price }) }}
+        {{ Number(specialist.price).toLocaleString('ru-RU', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) }} сум
       </span>
     </div>
   </div>

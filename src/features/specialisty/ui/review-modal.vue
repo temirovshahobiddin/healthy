@@ -27,7 +27,7 @@ const { t } = useI18n({ useScope: "local" })
           class="ui-input-outline !h-auto !border-0 !border-b-2 py-[10px] md:py-[15px]"
           :placeholder="t('form-inputs.reason')"
         ></ui-input>
-      </ui-form-group>
+      </ui-form-group> 
     </div>
   </ui-modal>
 </template>

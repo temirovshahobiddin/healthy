@@ -24,7 +24,7 @@ const regions = ref({
     page: 1,
     total: 0,
     limit: 10
-  }
+  } 
 })
 const route = useRoute()
 const router = useRouter()
