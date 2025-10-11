@@ -2,15 +2,20 @@
   <transition name="slide-right">
     <div v-if="isMenuOpen" class="mobile-menu">
       <ul class="mobile-menu__content">
-        <nuxt-link class="mobile-menu__item" to="/specialisty">Специалисты</nuxt-link>
-        <nuxt-link class="mobile-menu__item" to="/courses">Курсы</nuxt-link>
-        <nuxt-link class="mobile-menu__item" to="/blog">О проекте</nuxt-link>
-        <nuxt-link class="mobile-menu__item" to="/about">Контакты</nuxt-link>
-        <nuxt-link class="mobile-menu__item" to="/blog">Блог</nuxt-link>
+        <nuxt-link
+          v-for="(item, i) in menuItems"
+          :key="i"
+          class="mobile-menu__item"
+          :to="item.to"
+          @click.native="closeMenu"
+        >
+          {{ item.label }}
+        </nuxt-link>
       </ul>
+
       <div class="mt-[100%] flex w-full flex-col gap-[10px]">
         <ui-button @click="orderModalOpen = true">Записаться</ui-button>
-        <ui-button class="!bg-[#63845C33] !text-green-500" @click="$router.push('/for-psychologists')">
+        <ui-button class="!bg-[#63845C33] !text-green-500" @click="goToPsychologists">
           Специалистам
         </ui-button>
       </div>
@@ -19,23 +24,40 @@
 </template>
 
 <script setup lang="ts">
+import { useRouter } from "vue-router"
 import { ref } from "vue"
 
-interface IProps {
-  isMenuOpen: boolean
-}
-
-defineProps<IProps>()
-
+const router = useRouter()
 const { orderModalOpen } = useModal()
 
-// Toggle isMenuOpen to show/hide menu
+const props = defineProps<{
+  isMenuOpen: boolean
+}>()
+
+const emit = defineEmits(["update:isMenuOpen"])
+
+const menuItems = [
+  { label: "Специалисты", to: "/specialisty" },
+  { label: "Курсы", to: "/courses" },
+  { label: "О проекте", to: "/about" },
+  { label: "Контакты", to: "/contacts" },
+  { label: "Блог", to: "/blog" },
+]
+
+function closeMenu() {
+  emit("update:isMenuOpen", false)
+}
+
+function goToPsychologists() {
+  closeMenu()
+  router.push("/for-psychologists")
+}
 </script>
 
 <style scoped>
 .slide-right-enter-active,
 .slide-right-leave-active {
-  transition: transform 0.3s;
+  transition: transform 0.3s ease;
 }
 
 .slide-right-enter-from,
@@ -54,13 +76,11 @@ const { orderModalOpen } = useModal()
   right: 0;
   width: 100vw;
   height: calc(100vh - 60px);
-
   background: white;
   z-index: 1000;
   padding: 30px 16px;
-  /* Add padding, shadow, etc. as needed */
-
-  @apply flex w-full flex-col items-start justify-between;
+  overflow-y: auto;
+  @apply flex flex-col items-start justify-between;
 }
 
 .mobile-menu__content {
@@ -70,7 +90,6 @@ const { orderModalOpen } = useModal()
 }
 
 .mobile-menu__item {
-  @apply pb-4 text-mobile-body-17 font-normal text-[#323232];
-  @apply border-b border-solid border-b-[#e0e5e3];
+  @apply pb-4 text-mobile-body-17 font-normal text-[#323232] border-b border-solid border-b-[#e0e5e3];
 }
 </style>

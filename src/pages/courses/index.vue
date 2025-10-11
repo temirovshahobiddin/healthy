@@ -25,41 +25,28 @@ const { t } = useI18n({
 const courseApi = useCoursesApi()
 const route = useRoute()
 const router = useRouter()
-const query = ref({ ...route.query } || {})
+const query = reactive({
+  type: route.query.type || '',
+  page: Number(route.query.page) || 1,
+  limit: 10
+})
 const courses = ref([])
 const pagination = ref({
   page: 1,
   total: 0,
   limit: 10
 })
-
-const getCourses = () => {
-  router
-    .push({
-      query: {
-        ...query.value
-      }
-    })
-    .then(() => {
-      courseApi.getCoursesList(query.value).then((response) => {
-        courses.value = response.data?.data || []
-        pagination.value = response.data?.pagination || {
-          page: 1,
-          total: 0,
-          limit: 10
-        }
-      })
-    })
+const getCourses = async () => {
+  router.push({ query: { ...query } })
+  const { data } = await courseApi.getCoursesList(query)
+  console.log(data);
+  courses.value = data || []
+  pagination.value = data?.pagination || { page: 1, total: 0, limit: 10 }
 }
 
-const { data } = await useAsyncData("courses", () => {
-  return courseApi.getCoursesList(query.value)
+
+onMounted(() => {
+  getCourses()
 })
 
-courses.value = data.value?.data || []
-pagination.value = data.value?.pagination || {
-  page: 1,
-  total: 0,
-  limit: 10
-}
 </script>

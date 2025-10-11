@@ -5,10 +5,18 @@ interface IProps {
   specialist: any
 }
 
-function getEmbedUrl(url: string) {
-  const videoId = new URL(url).searchParams.get("v")
-  return videoId ? `https://www.youtube.com/embed/${videoId}` : url
+function getEmbedUrl(url?: string) {
+  if (!url) return ""
+  try {
+    // если url без протокола — добавляем https://
+    const normalizedUrl = url.startsWith("http") ? url : `https://${url}`
+    const videoId = new URL(normalizedUrl).searchParams.get("v")
+    return videoId ? `https://www.youtube.com/embed/${videoId}` : normalizedUrl
+  } catch {
+    return ""
+  }
 }
+
 
 defineProps<IProps>()
 </script>

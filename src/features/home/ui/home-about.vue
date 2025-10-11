@@ -9,25 +9,21 @@ const localePath = useLocalePath()
 <template>
   <app-section class="py-[80px] md:py-[120px]">
     <div
-      class="mb-[80px] flex flex-col gap-[30px] md:mb-[120px] md:flex-row md:items-center md:justify-between md:gap-[60px]"
-    >
+      class="mb-[80px] flex flex-col gap-[30px] md:mb-[120px] md:flex-row md:items-center md:justify-between md:gap-[60px]">
       <div class="h-[275px] w-full overflow-hidden rounded-[20px] md:h-[559px] md:w-[670px]">
         <img src="https://codia-f2c.s3.us-west-1.amazonaws.com/image/2025-07-20/rUsWz6jVNz.png" alt="" />
       </div>
       <div
-        class="flex shrink-0 flex-col flex-nowrap items-start justify-between gap-[30px] md:mt-0 md:w-[710px] md:gap-[60px]"
-      >
+        class="flex shrink-0 flex-col flex-nowrap items-start justify-between gap-[30px] md:mt-0 md:w-[710px] md:gap-[60px]">
         <div class="flex shrink-0 flex-col flex-nowrap items-start self-stretch">
           <div class="mb-[15px] md:mb-[30px]">
             <span
-              class="text-left font-['Onest'] text-mobile-headline-1 font-semibold text-[#323232] md:text-headline-2"
-            >
+              class="text-left font-['Onest'] text-mobile-headline-1 font-semibold text-[#323232] md:text-headline-2">
               {{ t("about_title") }}
             </span>
             <br />
             <span
-              class="text-left font-['Onest'] text-mobile-headline-1 font-semibold text-[#63845c] md:text-headline-2"
-            >
+              class="text-left font-['Onest'] text-mobile-headline-1 font-semibold text-[#63845c] md:text-headline-2">
               {{ t("about_title3") }}
             </span>
           </div>
@@ -42,18 +38,10 @@ const localePath = useLocalePath()
           </span>
         </div>
         <div class="flex w-full flex-col flex-nowrap gap-[15px] md:flex-row md:items-center">
-          <ui-button
-            class="w-full md:w-fit"
-            variant="filled"
-            :to="localePath('/specialisty')"
-            :label="t('select_specialist')"
-          />
-          <ui-button
-            class="w-full md:w-fit"
-            variant="outline"
-            :to="localePath('/courses')"
-            :label="t('select_course')"
-          />
+          <ui-button class="w-full md:w-fit" variant="filled" :to="localePath('/specialisty')"
+            :label="t('select_specialist')" />
+          <ui-button class="w-full md:w-fit" variant="outline" :to="localePath('/courses')"
+            :label="t('select_course')" />
         </div>
       </div>
     </div>
@@ -61,23 +49,18 @@ const localePath = useLocalePath()
       <span class="section-title">
         {{ t("about_title2") }}
       </span>
-      <div class="mt-[20px] grid grid-cols-1 gap-[10px] md:mt-[30px] md:grid-cols-4 md:gap-[20px]">
-        <home-about-card
-          v-for="(content, index) in tm('about_card')"
-          :key="index"
-          :title="rt(content.title)"
-          :description="rt(content.description)"
-          :icon-name="rt(content.icon)"
-        />
+      <div class="mt-[20px] grid grid-cols-1 gap-[10px] md:mt-[30px] md:grid-cols-2 xl:grid-cols-4 md:gap-[20px]">
+        <home-about-card v-for="(content, index) in tm('about_card')" :key="index" :title="rt(content.title)"
+          :description="rt(content.description)" :icon-name="rt(content.icon)" />
       </div>
+
     </div>
   </app-section>
 </template>
 
 <style scoped></style>
 
-<i18n lang="json">
-{
+<i18n lang="json">{
   "en": {
     "select_specialist": "Find a specialist",
     "select_course": "View courses",
@@ -172,5 +155,4 @@ const localePath = useLocalePath()
       }
     ]
   }
-}
-</i18n>
+}</i18n>
