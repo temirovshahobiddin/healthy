@@ -14,22 +14,26 @@ const onBeforeShow = (e: any) => {
 const form = ref({
   rating: 0,
   comment: "",
-  age: "",
   reviewer_name: "",
+  phone: "",
   specialist_id: null
 })
+const submit = () => {
+  console.log(form.value)
+}
 
 const setRating = (value: number) => {
   form.value.rating = value
 }
+
 </script>
 
 <template>
   <ui-modal id="review-create-modal" class="review-create-modal" label="Ваша оценка" @before-show="onBeforeShow">
     <div class="px-[15px] pb-[20px] md:px-[20px]">
-      <div class="mb-4 flex items-center gap-2">
-        <span v-for="star in 5" :key="star" class="cursor-pointer text-2xl transition-colors"
-          :class="form.rating >= star ? 'text-yellow-400' : 'text-gray-300'" @click="setRating(star)">
+      <div class="mb-3 flex items-center gap-2">
+        <span v-for="star in 5" :key="star" class="cursor-pointer text-3xl transition-colors"
+          :class="form.rating >= star ? 'text-green-500' : 'text-gray-300'" @click="setRating(star)">
           ★
         </span>
       </div>
@@ -37,16 +41,17 @@ const setRating = (value: number) => {
       <div class="relative flex shrink-0 flex-col flex-nowrap items-start gap-[10px] self-stretch">
         <ui-form-group class="w-full">
           <ui-input class="ui-input-outline !h-auto !border-0 !border-b-2 py-[10px] text-[#848484] md:py-[15px]"
-            :placeholder="t('form-inputs.fio')" />
+            v-model="form.reviewer_name" :placeholder="t('form-inputs.fio')" />
         </ui-form-group>
         <ui-form-group class="w-full">
           <ui-input class="ui-input-outline !h-auto !border-0 !border-b-2 py-[10px] text-[#848484] md:py-[15px]"
-            :placeholder="t('form-inputs.phone')" />
+            v-model="form.phone" :placeholder="t('form-inputs.phone')" />
         </ui-form-group>
         <ui-form-group class="w-full">
           <ui-input class="ui-input-outline !h-auto !border-0 !border-b-2 py-[10px] text-[#848484] md:py-[15px]"
-            :placeholder="t('form-inputs.reason')" />
+            v-model="form.comment" :placeholder="t('form-inputs.reason')" />
         </ui-form-group>
+        <ui-button class="w-full !bg-green-500 mt-[10px]" @click="submit">Отправить отзыв</ui-button>
       </div>
     </div>
   </ui-modal>

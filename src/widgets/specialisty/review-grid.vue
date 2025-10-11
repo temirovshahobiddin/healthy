@@ -53,7 +53,7 @@ const showCreateReviewModal = () => {
         {{ $t("actions.add_review") }}
       </ui-button>
     </div>
-    <div class="hidden grid-cols-4 gap-[20px] self-stretch md:grid">
+    <div class="grid grid-cols-1 gap-[20px] self-stretch">
       <review-card v-for="item in items" :key="item.id" :review="item" />
     </div>
 

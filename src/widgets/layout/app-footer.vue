@@ -58,10 +58,14 @@ const { siteSettings } = storeToRefs(siteSettingsStore)
 
       <div class="flex flex-col flex-nowrap items-start gap-[10px] md:gap-[15px]">
         <span class="relative font-['Onest'] text-mobile-body-16 font-normal text-[#fff] md:text-[20px] md:font-medium">
-          Специалисты
+          <nuxt-link-locale to="/specialisty">
+            Специалисты
+          </nuxt-link-locale>
         </span>
         <span class="relative font-['Onest'] text-mobile-body-16 font-normal text-[#fff] md:text-[20px] md:font-medium">
-          Курсы
+          <nuxt-link-locale to="/courses">
+            Курсы
+          </nuxt-link-locale>
         </span>
         <span class="relative font-['Onest'] text-mobile-body-16 font-normal text-[#fff] md:text-[20px] md:font-medium">
           О проекте
@@ -70,13 +74,19 @@ const { siteSettings } = storeToRefs(siteSettingsStore)
 
       <div class="flex flex-col flex-nowrap items-start gap-[10px] md:gap-[15px]">
         <span class="relative font-['Onest'] text-mobile-body-16 font-normal text-[#fff] md:text-[20px] md:font-medium">
-          Блог
+          <nuxt-link-locale to="/blog">
+            Блог
+          </nuxt-link-locale>
         </span>
         <span class="relative font-['Onest'] text-mobile-body-16 font-normal text-[#fff] md:text-[20px] md:font-medium">
-          Контакты
+          <nuxt-link-locale to="/contacts">
+            Контакты
+          </nuxt-link-locale>
         </span>
         <span class="relative font-['Onest'] text-mobile-body-16 font-normal text-[#fff] md:text-[20px] md:font-medium">
-          Специалистам
+          <nuxt-link-locale to="/about">
+            Специалистам
+          </nuxt-link-locale>
         </span>
       </div>
 

@@ -1,66 +1,64 @@
 <template>
-  <div class="main-container mx-auto w-full overflow-hidden bg-[#f0f4f1] py-[60px]">
+  <div class="main-container mx-auto w-full overflow-hidden bg-[#f0f4f1] py-[20px] md:py-[60px]">
     <app-section>
       <div>
-        <div class="flex flex-col items-start gap-[40px] md:flex-row">
-          <div
-            class="flex flex-col flex-nowrap items-start justify-center gap-[20px] rounded-[20px] bg-[#fff] px-[10px] py-[15px] md:w-[447px] md:p-[15px]"
-          >
+        <div class="flex flex-col items-start gap-[15px] md:gap-[40px] md:flex-row">
+          <div class="flex flex-col flex-nowrap items-start justify-center gap-[20px] rounded-[20px] bg-[#fff] px-[10px] py-[15px] md:w-[447px] md:p-[15px]">
             <div class="relative shrink-0 self-stretch rounded-[10px]">
               <img class="object-cover" alt="" :src="specialist.photo" />
             </div>
-            <ui-button class="!hidden w-full md:!flex">Записаться</ui-button>
-            <div class="grid gap-[20px] md:!hidden">
-              <p class="text-mobile-headline-2 font-bold">{{ specialist.full_name }}</p>
-              <div class="grid gap-[5px]">
-                <div
-                  v-for="specialization in specialist.specializations"
-                  class="w-fit rounded-[100px] border border-solid border-[#63845c] px-[8px] py-[4px]"
-                  :key="specialization.id"
-                >
-                  <span class="text-mobile-body-14 font-bold text-[#63845c]">
-                    {{ specialization.name }}
+            <ui-button class="!hidden w-full md:!flex" @click="orderModalOpen = true">Записаться</ui-button>
+          </div>
+          <div class="md:w-[953px]">
+            <div class="md:hidden flex flex-col flex-nowrap items-start justify-center gap-[20px] rounded-[20px] bg-[#fff] px-[10px] py-[15px]  mb-[15px]">
+              <div class="grid gap-[25px] md:!hidden">
+                <p class="text-mobile-headline-2 font-bold">{{ specialist.full_name }}</p>
+                <div class="grid gap-[5px] mt-[4px]">
+                  <div
+                    v-for="specialization in specialist.specializations"
+                    class="w-fit rounded-[100px] border border-solid border-[#63845c] px-[8px] py-[4px]"
+                    :key="specialization.id"
+                  >
+                    <span class="text-mobile-body-14 font-bold text-[#63845c]">
+                      {{ specialization.name }}
+                    </span>
+                  </div>
+                </div>
+              </div>
+              <div class="grid gap-[8px] md:!hidden">
+                <div class="flex items-center gap-[8px]">
+                  <icon class="text-[18px] text-green-500" name="h-icon:achieve"></icon>
+                  <span class="text-mobile-body-15 font-medium text-[#323232] md:text-body-17">
+                    Опыт: {{ specialist.experience }} лет
+                  </span>
+                </div>
+                <div class="flex items-center gap-[8px]">
+                  <icon class="text-[18px] text-green-500" name="h-icon:star"></icon>
+    
+                  <span class="text-mobile-body-15 font-medium text-[#323232] md:text-body-17">
+                    Рейтинг: {{ specialist.rating || 0 }}
+                  </span>
+                </div>
+                <div class="flex items-center gap-[8px]">
+                  <icon class="text-[18px] text-green-500" name="h-icon:location"></icon>
+    
+                  <span class="text-mobile-body-15 font-medium text-[#323232] md:text-body-17">
+                    {{ specialist.city }}
+                  </span>
+                </div>
+                <div class="flex flex-nowrap items-center gap-[8px] self-stretch">
+                  <icon class="text-[18px] text-green-500" name="h-icon:language"></icon>
+    
+                  <span class="text-left font-['Onest'] text-mobile-body-15 font-medium text-[#323232]">
+                    {{ specialist.lang?.map((item) => $t(`languages.${item}`)).join(", ") }}
                   </span>
                 </div>
               </div>
-            </div>
-            <div class="grid gap-[8px] md:!hidden">
-              <div class="flex items-center gap-[8px]">
-                <icon class="text-[18px] text-green-500" name="h-icon:achieve"></icon>
-                <span class="text-mobile-body-15 font-medium text-[#323232] md:text-body-17">
-                  Опыт: {{ specialist.experience }} лет
-                </span>
-              </div>
-              <div class="flex items-center gap-[8px]">
-                <icon class="text-[18px] text-green-500" name="h-icon:star"></icon>
-
-                <span class="text-mobile-body-15 font-medium text-[#323232] md:text-body-17">
-                  Рейтинг: {{ specialist.rating || 0 }}
-                </span>
-              </div>
-              <div class="flex items-center gap-[8px]">
-                <icon class="text-[18px] text-green-500" name="h-icon:location"></icon>
-
-                <span class="text-mobile-body-15 font-medium text-[#323232] md:text-body-17">
-                  {{ specialist.city }}
-                </span>
-              </div>
-              <div class="flex flex-nowrap items-center gap-[8px] self-stretch">
-                <icon class="text-[18px] text-green-500" name="h-icon:language"></icon>
-
-                <span class="text-left font-['Onest'] text-mobile-body-15 font-medium text-[#323232]">
-                  {{ specialist.lang?.map((item) => $t(`languages.${item}`)).join(", ") }}
-                </span>
+              <div class="border-t border-solid border-t-[#E8E8E8] pt-[15px] md:!hidden">
+                <span class="text-mobile-subtitle-22 font-semibold text-[#323232]">от {{ specialist.price }} сум</span>
               </div>
             </div>
-            <div class="border-t border-solid border-t-[#E8E8E8] pt-[15px] md:!hidden">
-              <span class="text-mobile-subtitle-22 font-semibold text-[#323232]">от {{ specialist.price }} сум</span>
-            </div>
-          </div>
-          <div class="md:w-[953px]">
-            <div
-              class="mb-[40px] hidden h-[402px] flex-col flex-nowrap items-start gap-[30px] rounded-[20px] bg-[#fff] md:flex md:p-[30px]"
-            >
+            <div class="mb-[40px] hidden h-[402px] flex-col flex-nowrap items-start gap-[30px] rounded-[20px] bg-[#fff] md:flex md:p-[30px]">
               <div class="relative flex shrink-0 flex-col flex-nowrap items-start gap-[12px] self-stretch">
                 <span
                   class="relative h-[48px] shrink-0 basis-auto self-stretch text-left font-['Onest'] text-[40px] font-semibold text-[#323232]"
@@ -97,11 +95,11 @@
                   <span
                     class="relative h-[26px] shrink-0 basis-auto text-left font-['Onest'] text-[20px] font-medium text-[#323232]"
                   >
-                    Рейтинг: {{ specialist.rating || 0 }}
+                    Рейтинг: {{ specialist.review_rating || 0 }}
                   </span>
                 </div>
-                <div class="relative flex w-[107px] items-center gap-[8px]">
-                  <icon class="text-[18px] text-green-500" name="h-icon:location"></icon>
+                <div class="relative flex  items-center gap-[8px]">
+                  <icon class="text-[18px] text-green-500" name="weui:location-filled"></icon>
 
                   <span
                     class="relative h-[26px] shrink-0 basis-auto text-left font-['Onest'] text-[20px] font-medium text-[#323232]"
@@ -162,7 +160,6 @@
                   <span class="text-mobile-body-15 font-medium md:text-body-18">Блог</span>
                 </div>
               </div>
-
               <template v-if="activeTab === 'specialist'">
                 <specialist-detail-tab :specialist />
               </template>
@@ -222,6 +219,8 @@ import { useCoursesApi } from "~/api/courses/api"
 import ReviewCreateModal from "~/features/review/ui/review-create-modal.vue"
 import { usePostApi } from "~/api/posts/api"
 import SpecialistDetailTab from "~/features/specialisty/ui/specialist-detail-tab.vue"
+
+const { orderModalOpen } = useModal()
 
 const activeTab = ref("specialist")
 

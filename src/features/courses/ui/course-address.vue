@@ -116,7 +116,9 @@ import AppSectionFluid from "~/widgets/layout/app-section-fluid.vue"
           <ui-button class="!bg-white !text-green-500">Записаться на курс</ui-button>
         </div>
       </div>
-      <iframe
+      <iframe src="https://yandex.com/map-widget/v1/?um=constructor%3A5aff8a80fefd8c9947873ec7aedcef15800978c3887fb1dfac16840452378f9e&amp;source=constructor"
+      width="560" height="400" class="h-[200px] w-full rounded-[20px] md:h-[687px]" frameborder="0"></iframe>
+      <!-- <iframe
         class="h-[200px] w-full rounded-[20px] md:h-[687px]"
         src="https://yandex.uz/maps/-/CHdr5MYD"
         width="560"
@@ -124,7 +126,7 @@ import AppSectionFluid from "~/widgets/layout/app-section-fluid.vue"
         frameborder="1"
         allowfullscreen="true"
         style="position: relative"
-      ></iframe>
+      ></iframe> -->
     </div>
   </app-section-fluid>
 </template>

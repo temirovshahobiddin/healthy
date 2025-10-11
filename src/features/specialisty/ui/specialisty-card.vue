@@ -14,8 +14,12 @@ defineProps<IProps>()
     class="flex w-full flex-col flex-nowrap items-start gap-[20px] rounded-[20px] bg-[#fff] p-[15px] md:flex-row md:p-[20px]"
     @click="$router.push(`/specialisty/${specialist.slug}`)">
     <div class="flex items-start gap-[15px]">
-      <img class="h-[137px] w-[119px] rounded-[10px] object-cover md:h-[310px] md:min-w-[269px]" alt=""
-        :src="specialist.photo" />
+      <div>
+        <img class="h-[137px] w-[119px] rounded-[10px] object-cover md:h-[310px] md:min-w-[269px]" alt=""
+          :src="specialist.photo" />
+        <ui-button class="mt-[20px] w-full">Записаться</ui-button>
+      </div>
+
       <div class="flex h-full flex-col justify-between md:hidden">
         <span class="text-mobile-subtilte-20 overflow-hidden text-left font-['Onest'] font-semibold text-[#323232]">
           {{ specialist.full_name }}
@@ -52,11 +56,11 @@ defineProps<IProps>()
           <icon class="text-[18px] text-green-500" name="h-icon:star"></icon>
 
           <span class="text-mobile-body-15 font-medium text-[#323232] md:text-body-17">
-            {{ t("rating") }}: {{ specialist.rating }}
+            {{ t("rating") }}: {{ specialist.review_rating }}
           </span>
         </div>
         <div class="flex shrink-0 flex-nowrap items-center gap-[8px]">
-          <icon class="text-[18px] text-green-500" name="h-icon:location"></icon>
+          <icon class="text-[18px] text-green-500" name="weui:location-filled"></icon>
 
           <span class="text-mobile-body-15 font-medium text-[#323232] md:text-body-17">{{ specialist.city }}</span>
         </div>
@@ -72,7 +76,7 @@ defineProps<IProps>()
         <div
           class="flex shrink-0 flex-nowrap items-center justify-center gap-[10px] rounded-[100px] border border-solid border-[#63845c] pb-[5px] pl-[10px] pr-[10px] pt-[5px]">
           <span class="font-['Onest'] text-mobile-body-14 font-bold text-[#63845c] md:text-subtitle-16">
-            {{ specialist.specializations.name }}
+            {{ specialist.specializations[0].name }}
           </span>
         </div>
         <div v-if="specialist.specializations?.length > 1"

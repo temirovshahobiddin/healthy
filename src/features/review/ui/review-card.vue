@@ -25,7 +25,7 @@ const showReviewModal = () => {
 
 <template>
   <div
-    class="flex h-[447px] w-full flex-col flex-nowrap items-start gap-[20px] rounded-[20px] bg-[#fff] px-[15px] py-[20px] md:p-[20px]"
+    class="flex h-[240px] w-full flex-col flex-nowrap items-start gap-[20px] rounded-[20px] bg-[#fff] px-[15px] py-[20px] md:p-[20px]"
   >
     <div class="flex w-full flex-col items-start gap-[10px] md:gap-[15px]">
       <div class="flex flex-col flex-nowrap items-start gap-[2px] self-stretch">
