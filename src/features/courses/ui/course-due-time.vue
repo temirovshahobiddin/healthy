@@ -10,7 +10,7 @@ const isMobile = breakpoints.smallerOrEqual("sm")
 
 <template>
   <app-section class="py-[40px] md:py-[60px]">
-    <div class="pt-40px] overflow-hidden rounded-[20px] bg-[#6f8f6e] px-[15px] py-[40px] md:h-[590px] md:py-[80px]">
+    <div class="pt-[40px] overflow-hidden rounded-[20px] bg-[#6f8f6e] px-[15px] py-[40px] md:h-[590px] md:py-[80px]">
       <div class="mx-auto flex w-full flex-nowrap items-center justify-center gap-[10px] md:gap-[26px]">
         <course-statistics-progress progress="50" :size="isMobile ? 41.5 : 100">
           <template #label>

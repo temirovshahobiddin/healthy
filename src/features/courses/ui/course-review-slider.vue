@@ -23,6 +23,7 @@ const carouselConfig = computed<Partial<CarouselConfig>>(() => ({
 </script>
 
 <template>
+  
   <div class="w-full !bg-[#F0F4F1] px-4 py-[80px] md:px-0 md:py-[120px]">
     <app-section class="!px-0">
       <div class="flex w-full items-center justify-between">
@@ -30,22 +31,15 @@ const carouselConfig = computed<Partial<CarouselConfig>>(() => ({
         <ui-button class="!hidden md:!flex md:min-w-[224px]">Оставить отзыв</ui-button>
       </div>
     </app-section>
-    <div class="mt-[20px] md:mt-[40px]">
-      <carousel v-bind="carouselConfig" ref="carouselRef">
-        <slide class="h-full w-full">
-          <home-review-card />
-        </slide>
-        <slide class="h-full w-full">
-          <home-review-card />
-        </slide>
-        <slide class="h-full w-full">
-          <home-review-card />
-        </slide>
-        <slide class="h-full w-full">
-          <home-review-card />
-        </slide>
-      </carousel>
-    </div>
+    <app-section class="!px-0">
+      <div class="mt-[20px]  md:mt-[40px]">
+        <carousel v-bind="carouselConfig" ref="carouselRef">
+          <slide v-for="n in 4" :key="n">
+            <home-review-card />
+          </slide>
+        </carousel>
+      </div>
+    </app-section>
     <app-section class="!px-0">
       <ui-button class="mt-[20px] !flex w-full md:!hidden">Оставить отзыв</ui-button>
       <div class="ml-auto mt-[21px] hidden w-[130px] flex-nowrap items-center gap-[10px] md:mt-[40px] md:flex">
