@@ -19,7 +19,7 @@ const mockReview = {
   }
 }
 const showReviewModal = () => {
-  modal.show("review-modal", mockReview)
+  modal.show("review-modal", props.review)
 }
 </script>
 
@@ -30,10 +30,10 @@ const showReviewModal = () => {
     <div class="flex w-full flex-col items-start gap-[10px] md:gap-[15px]">
       <div class="flex flex-col flex-nowrap items-start gap-[2px] self-stretch">
         <span class="text-mobile-subtitle-18 font-semibold text-[#323232] md:text-subtitle-22">
-          {{ mockReview.reviewer_name }}
+          {{ review.reviewer_name }}
         </span>
         <span class="text-left font-['Onest'] text-mobile-body-15 font-normal text-[#848484] md:text-body-16">
-          {{ mockReview.reviewer_age }} {{ t("age") }}
+          {{ review.reviewer_age }} {{ t("age") }}
         </span>
       </div>
       <div
@@ -42,19 +42,19 @@ const showReviewModal = () => {
         <div class="flex w-[45px] flex-nowrap items-center gap-[5px]">
           <icon class="text-green-500" name="h-icon:star"></icon>
           <span class="font-['Manrope'] text-mobile-body-14 font-bold text-[#63845c] md:text-body-16">
-            {{ mockReview.rating }}
+            {{ review.rating }}
           </span>
         </div>
-        <div class="flex w-[160px] flex-nowrap items-center gap-[10px] text-mobile-body-14 md:text-body-16">
+        <div class="flex w-full flex-nowrap items-center justify-end gap-[10px] text-mobile-body-14 md:text-body-16">
           <span class="font-normal text-[#848484]">{{ t("for") }}:</span>
           <div class="font-normal">
-            <span class="font-normal text-[#848484] underline">{{ mockReview.specialist.name }}</span>
+            <span class="font-normal text-[#848484] underline cursor-pointer">{{ review.specialist_name }}</span>
           </div>
         </div>
       </div>
     </div>
     <p class="overflow-hidden break-words text-mobile-body-15 font-normal text-[#323232] md:text-body-17">
-      {{ mockReview.comment }}
+      {{ review.comment }}
     </p>
     <ui-button
       class="mt-auto"

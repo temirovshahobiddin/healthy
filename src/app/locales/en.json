@@ -53,6 +53,9 @@
     },
     "success": {
       "saved": "Saved successfully"
+    },
+    "review": {
+      "no_reviews": "Пока нет отзывов"
     }
   },
   "placeholders": {
@@ -73,6 +76,16 @@
     "minLength": "Minimum required length is {min}",
     "required": "This field is required",
     "sameAs": "Value must match the field \"{otherName}\""
+  },
+  "review_modal": {
+    "leave_review": "Leave a Review",
+    "your_review": "Your Review",
+    "your_rating": "Your Rating",
+    "write_your_review": "Write your review...",
+    "submit_review": "Submit Review",
+    "review_submitted": "Review Submitted!",
+    "review_success_message": "Your review has been successfully submitted and will be published after moderation.",
+    "ok": "Ok"
   },
   "order_modal": {
     "step": "Step",

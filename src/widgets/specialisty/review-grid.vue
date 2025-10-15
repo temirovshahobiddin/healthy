@@ -8,7 +8,10 @@ interface IProps {
   items: any[]
 }
 
-defineProps<IProps>()
+
+const props = defineProps<IProps>()
+
+console.log(props.items);
 defineEmits<{
   (e: "loadMore"): void
 }>()
@@ -41,7 +44,6 @@ const showCreateReviewModal = () => {
   modal.show("review-create-modal")
 }
 </script>
-
 <template>
   <app-section class="mb-[80px] mt-[90px] flex flex-col flex-nowrap items-start gap-[20px] md:mt-[124px] md:gap-[40px]">
     <div class="flex flex-nowrap items-center justify-between self-stretch">
@@ -53,31 +55,43 @@ const showCreateReviewModal = () => {
         {{ $t("actions.add_review") }}
       </ui-button>
     </div>
-    <div class="grid grid-cols-1 gap-[20px] self-stretch">
+
+    <div v-if="items.length" class="grid grid-cols-1 gap-[20px] self-stretch">
       <review-card v-for="item in items" :key="item.id" :review="item" />
+    </div>
+    <div v-else class="w-full text-center text-[#999] py-[40px]">
+      {{ $t("messages.review.no_reviews") }}
     </div>
 
     <ui-button class="flex w-full px-[20px] py-[16px] md:!hidden" color="primary" @click="showCreateReviewModal">
       {{ $t("actions.add_review") }}
     </ui-button>
-    <ui-button class="!hidden w-full px-[20px] py-[16px] md:flex" variant="outline" @click="$emit('loadMore')">
+    <ui-button v-if="items.length" class="!hidden w-full px-[20px] py-[16px] md:flex" variant="outline"
+      @click="$emit('loadMore')">
       {{ $t("actions.load_more") }}
     </ui-button>
   </app-section>
 </template>
 
-<style scoped></style>
-
 <i18n>
 {
   "ru": {
-    "title": "Отзывы"
+    "title": "Отзывы",
+    "messages": {
+      "no_reviews": "Пока нет отзывов"
+    }
   },
   "uz": {
-    "title": "Sharhlar"
+    "title": "Sharhlar",
+    "messages": {
+      "no_reviews": "Hozircha sharhlar yo‘q"
+    }
   },
   "en": {
-    "title": "Reviews"
+    "title": "Reviews",
+    "messages": {
+      "no_reviews": "No reviews yet"
+    }
   }
 }
 </i18n>
