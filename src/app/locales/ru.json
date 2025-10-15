@@ -62,6 +62,9 @@
     },
     "success": {
       "saved": "Успешно сохранено"
+    },
+    "review": {
+      "no_reviews": "Пока нет отзывов"
     }
   },
   "placeholders": {

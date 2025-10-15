@@ -53,6 +53,9 @@
     },
     "success": {
       "saved": "Saved successfully"
+    },
+    "review": {
+      "no_reviews": "Пока нет отзывов"
     }
   },
   "placeholders": {

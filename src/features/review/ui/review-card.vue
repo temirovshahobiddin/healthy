@@ -45,10 +45,10 @@ const showReviewModal = () => {
             {{ review.rating }}
           </span>
         </div>
-        <div class="flex w-[160px] flex-nowrap items-center gap-[10px] text-mobile-body-14 md:text-body-16">
+        <div class="flex w-full flex-nowrap items-center justify-end gap-[10px] text-mobile-body-14 md:text-body-16">
           <span class="font-normal text-[#848484]">{{ t("for") }}:</span>
           <div class="font-normal">
-            <span class="font-normal text-[#848484] underline">{{ review.specialist_name }}</span>
+            <span class="font-normal text-[#848484] underline cursor-pointer">{{ review.specialist_name }}</span>
           </div>
         </div>
       </div>

@@ -76,6 +76,9 @@
     },
     "success": {
       "saved": "Muvaffaqiyatli saqlandi"
+    },
+    "review": {
+      "no_reviews": "Пока нет отзывов"
     }
   },
   "review_modal": {
