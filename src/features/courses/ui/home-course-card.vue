@@ -15,7 +15,7 @@ const { t } = useI18n({
 <template>
   <nuxt-link-locale class="flex w-full flex-col flex-nowrap items-start gap-[25px]" :to="`/courses/${course.slug}`">
     <div class="self-stretch overflow-hidden rounded-[20px]">
-      <img class="object-cover object-center md:h-[400px]" alt="" :src="course.thumbnail" />
+      <img class="object-cover object-center md:h-[400px] rounded-[15px]" alt="" :src="course.thumbnail" />
     </div>
     <div class="flex flex-col flex-nowrap items-start gap-[15px] self-stretch md:gap-[20px]">
       <div

@@ -184,7 +184,7 @@
     <review-grid :items="reviews" />
     <home-course-grid :items="courses" />
     <div class="fixed bottom-0 left-0 right-0 z-30 bg-white px-4 py-[20px] md:!hidden">
-      <ui-button class="w-full">Записаться</ui-button>
+      <ui-button class="w-full" @click="orderModalOpen = true">Записаться</ui-button>
     </div>
     <review-create-modal />
   </div>

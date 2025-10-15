@@ -1,4 +1,5 @@
 <template>
+
   <div class="main-container relative mx-auto w-full overflow-hidden bg-[#f0f4f1]">
     <specialisty-hero />
     <specialisty-filter @on:filter="changeRoute" />
@@ -16,6 +17,7 @@ import SpecialistyFilter from "~/features/specialisty/ui/specialisty-filter.vue"
 import SpecialistyHero from "~/features/specialisty/ui/specialisty-hero.vue"
 import { useSpecialistsApi } from "~/entities/specialists/specialists.api"
 
+const specialistsApi = useSpecialistsApi()
 const route = useRoute()
 const router = useRouter()
 const query = ref({ ...route.query } || {})
@@ -52,10 +54,13 @@ const getSpecialists = () => {
   })
 }
 
-const specialistsApi = useSpecialistsApi()
+// const specialistsApi = useSpecialistsApi()
 const { data, refresh } = await useAsyncData("specialists", async () => {
+  console.log('Fetching_data with asyncdata', route.query);
   return specialistsApi.getSpecialistsList(route.query)
 })
+
+
 
 specialists.value = data.value?.data || []
 pagination.value = data.value?.pagination || {

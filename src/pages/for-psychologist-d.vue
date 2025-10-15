@@ -242,7 +242,7 @@
           <span
             class="relative z-[78] h-[23px] shrink-0 basis-auto whitespace-nowrap text-center font-['Manrope'] text-[17px] font-bold leading-[23px] text-[#63845c]"
           >
-            Присоедениться
+            Присоединиться
           </span>
         </div>
       </div>

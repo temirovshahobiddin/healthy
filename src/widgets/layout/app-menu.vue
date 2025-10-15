@@ -9,11 +9,11 @@
           :to="item.to"
           @click.native="closeMenu"
         >
-          {{ item.label }}
+          {{ item.label }}i
         </nuxt-link>
       </ul>
 
-      <div class="mt-[100%] flex w-full flex-col gap-[10px]">
+      <div class="flex w-full flex-col gap-[10px]">
         <ui-button @click="orderModalOpen = true">Записаться</ui-button>
         <ui-button class="!bg-[#63845C33] !text-green-500" @click="goToPsychologists">
           Специалистам

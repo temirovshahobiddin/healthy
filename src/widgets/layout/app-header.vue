@@ -34,7 +34,7 @@ onUnmounted(() => {
   <header :class="['app-header', { 'app-header--scrolled': isScrolled }]">
     <div class="app-header-container">
       <nuxt-link-locale to="/">
-        <logo class="h-[65px] w-[65px] md:h-[80px] md:w-[80px]" alt="Logo" :class="{
+        <logo class="h-[60px] w-[65px] md:h-[80px] md:w-[80px]" alt="Logo" :class="{
           'text-white': !isScrolled,
           'text-green-500': isScrolled
         }" />
