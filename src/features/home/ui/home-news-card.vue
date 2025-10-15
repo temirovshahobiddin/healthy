@@ -14,7 +14,7 @@ const { t } = useI18n({
   <div
     class="flex w-full shrink-0 flex-col flex-nowrap items-start gap-[20px] rounded-[20px] bg-[#f7f7f7] p-[10px] pb-[15px] md:gap-[25px] md:p-[15px]"
     @click="$router.push(`/blog/${item.slug}`)">
-    <div class="h-[180px] shrink-0 self-stretch overflow-hidden rounded-[10px] bg-[rgba(217,217,217,0.2)] md:h-[240px]">
+    <div class="h-[180px] shrink-0 self-stretch overflow-hidden rounded-[10px] bg-[rgba(217,217,217,0.2)] md:h-[320px]">
       <img class="object-cover object-center" alt="" :src="item.thumbnail" />
     </div>
     <div class="flex shrink-0 flex-col flex-nowrap items-start gap-[20px] self-stretch">

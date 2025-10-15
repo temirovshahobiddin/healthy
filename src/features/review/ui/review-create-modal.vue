@@ -1,16 +1,17 @@
 <script setup lang="ts">
 import { ref } from "vue"
-const { t } = useI18n({
-  useScope: "local"
-})
+import { useReviewApi } from "~/api/reviews/api"
+
+interface IProps {
+  specialist: Array<any>
+}
+const props = defineProps<IProps>()
+const { $toast } = useNuxtApp()
+
+const { t } = useI18n({ useScope: "local" })
+const reviewApi = useReviewApi()
 
 const review = ref({})
-
-const onBeforeShow = (e: any) => {
-  console.log("Review Modal Data:", e)
-  review.value = e
-}
-
 const form = ref({
   rating: 0,
   comment: "",
@@ -18,15 +19,59 @@ const form = ref({
   phone: "",
   specialist_id: null
 })
-const submit = () => {
-  console.log(form.value)
+
+
+const onBeforeShow = (e: any) => {
+  console.log("Review Modal Data:", e)
+  review.value = e
+  form.value.specialist_id = e?.id || null
 }
 
 const setRating = (value: number) => {
   form.value.rating = value
 }
 
+
+const sendReview = async () => {
+  try {
+    if (!form.value.rating || !form.value.reviewer_name || !form.value.phone) {
+      alert("Пожалуйста, заполните все обязательные поля.")
+      return
+    }
+
+    const payload = {
+      rating: form.value.rating,
+      comment: form.value.comment,
+      reviewer_name: form.value.reviewer_name,
+      phone: form.value.phone,
+      reviewer_age: 27,
+      specialist_id: props.specialist?.id || null
+    }
+
+    const response = await reviewApi.sendReview(payload)
+    console.log("Отзыв успешно отправлен:", response)
+    alert("Спасибо за ваш отзыв!")
+
+
+    form.value = {
+      rating: 0,
+      comment: "",
+      reviewer_name: "",
+      phone: "",
+      specialist_id: null
+    }
+
+
+    const modal = document.getElementById("review-create-modal") as any
+    modal?.close?.()
+    $toast.success(t("messages.review_modal.review_submitted  "))
+  } catch (err) {
+    $toast.error(t("messages.error.something_went_wrong"))
+  }
+}
+
 </script>
+
 
 <template>
   <ui-modal id="review-create-modal" class="review-create-modal" label="Ваша оценка" @before-show="onBeforeShow">
@@ -51,7 +96,7 @@ const setRating = (value: number) => {
           <ui-input class="ui-input-outline !h-auto !border-0 !border-b-2 py-[10px] text-[#848484] md:py-[15px]"
             v-model="form.comment" :placeholder="t('form-inputs.reason')" />
         </ui-form-group>
-        <ui-button class="w-full !bg-green-500 mt-[10px]" @click="submit">Отправить отзыв</ui-button>
+        <ui-button class="w-full !bg-green-500 mt-[10px]" @click="sendReview">Отправить отзыв</ui-button>
       </div>
     </div>
   </ui-modal>

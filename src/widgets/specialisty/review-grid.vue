@@ -8,7 +8,10 @@ interface IProps {
   items: any[]
 }
 
-defineProps<IProps>()
+
+const props = defineProps<IProps>()
+
+console.log(props.items);
 defineEmits<{
   (e: "loadMore"): void
 }>()

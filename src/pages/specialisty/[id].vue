@@ -63,7 +63,8 @@
                 <span class="text-mobile-subtitle-22 font-semibold text-[#323232]">
                   от {{ Number(specialist.price).toLocaleString('ru-RU', {
                     minimumFractionDigits: 2,
-                  maximumFractionDigits: 2 }) }} сум</span>
+                    maximumFractionDigits: 2
+                  }) }} сум</span>
 
               </div>
             </div>
@@ -124,7 +125,8 @@
                   class="relative h-[38px] shrink-0 basis-auto self-stretch text-left font-['Onest'] text-[30px] font-semibold leading-[38px] text-[#323232]">
                   от {{ Number(specialist.price).toLocaleString('ru-RU', {
                     minimumFractionDigits: 2,
-                  maximumFractionDigits: 2 }) }} сум
+                    maximumFractionDigits: 2
+                  }) }} сум
                 </span>
               </div>
             </div>
@@ -143,11 +145,10 @@
                 }" @click="changeTab('services')">
                   <span class="text-mobile-body-15 font-medium md:text-body-18">Услуги</span>
                 </div>
-                <div v-if="blogs.length > 0"
-                  class="relative flex w-[41px] items-center justify-center gap-[10px] pb-[10px] pt-0" :class="{
-                    'border-b-[#63845c] text-[#63845c]': activeTab === 'specialist',
-                    'border-b-transparent text-[#323232]': activeTab !== 'specialist'
-                  }" @click="changeTab('blog')">
+                <div class="relative flex w-[41px] items-center justify-center gap-[10px] pb-[10px] pt-0" :class="{
+                  'border-b-[#63845c] text-[#63845c]': activeTab === 'specialist',
+                  'border-b-transparent text-[#323232]': activeTab !== 'specialist'
+                }" @click="changeTab('blog')">
                   <span class="text-mobile-body-15 font-medium md:text-body-18">Блог</span>
                 </div>
               </div>
@@ -186,7 +187,7 @@
     <div class="fixed bottom-0 left-0 right-0 z-30 bg-white px-4 py-[20px] md:!hidden">
       <ui-button class="w-full">Записаться</ui-button>
     </div>
-    <review-create-modal />
+    <review-create-modal :specialist="specialist" />
   </div>
   <ui-modal id="phone_modal" class="phone_modal" label="Записаться">
     <div class="px-[15px] pb-[20px] md:px-[20px] flex flex-col items-start">
@@ -278,8 +279,12 @@ const { data, error } = await useAsyncData("specialist", async () => {
 })
 const [_specialist, _reviews, _courses] = data.value || []
 specialist.value = _specialist?.data || {}
-reviews.value = _reviews?.data || []
+reviews.value = _specialist?.data.reviews || []
 courses.value = _courses?.data || []
+
+
+console.log(data.value);
+
 </script>
 
 <style>

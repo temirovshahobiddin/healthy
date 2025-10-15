@@ -78,6 +78,17 @@
       "saved": "Muvaffaqiyatli saqlandi"
     }
   },
+  "review_modal": {
+    "leave_review": "Fikr qoldirish",
+    "your_review": "Sizning fikringiz",
+    "your_name": "Ismingiz",
+    "your_position": "Lavozimingiz",
+    "your_message": "Xabaringiz",
+    "submit_review": "Fikrni yuborish",
+    "review_submitted": "Fikringiz yuborildi!",
+    "thank_you_message": "Fikringiz uchun rahmat! U tekshirilgandan so'ng e'lon qilinadi.",
+    "ok": "Ok"
+  },
   "placeholders": {
     "data_not_found": "Ma'lumot topilmadi",
     "enter_email": "Elektron pochtangizni kiriting",

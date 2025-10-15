@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import CertificateSlider from "~/features/specialisty/ui/certificate-slider.vue"
 
+const { t } = useI18n({ useScope: "local" })
+
 interface IProps {
   specialist: any
 }

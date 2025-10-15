@@ -12,7 +12,7 @@ defineProps<IProps>()
     class="flex w-full shrink-0 flex-col flex-nowrap items-start gap-[20px] rounded-[20px] bg-white p-[10px] pb-[15px] md:gap-[25px] md:p-[15px]"
     @click="router.push(`/blog/${blog.slug}`)"
   >
-    <img class="h-[180px] w-full rounded-[10px] object-cover object-center md:h-[240px]" alt="" :src="blog.thumbnail" />
+    <img class="h-[180px] w-full rounded-[10px] object-cover object-top md:h-[320px]" alt="" :src="blog.thumbnail" />
     <div class="flex shrink-0 flex-col flex-nowrap items-start gap-[20px] self-stretch">
       <div
         class="flex shrink-0 flex-col flex-nowrap items-start gap-[5px] self-stretch border-b border-solid border-b-[#e0e5e3] pb-[15px] md:gap-[8px] md:pb-[20px]"
