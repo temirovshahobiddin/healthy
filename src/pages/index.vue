@@ -69,6 +69,8 @@ const [_banner, _specialists, _blog, _courses, _review] = data.value || []
 //   showError(error.value)
 // }
 
+console.log(_specialists?.data)
+
 useHead({
   title: t("title"),
   meta: [

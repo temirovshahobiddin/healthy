@@ -16,6 +16,7 @@ import AppSection from "~/widgets/layout/app-section.vue"
 import SpecialistyFilter from "~/features/specialisty/ui/specialisty-filter.vue"
 import SpecialistyHero from "~/features/specialisty/ui/specialisty-hero.vue"
 import { useSpecialistsApi } from "~/entities/specialists/specialists.api"
+const { $http } = useNuxtApp()
 
 const specialistsApi = useSpecialistsApi()
 const route = useRoute()
@@ -54,11 +55,17 @@ const getSpecialists = () => {
   })
 }
 
-// const specialistsApi = useSpecialistsApi()
-const { data, refresh } = await useAsyncData("specialists", async () => {
+const getdata = async () => {
   console.log('Fetching_data with asyncdata', route.query);
-  return specialistsApi.getSpecialistsList(route.query)
-})
+  return $http.$get("/specialists", { params: route.query })
+}
+
+// const { data, refresh } = await useAsyncData("specialists", () => getdata())
+
+const { data, refresh } = await useAsyncData(
+  `specialists-${JSON.stringify(route.query)}`,
+  () => getdata()
+)
 
 
 

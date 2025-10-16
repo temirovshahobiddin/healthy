@@ -9,7 +9,7 @@
           :to="item.to"
           @click.native="closeMenu"
         >
-          {{ item.label }}i
+          {{ item.label }}
         </nuxt-link>
       </ul>
 

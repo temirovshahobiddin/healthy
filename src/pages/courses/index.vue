@@ -4,7 +4,7 @@
     <course-filter v-model="query.type" @update:model-value="getCourses" />
     <app-section class="mt-[20px] pb-[56px] md:pb-[60px]">
       <div class="grid grid-cols-1 gap-[40px] md:grid-cols-2 md:gap-[20px]">
-        <home-course-card v-for="course in courses" :key="course.id" :course />
+        <home-course-card v-for="course in courses" :key="course.id" :course="course" />
       </div>
       <ui-pagination v-model="query.page" :total="pagination.total" @update:model-value="getCourses" />
     </app-section>
@@ -39,7 +39,6 @@ const pagination = ref({
 const getCourses = async () => {
   router.push({ query: { ...query } })
   const { data } = await courseApi.getCoursesList(query)
-  console.log(data);
   courses.value = data || []
   pagination.value = data?.pagination || { page: 1, total: 0, limit: 10 }
 }

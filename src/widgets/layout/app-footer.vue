@@ -68,7 +68,9 @@ const { siteSettings } = storeToRefs(siteSettingsStore)
           </nuxt-link-locale>
         </span>
         <span class="relative font-['Onest'] text-mobile-body-16 font-normal text-[#fff] md:text-[20px] md:font-medium">
-          О проекте
+          <nuxt-link-locale to="/about">
+            О проекте
+          </nuxt-link-locale>
         </span>
       </div>
 

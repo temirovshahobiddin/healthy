@@ -1,6 +1,6 @@
 <script setup lang="ts">
 interface IProps {
-  review: any[]
+  review: any
 }
 
 const props = defineProps<IProps>()
