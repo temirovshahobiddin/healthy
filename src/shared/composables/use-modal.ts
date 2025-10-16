@@ -1,6 +1,8 @@
 export const modalStore = ref<Map<ModalId, IModalValue>>(new Map())
 
 const orderModalOpen = ref<boolean>(false)
+const courseOrderModalOpen = ref<boolean>(false)
+const courseOrderData = ref<{ serviceId?: string | number; specialistId?: string | number }>({})
 
 export const useModal = () => {
   const setModal = (id: ModalId, value: IModalValue) => {
@@ -26,5 +28,10 @@ export const useModal = () => {
     if (modal && modal?.hide) modal.hide()
   }
 
-  return { setModal, getModal, removeModal, show, hide, orderModalOpen }
+  const openCourseOrderModal = (serviceId?: string | number, specialistId?: string | number) => {
+    courseOrderData.value = { serviceId, specialistId }
+    courseOrderModalOpen.value = true
+  }
+
+  return { setModal, getModal, removeModal, show, hide, orderModalOpen, courseOrderModalOpen, courseOrderData, openCourseOrderModal }
 }

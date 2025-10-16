@@ -1,20 +1,21 @@
 <script lang="ts" setup>
+interface Option {
+  id: number | string,
+  name: string
+}
+
 interface Props {
-  options: string[]
-  modelValue?: string
+  options: Option[]
+  modelValue?: number | string
   placeholder?: string
   randomSuggestionsCount?: number
 }
 
 interface Emits {
-  (e: "update:modelValue", value: string): void
+  (e: "update:modelValue", value: number | string): void
 }
 
 const { t } = useI18n()
-
-interface Emits {
-  (e: "update:modelValue", value: string): void
-}
 
 const props = withDefaults(defineProps<Props>(), {
   placeholder: "Выберите опцию...",
@@ -31,7 +32,10 @@ watch(
   () => props.modelValue,
   (newValue) => {
     if (newValue) {
-      searchTerm.value = newValue
+      const selectedOption = props.options.find((opt) => opt.id === newValue)
+      if (selectedOption) {
+        searchTerm.value = selectedOption.name
+      }
     }
   },
   { immediate: true }
@@ -40,7 +44,7 @@ watch(
 // Computed properties for filtering and random suggestions
 const filteredOptions = computed(() => {
   if (!searchTerm.value) return props.options
-  return props.options.filter((option) => option.toLowerCase().includes(searchTerm.value.toLowerCase()))
+  return props.options.filter((option) => option.name.toLowerCase().includes(searchTerm.value.toLowerCase()))
 })
 
 const randomSuggestions = computed(() => {
@@ -49,9 +53,9 @@ const randomSuggestions = computed(() => {
 })
 
 // Methods for select functionality
-const selectOption = (option: string) => {
-  searchTerm.value = option
-  emit("update:modelValue", option)
+const selectOption = (option: Option) => {
+  searchTerm.value = option.name
+  emit("update:modelValue", option.id)
   isDropdownOpen.value = false
 }
 
@@ -93,67 +97,44 @@ onMounted(() => {
   <div class="custom-select-component relative w-full">
     <!-- Input Field -->
     <div class="relative">
-      <input
-        v-model="searchTerm"
+      <input v-model="searchTerm"
         class="w-full border-b py-3 text-base transition-colors focus:border-green-500 focus:outline-none sm:text-lg"
-        type="text"
-        :placeholder="placeholder"
-        @click="handleInputClick"
-        @focus="isDropdownOpen = true"
-        @input="handleInputChange"
-      />
+        type="text" :placeholder="placeholder" @click="handleInputClick" @focus="isDropdownOpen = true"
+        @input="handleInputChange" />
 
       <!-- Clear Icon -->
-      <button
-        v-if="searchTerm"
+      <button v-if="searchTerm"
         class="absolute right-2 top-1/2 -translate-y-1/2 transform text-gray-400 transition-colors hover:text-gray-600"
-        type="button"
-        @click="clearSelection"
-      >
+        type="button" @click="clearSelection">
         <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
           <path
-            d="M12.854 4.854a.5.5 0 0 0-.708-.708L8 8.293 3.854 4.146a.5.5 0 1 0-.708.708L7.293 9l-4.147 4.146a.5.5 0 0 0 .708.708L8 9.707l4.146 4.147a.5.5 0 0 0 .708-.708L8.707 9l4.147-4.146z"
-          />
+            d="M12.854 4.854a.5.5 0 0 0-.708-.708L8 8.293 3.854 4.146a.5.5 0 1 0-.708.708L7.293 9l-4.147 4.146a.5.5 0 0 0 .708.708L8 9.707l4.146 4.147a.5.5 0 0 0 .708-.708L8.707 9l4.147-4.146z" />
         </svg>
       </button>
 
       <!-- Dropdown Arrow -->
-      <button
-        v-else
+      <button v-else
         class="absolute right-2 top-1/2 -translate-y-1/2 transform text-gray-400 transition-transform duration-200"
-        type="button"
-        :class="{ 'rotate-180': isDropdownOpen }"
-        @click="toggleDropdown"
-      >
+        type="button" :class="{ 'rotate-180': isDropdownOpen }" @click="toggleDropdown">
         <svg width="12" height="8" viewBox="0 0 12 8" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path
-            d="M1 1.5L6 6.5L11 1.5"
-            stroke="#323232"
-            stroke-width="1.5"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          />
+          <path d="M1 1.5L6 6.5L11 1.5" stroke="#323232" stroke-width="1.5" stroke-linecap="round"
+            stroke-linejoin="round" />
         </svg>
       </button>
 
       <!-- Dropdown -->
       <Transition name="dropdown">
-        <div
-          v-if="isDropdownOpen"
-          class="absolute top-full z-50 mt-2 w-full overflow-hidden rounded-xl border border-gray-200 bg-white py-2 pl-2 shadow-md"
-        >
+        <div v-if="isDropdownOpen"
+          class="absolute top-full z-50 mt-2 w-full overflow-hidden rounded-xl border border-gray-200 bg-white py-2 pl-2 shadow-md">
           <!-- Filtered Options -->
           <div class="max-h-40 overflow-y-auto pr-2">
-            <div v-if="filteredOptions.length === 0" class="px-4 py-3 text-sm text-gray-500">{{ t('order_modal.option_not_found') }}</div>
-            <button
-              v-for="option in filteredOptions"
+            <div v-if="filteredOptions.length === 0" class="px-4 py-3 text-sm text-gray-500">{{
+              t('order_modal.option_not_found') }}</div>
+            <button v-for="option in filteredOptions"
               class="w-full rounded-lg px-2.5 py-2 text-left text-sm transition-colors hover:bg-green-500 hover:text-white sm:text-base"
-              type="button"
-              :key="option"
-              :class="{ 'bg-green-500 text-white': modelValue === option }"
-              @click="selectOption(option)"
-            >
-              {{ option }}
+              type="button" :key="option.id" :class="{ 'bg-green-500 text-white': modelValue === option.id }"
+              @click="selectOption(option)">
+              {{ option.name }}
             </button>
           </div>
         </div>
@@ -163,14 +144,10 @@ onMounted(() => {
     <!-- Random Suggestions (below input) -->
     <div v-if="!searchTerm && randomSuggestions.length > 0" class="mt-5">
       <div class="flex flex-wrap gap-2">
-        <button
-          v-for="suggestion in randomSuggestions"
+        <button v-for="suggestion in randomSuggestions"
           class="rounded-full border px-3 py-2 text-sm transition-colors hover:bg-green-500 hover:text-white sm:text-base"
-          type="button"
-          :key="suggestion"
-          @click="selectOption(suggestion)"
-        >
-          {{ suggestion }}
+          type="button" :key="suggestion.id" @click="selectOption(suggestion)">
+          {{ suggestion.name }}
         </button>
       </div>
     </div>

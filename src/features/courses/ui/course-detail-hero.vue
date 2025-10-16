@@ -12,7 +12,7 @@
               </div>
             </h-tag>
             <h-tag>
-              {{ course.type.name}}
+              {{ course.type.name }}
             </h-tag>
             <h-tag>
               {{ t('format') }}
@@ -24,19 +24,22 @@
               {{ course.title }}
             </h1>
             <div class="md:w-[598px]">
-              <span class="font-['Onest'] text-mobile-body-15 font-normal text-[#585958] md:text-body-18" v-html="course.description">
-                
+              <span class="font-['Onest'] text-mobile-body-15 font-normal text-[#585958] md:text-body-18"
+                v-html="course.description">
+
               </span>
             </div>
           </div>
         </div>
         <div class="flex w-full flex-col flex-nowrap items-start gap-[10px] md:flex-row md:gap-[20px]">
-          <ui-button class="w-full md:w-auto md:min-w-[223px]">Записаться на курс</ui-button>
+          <ui-button class="w-full cursor-pointer md:w-auto md:min-w-[223px]"
+            @click="openCourseOrderModal(course.id, course.specialist.id)">Записаться на курс</ui-button>
           <ui-button class="w-full md:w-auto md:min-w-[223px]" variant="outline">Подробнее</ui-button>
         </div>
       </div>
       <div class="mb-[20px] h-[328px] w-[328px] overflow-hidden rounded-[20px] md:mb-0 md:h-[670px] md:w-[670px]">
-        <img class="object-cover h-[328px] w-[328px] overflow-hidden rounded-[20px] md:mb-0 md:h-[670px] md:w-[670px]" :src="course.thumbnail" alt="" />
+        <img class="object-cover h-[328px] w-[328px] overflow-hidden rounded-[20px] md:mb-0 md:h-[670px] md:w-[670px]"
+          :src="course.thumbnail" alt="" />
       </div>
     </div>
   </app-section>
@@ -47,15 +50,21 @@ import AppSection from "~/widgets/layout/app-section.vue"
 import HTag from "~/features/base/h-tag.vue"
 
 const { t, locale } = useI18n({ useScope: "local" })
-
+const { openCourseOrderModal } = useModal()
 interface IProps {
   course: {
     start_date: string
     title: string
     description: string
-    type: string
+    type: {
+      name: string
+    }
     format: string
     thumbnail: string
+    id: string | number
+    specialist: {
+      id: string | number
+    }
   }
 }
 
@@ -78,7 +87,7 @@ const formattedDate = computed(() => {
   const date = new Date(props.course.start_date)
 
   if (locale.value === "uz") {
-    return formatUzDate(date)  
+    return formatUzDate(date)
   }
 
   return new Intl.DateTimeFormat("ru-RU", {

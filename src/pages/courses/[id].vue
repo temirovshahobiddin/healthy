@@ -6,8 +6,8 @@
     <course-due-time :course />
     <course-modules :course />
     <course-author :course />
-    <course-places reserved-count="4" :place-count="10" />
-    <course-address :course />
+    <course-places :course_id="course.id" :specialist_id="course.specialist.id" :reserved-count="4" :place-count="10" />
+    <course-address :course_id="course.id" :specialist_id="course.specialist.id" />
     <course-review-slider :course />
     <course-leed-form :course />
     <course-faq :course />

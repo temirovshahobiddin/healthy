@@ -3,10 +3,14 @@ import AppSectionFluid from "~/widgets/layout/app-section-fluid.vue"
 
 interface IProps {
   placeCount: number
-  reservedCount: number
+  reservedCount: number,
+  course_id?: string | number,
+  specialist_id?: string | number
 }
 
 defineProps<IProps>()
+
+const { openCourseOrderModal } = useModal()
 </script>
 
 <template>
@@ -14,22 +18,18 @@ defineProps<IProps>()
     <div class="mx-auto flex flex-col items-center">
       <div class="mx-auto flex w-fit flex-nowrap items-center">
         <template v-for="n in placeCount" :key="n">
-          <div
-            v-if="n <= reservedCount"
+          <div v-if="n <= reservedCount"
             class="flex h-[45.63px] w-[45.63px] items-center justify-center rounded-[40px] border border-solid border-[#e0e5e3] bg-[#fff] md:h-[80px] md:w-[80px]"
             :class="{
               '-ml-[14.30px] md:-ml-[25px]': n > 1
-            }"
-          >
+            }">
             <icon class="h-[17.11] w-[17.11] text-green-500 md:h-[30px] md:w-[30px]" name="h-icon:checkmark"></icon>
           </div>
-          <div
-            v-else
+          <div v-else
             class="flex h-[45.63px] w-[45.63px] items-center justify-center rounded-[40px] border border-solid border-[#fff] bg-[#63845c] md:h-[80px] md:w-[80px]"
             :class="{
               '-ml-[14.30px] md:-ml-[25px]': n > 0
-            }"
-          ></div>
+            }"></div>
         </template>
       </div>
       <div class="mt-[20px] flex flex-col flex-nowrap items-center gap-[5px] md:mt-[40px] md:gap-[8px]">
@@ -40,7 +40,7 @@ defineProps<IProps>()
           Успейте забронировать место на курс
         </span>
       </div>
-      <ui-button class="mt-[30px]">Записаться на курс</ui-button>
+      <ui-button class="mt-[30px]" @click="openCourseOrderModal(course_id, specialist_id)">Записаться на курс</ui-button>
     </div>
   </app-section-fluid>
 </template>

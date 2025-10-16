@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import AppSection from "~/widgets/layout/app-section.vue"
 import HTag from "~/features/base/h-tag.vue"
-
+const { openCourseOrderModal } = useModal()
 interface IProps {
   course: any
 }
@@ -64,7 +64,7 @@ defineProps<IProps>()
       
 
     </div>
-    <ui-button class="w-full md:w-auto md:min-w-[223px]">Записаться на курс</ui-button>
+    <ui-button class="w-full md:w-auto md:min-w-[223px]" @click="openCourseOrderModal(course.id, course.specialist.id)">Записаться на курс</ui-button>
   </app-section>
 </template>
 

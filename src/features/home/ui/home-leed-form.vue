@@ -39,6 +39,15 @@ const submit = async () => {
       vuelidate.value.$reset()
     })
 }
+const formatPhoneNumber = (phone: string | undefined) => {
+  if (!phone) return ''
+  // Remove all non-digit characters
+  const cleaned = phone.replace(/\D/g, '')
+  if (cleaned.length === 12 && cleaned.startsWith('998')) {
+    return `+${cleaned.slice(0, 3)} (${cleaned.slice(3, 5)}) ${cleaned.slice(5, 8)}-${cleaned.slice(8, 10)}-${cleaned.slice(10, 12)}`
+  }
+  return phone
+}
 </script>
 
 <template>
@@ -64,7 +73,7 @@ const submit = async () => {
               class="font-['Onest'] text-mobile-subtitle-18 font-semibold text-[#fff] md:text-subtitle-22"
               :href="`tel:${siteSettings?.phone?.trim()}`"
             >
-              {{ siteSettings?.phone }}
+              {{ formatPhoneNumber(siteSettings?.phone) }}
             </a>
           </div>
         </div>

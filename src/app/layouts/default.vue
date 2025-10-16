@@ -3,12 +3,13 @@ import { AppHeader, AppContent } from "~/widgets/layout"
 import { ProfileModal, ProfilePasswordModal } from "~/features/profile"
 import AppFooter from "~/widgets/layout/app-footer.vue"
 import ReviewModal from "~/features/review/ui/review-modal.vue"
-import { SuccessModal, OrderModal } from "~/features/modals"
+import { SuccessModal, OrderModal, CourseOrderModal } from "~/features/modals"
 </script>
 
 <template>
   <teleport to="body">
     <OrderModal />
+    <CourseOrderModal />
   </teleport>
 
   <div>

@@ -1,5 +1,11 @@
 <script setup lang="ts">
 import AppSectionFluid from "~/widgets/layout/app-section-fluid.vue"
+const { openCourseOrderModal } = useModal()
+interface IProps {
+  course_id: number | string
+  specialist_id: number | string
+}
+defineProps<IProps>()
 </script>
 
 <template>
@@ -113,7 +119,7 @@ import AppSectionFluid from "~/widgets/layout/app-section-fluid.vue"
           </div>
         </div>
         <div class="col-span-full mt-[30px] !hidden md:!block">
-          <ui-button class="!bg-white !text-green-500">Записаться на курс</ui-button>
+          <ui-button class="!bg-white !text-green-500" @click="openCourseOrderModal(course_id, specialist_id)">Записаться на курс</ui-button>
         </div>
       </div>
       <iframe src="https://yandex.com/map-widget/v1/?um=constructor%3A5aff8a80fefd8c9947873ec7aedcef15800978c3887fb1dfac16840452378f9e&amp;source=constructor"
