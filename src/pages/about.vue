@@ -212,9 +212,24 @@
       >
         Команда
       </span>
+      <!-- <pre>{{ specialists[0] }}</pre> -->
 
-      <div class="relative no-scrollbar z-[119] mb-0 mr-0 mt-[30px] grid grid-cols-4 gap-[20px] max-[1420px]:px-4 max-[1420px]:flex max-[1420px]:overflow-x-auto max-[940px]:mt-5">
-        <div class="flex-1 max-[1420px]:shrink-0 max-[1420px]:w-[288px] max-[1420px]:flex-auto">
+      <div class="relative z-[119] mb-0 mr-0 mt-[30px] gap-[20px] px-4 flex overflow-x-auto max-[940px]:mt-5">
+        <div v-for="specialist in specialists" :key="specialist.id"
+        class="shrink-0 w-[288px] flex-auto">
+          <img class="w-full h-[400px] object-cover rounded-[10px] max-[940px]:h-[435px]" :src="specialist.photo" alt="team-img" width="345" height="400">
+
+          <div class="flex flex-col gap-[5px] mt-5 leading-[1.2]">
+              <p class="text-[24px] font-semibold text-black/100 max-[940px]:text-[22px]">
+                {{ specialist.full_name }}
+              </p>
+
+              <span class="text-[17px] text-black/80 max-[940px]:text-[15px]">
+                {{ specialist.specializations[0].name }}
+              </span>
+          </div>
+        </div>
+        <!-- <div class="flex-1 max-[1420px]:shrink-0 max-[1420px]:w-[288px] max-[1420px]:flex-auto">
           <img class="w-full h-[400px] object-cover rounded-[10px] max-[940px]:h-[435px]" src="https://codia-f2c.s3.us-west-1.amazonaws.com/image/2025-07-21/xehTJLCUuR.png" alt="team-img" width="345" height="400">
 
           <div class="flex flex-col gap-[5px] mt-5 leading-[1.2]">
@@ -268,7 +283,7 @@
                 Клинический психолог
               </span>
           </div>
-        </div>
+        </div> -->
       </div>
 
       <div
@@ -402,4 +417,14 @@ import { NuxtLink } from "#components";
 import HomeLeedForm from "~/features/home/ui/home-leed-form.vue"
 import AppSectionFluid from "~/widgets/layout/app-section-fluid.vue"
 import AppSection from "~/widgets/layout/app-section.vue"
+const { $http } = useNuxtApp()
+const specialists = ref([])
+const getdata = async () => {
+  return $http.$get("/specialists", { params: { page: 1, limit: 10 } })
+}
+
+const { data, refresh } = await useAsyncData("specialists", () => getdata())
+
+specialists.value = data.value?.data || []
+
 </script>

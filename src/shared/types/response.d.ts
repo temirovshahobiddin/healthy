@@ -17,6 +17,7 @@ interface IPagination {
 }
 
 interface IResponse<T> {
+  data: any
   content: T
   errors?: string[]
   pageable?: IPagination

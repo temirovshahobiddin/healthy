@@ -56,7 +56,6 @@ const getSpecialists = () => {
 }
 
 const getdata = async () => {
-  console.log('Fetching_data with asyncdata', route.query);
   return $http.$get("/specialists", { params: route.query })
 }
 
