@@ -141,7 +141,7 @@ defineProps<IProps>()
       </div>
     </template>
   </ui-accordion>
-  <ui-accordion class="detail-accordion w-full !border-b border-none border-b-[#E8E8E8] !bg-white md:mb-[10px]">
+  <ui-accordion class="detail-accordion w-full !border-b border-none border-b-[#E8E8E8] !bg-white md:mb-[10px]" v-if="specialist.personal_appeal">
     <template #header>
       <span class="text-mobile-subtitle-20 font-semibold text-[#323232] md:text-subtitle-24">Личное обращение</span>
     </template>
@@ -149,14 +149,13 @@ defineProps<IProps>()
       <div class="pb-[10px] md:pb-[15px]">
         <div class="relative overflow-hidden rounded-[10px] bg-[#f0f4f1] p-[15px] md:p-[20px]">
           <span class="text-mobile-subtitle-16 font-semibold text-[#63845c] md:text-subtitle-20">
-            Каждый человек уникален, и я убежден, что даже в самой сложной ситуации можно найти выход. В своей работе я
-            опираюсь на комплексный подход и верю в силы каждого пациента.
+            {{ specialist.personal_appeal }}
           </span>
         </div>
       </div>
     </template>
   </ui-accordion>
-  <ui-accordion class="detail-accordion w-full !border-b border-none border-b-[#E8E8E8] !bg-white md:mb-[10px]">
+  <ui-accordion class="detail-accordion w-full !border-b border-none border-b-[#E8E8E8] !bg-white md:mb-[10px]" v-if="specialist.video">
     <template #header>
       <span class="text-mobile-subtitle-20 font-semibold text-[#323232] md:text-subtitle-24">Видео-презентация</span>
     </template>
