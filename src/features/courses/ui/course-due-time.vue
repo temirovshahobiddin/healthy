@@ -6,6 +6,51 @@ import { breakpointsTailwind } from "@vueuse/core/index"
 
 const breakpoints = useBreakpoints(breakpointsTailwind)
 const isMobile = breakpoints.smallerOrEqual("sm")
+interface IProps {
+  course: any
+}
+defineProps<IProps>()
+type TimeLeft = {
+  months: number
+  days: number
+  hours: number
+}
+
+function getTimeLeft(start_date: string): TimeLeft {
+  const target = new Date(start_date)
+  const now = new Date()
+
+  if (isNaN(target.getTime()) || target <= now) {
+    return { months: 0, days: 0, hours: 0 }
+  }
+
+  let months =
+    target.getFullYear() * 12 + target.getMonth() -
+    (now.getFullYear() * 12 + now.getMonth())
+
+  // Adjust month difference if the day in the target month hasn't been reached yet
+  if (target.getDate() < now.getDate()) {
+    months--
+  }
+
+  // Get the date after adding full months to now
+  const temp = new Date(now)
+  temp.setMonth(temp.getMonth() + months)
+
+  // Calculate remaining days and hours
+  let diffMs = target.getTime() - temp.getTime()
+  const days = Math.floor(diffMs / (1000 * 60 * 60 * 24))
+  diffMs -= days * 1000 * 60 * 60 * 24
+
+  const hours = Math.floor(diffMs / (1000 * 60 * 60))
+
+  return {
+    months: Math.max(0, months),
+    days: Math.max(0, days),
+    hours: Math.max(0, hours)
+  }
+}
+
 </script>
 
 <template>
@@ -15,7 +60,7 @@ const isMobile = breakpoints.smallerOrEqual("sm")
         <course-statistics-progress progress="50" :size="isMobile ? 41.5 : 100">
           <template #label>
             <div class="flex flex-col items-center">
-              <span class="font-['Onest'] text-[32px] font-semibold text-[#fff] md:text-[70px]">01</span>
+              <span class="font-['Onest'] text-[32px] font-semibold text-[#fff] md:text-[70px]">{{ getTimeLeft(course.start_date).months }}</span>
               <span class="font-['Onest'] text-mobile-body-14 font-medium text-[#fff] opacity-80 md:text-body-18">
                 месяцев
               </span>
@@ -25,7 +70,7 @@ const isMobile = breakpoints.smallerOrEqual("sm")
         <course-statistics-progress progress="60" :size="isMobile ? 41.5 : 100">
           <template #label>
             <div class="flex flex-col items-center">
-              <span class="font-['Onest'] text-[32px] font-semibold text-[#fff] md:text-[70px]">10</span>
+              <span class="font-['Onest'] text-[32px] font-semibold text-[#fff] md:text-[70px]">{{ getTimeLeft(course.start_date).days }}</span>
               <span class="font-['Onest'] text-mobile-body-14 font-medium text-[#fff] opacity-80 md:text-body-18">
                 дней
               </span>
@@ -35,7 +80,7 @@ const isMobile = breakpoints.smallerOrEqual("sm")
         <course-statistics-progress progress="35" :size="isMobile ? 41.5 : 100">
           <template #label>
             <div class="flex flex-col items-center">
-              <span class="font-['Onest'] text-[32px] font-semibold text-[#fff] md:text-[70px]">08</span>
+              <span class="font-['Onest'] text-[32px] font-semibold text-[#fff] md:text-[70px]">{{ getTimeLeft(course.start_date).hours }}</span>
               <span class="font-['Onest'] text-mobile-body-14 font-medium text-[#fff] opacity-80 md:text-body-18">
                 часов
               </span>
