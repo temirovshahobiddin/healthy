@@ -78,7 +78,7 @@ const submit = async () => {
           <div class="relative w-[184px] shrink-0 whitespace-nowrap text-left font-['Onest'] font-semibold">
             <a class="font-['Onest'] text-mobile-subtitle-18 font-semibold text-[#fff] md:text-subtitle-22"
               :href="`tel:${siteSettings?.phone?.trim()}`">
-              {{ siteSettings?.phone }}
+              {{ siteSettings?.phone  || '+998911375516' }}
             </a>
           </div>
         </div>
