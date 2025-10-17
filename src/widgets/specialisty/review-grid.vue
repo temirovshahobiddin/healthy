@@ -11,7 +11,6 @@ interface IProps {
 
 const props = defineProps<IProps>()
 
-console.log(props.items);
 defineEmits<{
   (e: "loadMore"): void
 }>()
@@ -66,10 +65,12 @@ const showCreateReviewModal = () => {
     <ui-button class="flex w-full px-[20px] py-[16px] md:!hidden" color="primary" @click="showCreateReviewModal">
       {{ $t("actions.add_review") }}
     </ui-button>
-    <ui-button v-if="items.length" class="!hidden w-full px-[20px] py-[16px] md:flex" variant="outline"
-      @click="$emit('loadMore')">
-      {{ $t("actions.load_more") }}
-    </ui-button>
+    <div v-if="items.length > 0" class="flex w-full items-center justify-center">
+      <ui-button class="px-[20px] py-[16px] md:flex" variant="outline"
+        @click="$emit('loadMore')">
+        {{ $t("actions.load_more") }}
+      </ui-button>
+    </div>
   </app-section>
 </template>
 

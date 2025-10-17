@@ -14,11 +14,11 @@ defineProps<IProps>()
 
 <template>
   <nuxt-link-locale
-    class="flex w-full flex-col flex-nowrap items-start gap-[20px]"
+    class="specialist-card flex w-full flex-col flex-nowrap items-start gap-[20px]"
     :to="`/specialisty/${specialist.slug}`"
   >
     <div class="relative h-[335px] w-full overflow-hidden rounded-[10px] md:h-[400px]">
-      <img class="h-full w-full object-cover" alt="" :src="specialist.photo" />
+      <img class="h-full w-full object-cover" alt="" :src="specialist.photo" draggable="false" />
       <div
         v-if="specialist.is_owner"
         class="absolute bottom-[10px] left-[10px] rounded-[5px] bg-green-500 px-[10px] py-[5px] text-center md:min-w-[65px]"
@@ -63,7 +63,14 @@ defineProps<IProps>()
   </nuxt-link-locale>
 </template>
 
-<style scoped></style>
+<style scoped>
+.specialist-card {
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
+</style>
 
 <i18n>
 {

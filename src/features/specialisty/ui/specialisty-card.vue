@@ -17,7 +17,7 @@ defineProps<IProps>()
       <div>
         <img class="h-[137px] w-[119px] rounded-[10px] object-cover md:h-[310px] md:min-w-[269px]" alt=""
           :src="specialist.photo" />
-        <ui-button class="mt-[20px] w-full">Записаться</ui-button>
+        <!-- <ui-button class="mt-[20px] w-full">Записаться</ui-button> -->
       </div>
 
       <div class="flex h-full flex-col justify-between md:hidden">
@@ -25,7 +25,7 @@ defineProps<IProps>()
           {{ specialist.full_name }}
         </span>
         <span class="text-left font-['Onest'] text-mobile-body-14 font-semibold text-[#63845c]">
-          {{ $t("labels.price", { price: specialist.price }) }}
+          {{ Number(specialist.price).toLocaleString('ru-RU') }} сум
         </span>
       </div>
     </div>
@@ -88,7 +88,7 @@ defineProps<IProps>()
       </div>
       <span
         class="!hidden shrink-0 basis-auto self-stretch text-left font-['Onest'] text-[24px] font-semibold text-[#63845c] md:!block">
-        {{ Number(specialist.price).toLocaleString('ru-RU', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) }} сум
+        {{ Number(specialist.price).toLocaleString('ru-RU') }} сум
       </span>
     </div>
   </div>

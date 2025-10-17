@@ -42,11 +42,12 @@ function formatUzDate(dateString: string) {
 function formatRuDate(dateString: string) {
   const [year, month, day] = dateString.split('T')[0].split('-').map(Number)
   const date = new Date(year, month - 1, day)
-  return new Intl.DateTimeFormat("ru-RU", {
+  const formatted = new Intl.DateTimeFormat("ru-RU", {
     day: "numeric",
     month: "long",
     year: "numeric"
   }).format(date)
+  return formatted.replace(' г.', '')
 }
 
 const formattedDate = computed(() => {
@@ -78,7 +79,7 @@ const formattedDate = computed(() => {
             </h-tag>
             <h-tag>{{ course.type.name }}</h-tag>
             <h-tag v-if="course.format">
-              {{ course.format }}
+              {{ t(`format.${course.format.toLowerCase()}`) }}
             </h-tag>
           </div>
           <div class="flex flex-col flex-nowrap items-start gap-[8px] self-stretch">
@@ -91,7 +92,7 @@ const formattedDate = computed(() => {
           </div>
         </div>
         <span class="text-[22px] font-semibold text-[#63845c] md:text-subtitle-24">
-          {{ Number(course.price).toLocaleString('ru-RU', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) }}
+          {{ Number(course.price).toLocaleString('ru-RU') }}
           {{ t("currency") }}
         </span>
       </div>
@@ -114,13 +115,25 @@ const formattedDate = computed(() => {
 <i18n>
 {
   "ru": {
-    "currency": "сум"
+    "currency": "сум",
+    "format": {
+      "online": "Онлайн",
+      "offline": "Оффлайн"
+    }
   },
   "en": {
-    "currency": "sum"
+    "currency": "sum",
+    "format": {
+      "online": "Online",
+      "offline": "Offline"
+    }
   },
   "uz": {
-    "currency": "so'm"
+    "currency": "so'm",
+    "format": {
+      "online": "Onlayn",
+      "offline": "Oflayn"
+    }
   }
 }
 </i18n>

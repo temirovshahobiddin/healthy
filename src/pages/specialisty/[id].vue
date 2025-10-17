@@ -61,10 +61,7 @@
               </div>
               <div class="border-t border-solid border-t-[#E8E8E8] pt-[15px] md:!hidden">
                 <span class="text-mobile-subtitle-22 font-semibold text-[#323232]">
-                  от {{ Number(specialist.price).toLocaleString('ru-RU', {
-                    minimumFractionDigits: 2,
-                    maximumFractionDigits: 2
-                  }) }} сум</span>
+                  от {{ Number(specialist.price).toLocaleString('ru-RU') }} сум</span>
 
               </div>
             </div>
@@ -123,10 +120,7 @@
                 class="relative flex shrink-0 flex-col flex-nowrap items-start gap-[15px] self-stretch border-t border-solid border-b-[#e7e7e7] pb-0 pt-[20px]">
                 <span
                   class="relative h-[38px] shrink-0 basis-auto self-stretch text-left font-['Onest'] text-[30px] font-semibold leading-[38px] text-[#323232]">
-                  от {{ Number(specialist.price).toLocaleString('ru-RU', {
-                    minimumFractionDigits: 2,
-                    maximumFractionDigits: 2
-                  }) }} сум
+                  от {{ Number(specialist.price).toLocaleString('ru-RU') }} сум
                 </span>
               </div>
             </div>
@@ -192,7 +186,7 @@
   <ui-modal id="phone_modal" class="phone_modal" label="Записаться">
     <div class="px-[15px] pb-[20px] md:px-[20px] flex flex-col items-start">
       <h1 class="text-[24px] font-bold text-[#323232] md:text-[32px]">
-        {{ specialist.phone_number }}
+        {{ formatPhoneNumber(specialist.phone_number) }}
       </h1>
       <h3 class="text-[16px] text-gray-600 md:text-[18px]">
         Контактный номер специалиста
@@ -218,6 +212,17 @@ import { UiModal } from "#components"
 
 const { orderModalOpen } = useModal()
 const modal = useModal()
+
+const formatPhoneNumber = (phone: string | undefined) => {
+  if (!phone) return ''
+  // Remove all non-digit characters
+  const cleaned = phone.replace(/\D/g, '')
+  // Format: +998 (91) 137-55-16
+  if (cleaned.length === 12 && cleaned.startsWith('998')) {
+    return `+${cleaned.slice(0, 3)} (${cleaned.slice(3, 5)}) ${cleaned.slice(5, 8)}-${cleaned.slice(8, 10)}-${cleaned.slice(10, 12)}`
+  }
+  return phone
+}
 
 const activeTab = ref("specialist")
 

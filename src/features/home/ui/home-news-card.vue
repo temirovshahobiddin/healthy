@@ -27,15 +27,12 @@ const { t } = useI18n({
         class="font-['Onest'] text-[17px] text-mobile-body-14 font-normal text-[#323232] md:text-body-17 line-clamp-4"
         v-html="item.content"
       ></span>
-
-        <!-- <span class="font-['Onest'] text-[17px] text-mobile-body-14 font-normal text-[#323232] md:text-body-17"
-          v-html="item.content">
-        </span> -->
       </div>
       <div class="flex shrink-0 flex-nowrap items-start justify-between self-stretch">
         <div class="w-[112px] shrink-0 whitespace-nowrap text-left font-['Onest'] text-[17px] font-normal">
           <span class="body-17 font-['Onest'] text-[17px] font-normal text-[#63845c] underline">
-            {{ item.author.name }}
+            {{ item.author.full_name }}
+            <!-- {{ item.specialist.full_name }} -->
           </span>
         </div>
         <span class="body-17 text-left font-['Onest'] text-[17px] font-normal text-[#848484]">

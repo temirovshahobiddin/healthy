@@ -35,7 +35,7 @@ const carouselConfig = computed<Partial<CarouselConfig>>(() => ({
     <h2 class="section-title whitespace-nowrap font-['Onest'] font-semibold text-[#323232]">
       {{ t("title") }}
     </h2>
-    <div class="relative mt-[20px] md:mt-[40px]">
+    <div class="carousel-wrapper relative mt-[20px] md:mt-[40px]">
       <carousel v-bind="carouselConfig" ref="carouselRef">
         <slide v-for="item in items" class="h-full w-full" :key="item.id">
           <home-specialist-card :specialist="item" />
@@ -44,8 +44,7 @@ const carouselConfig = computed<Partial<CarouselConfig>>(() => ({
     </div>
     <nuxt-link-locale
       class="mx-auto mt-[31px] block w-[200px] rounded-[15px] bg-[#63845c] py-[14px] text-center font-['Manrope'] text-[15px] font-bold text-[#fff] md:mt-[52px] md:w-[224px] md:px-[20px] md:py-[16px] md:text-[17px]"
-      to="/specialisty"
-    >
+      to="/specialisty">
       <span>
         {{ t("all-specialists") }}
       </span>
@@ -53,7 +52,35 @@ const carouselConfig = computed<Partial<CarouselConfig>>(() => ({
   </app-section>
 </template>
 
-<style scoped></style>
+<style scoped>
+.carousel-wrapper :deep(.carousel__viewport) {
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  cursor: grab;
+}
+
+.carousel-wrapper :deep(.carousel__viewport:active) {
+  cursor: grabbing;
+}
+
+.carousel-wrapper :deep(.carousel__slide) {
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
+
+.carousel-wrapper :deep(img) {
+  pointer-events: none;
+  user-select: none;
+  -webkit-user-drag: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
+</style>
 
 <i18n>
 {
