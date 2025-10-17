@@ -56,7 +56,7 @@ const showCreateReviewModal = () => {
       </ui-button>
     </div>
 
-    <div v-if="items.length" class="grid grid-cols-1 gap-[20px] self-stretch">
+    <div v-if="items.length" class="flex flex-wrap gap-[20px]">
       <review-card v-for="item in items" :key="item.id" :review="item" />
     </div>
     <div v-else class="w-full text-center text-[#999] py-[40px]">

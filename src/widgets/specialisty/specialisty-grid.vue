@@ -20,11 +20,11 @@ const { t } = useI18n({
     </div>
     <div class="relative z-[199] grid grid-cols-4 gap-[20px] self-stretch">
       <review-card />
+      <!-- <review-card />
       <review-card />
       <review-card />
       <review-card />
-      <review-card />
-      <review-card />
+      <review-card /> -->
     </div>
 
     <ui-button class="!md:hidden flex w-full px-[20px] py-[16px]" color="primary">

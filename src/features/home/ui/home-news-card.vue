@@ -23,9 +23,14 @@ const { t } = useI18n({
         <span class="font-['Onest'] text-mobile-subtitle-22 font-semibold text-[#323232] md:text-subtitle-24">
           {{ item.title }}
         </span>
-        <span class="font-['Onest'] text-[17px] text-mobile-body-14 font-normal text-[#323232] md:text-body-17"
+        <span
+        class="font-['Onest'] text-[17px] text-mobile-body-14 font-normal text-[#323232] md:text-body-17 line-clamp-4"
+        v-html="item.content"
+      ></span>
+
+        <!-- <span class="font-['Onest'] text-[17px] text-mobile-body-14 font-normal text-[#323232] md:text-body-17"
           v-html="item.content">
-        </span>
+        </span> -->
       </div>
       <div class="flex shrink-0 flex-nowrap items-start justify-between self-stretch">
         <div class="w-[112px] shrink-0 whitespace-nowrap text-left font-['Onest'] text-[17px] font-normal">

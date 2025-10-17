@@ -16,6 +16,7 @@ const { t } = useI18n({
 
 <template>
   <app-section-fluid class="py-[40px] md:py-[120px]">
+    <pre>{{  }}</pre>
     <div class="relative bg-[#fff] text-[0px]">
       <span class="section-title">
         {{ t("title") }}
