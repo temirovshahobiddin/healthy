@@ -26,7 +26,7 @@ const courseApi = useCoursesApi()
 const route = useRoute()
 const router = useRouter()
 const query = reactive({
-  type: route.query.type || '',
+  type: route.query.type || null,
   page: Number(route.query.page) || 1,
   limit: 10
 })

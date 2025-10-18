@@ -134,14 +134,14 @@
                   <span class="text-mobile-body-15 font-semibold md:text-body-18">Специалист</span>
                 </div>
                 <div class="relative flex w-[60px] items-center justify-center gap-[10px] pb-[10px] pt-0" :class="{
-                  'border-b-[#63845c] text-[#63845c]': activeTab === 'specialist',
-                  'border-b-transparent text-[#323232]': activeTab !== 'specialist'
+                  'border-b-[#63845c] text-[#63845c]': activeTab === 'services',
+                  'border-b-transparent text-[#323232]': activeTab !== 'services'
                 }" @click="changeTab('services')">
                   <span class="text-mobile-body-15 font-medium md:text-body-18">Услуги</span>
                 </div>
                 <div class="relative flex w-[41px] items-center justify-center gap-[10px] pb-[10px] pt-0" :class="{
-                  'border-b-[#63845c] text-[#63845c]': activeTab === 'specialist',
-                  'border-b-transparent text-[#323232]': activeTab !== 'specialist'
+                  'border-b-[#63845c] text-[#63845c]': activeTab === 'blog',
+                  'border-b-transparent text-[#323232]': activeTab !== 'blog'
                 }" @click="changeTab('blog')">
                   <span class="text-mobile-body-15 font-medium md:text-body-18">Блог</span>
                 </div>
@@ -153,25 +153,28 @@
                 <specialist-services-tab :services :specialist_id="specialist.id"/>
               </template>
               <template v-else-if="activeTab === 'blog'">
-                <nuxt-link-locale v-for="item in blogs"
-                  class="flex w-full items-center justify-between border-b border-solid border-b-[#E8E8E8] py-[15px] md:py-[20px]"
-                  :key="item.id" :to="`/blog/${item.slug}`">
+                <div v-if="blogs.length > 0">
+                  <div v-for="item in blogs" :key="item.id" @click="router.push(`/blog/${item.slug}`)"
+                  class="flex w-full items-center justify-between border-b border-solid border-b-[#E8E8E8] py-[15px] md:py-[20px]">
                   <div class="flex flex-col gap-[5px]">
                     <span
                       class="font-['Onest'] text-mobile-subtitle-18 text-[#323232] md:text-subtitle-20 md:font-semibold">
                       {{ item.title }}
                     </span>
                     <span class="font-['Onest'] text-mobile-body-14 text-green-500 md:text-subtitle-16 md:font-bold">
-                      {{ item.created_at }}
+                      {{ formatDate(item.created_at, 'DD.MM.YYYY') }}
                     </span>
                   </div>
                   <icon class="h-[26px] w-[26px]" name="h-icon:arrow"></icon>
-                </nuxt-link-locale>
-
+                </div>
                 <div class="mt-[30px] flex w-full justify-center md:mb-[10px]">
                   <ui-pagination v-model="blogParams.page" :total="blogsPagination.total"
                     @update:model-value="paginateBlogs" />
                 </div>
+              </div>
+              <div v-else>
+                <h1 class="text-[24px] font-bold text-[#323232] md:text-[32px] text-center">Нет записей</h1>
+              </div>
               </template>
             </div>
           </div>
@@ -268,11 +271,13 @@ const changeTab = async (tab: string) => {
       services.value = response.data
     }
   }
-  activeTab.value = tab
-  if (tab === "blog") {
-    blogParams.value.page = 1
-    paginateBlogs()
+  else if(tab == 'blog'){
+    const response = await $http.$get(`posts?specialist_id=${specialist.value.id}`)
+    if (response?.data?.length > 0) {
+      blogs.value = response.data
+    }
   }
+  activeTab.value = tab
 }
 
 const paginateBlogs = () => {
