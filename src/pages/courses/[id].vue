@@ -1,5 +1,8 @@
 <template>
   <div class="w-full overflow-hidden bg-[#f0f4f1]">
+    <div>
+      <pre>{{ course.reviews }}</pre>
+    </div>
     <course-detail-hero :course />
     <course-about :course />
     <course-format :course />
@@ -8,7 +11,7 @@
     <course-author :course />
     <course-places :course_id="course.id" :specialist_id="course.specialist.id" :reserved-count="4" :place-count="10" />
     <course-address :course_id="course.id" :specialist_id="course.specialist.id" />
-    <course-review-slider :course />
+    <course-review-slider :reviews="course.reviews" />
     <course-leed-form :course />
     <course-faq :course />
   </div>

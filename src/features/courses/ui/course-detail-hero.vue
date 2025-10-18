@@ -75,26 +75,47 @@ const uzMonths = [
   "iyul", "avgust", "sentyabr", "oktyabr", "noyabr", "dekabr"
 ]
 
-function formatUzDate(date: Date) {
-  const d = date.getDate()
-  const m = uzMonths[date.getMonth()]
-  const y = date.getFullYear()
-  return `${d} ${m} ${y}`
+
+function formatUzDate(dateString: string) {
+  // Parse the date string directly to avoid timezone issues
+  const [year, month, day] = dateString.split('T')[0].split('-').map(Number)
+  const m = uzMonths[month - 1]
+  return `${day} ${m} ${year}`
 }
 
-const formattedDate = computed(() => {
-  if (!props.course?.start_date) return ""
-  const date = new Date(props.course.start_date)
-
-  if (locale.value === "uz") {
-    return formatUzDate(date)
-  }
-
-  return new Intl.DateTimeFormat("ru-RU", {
+function formatRuDate(dateString: string) {
+  const [year, month, day] = dateString.split('T')[0].split('-').map(Number)
+  const date = new Date(year, month - 1, day)
+  const formatted = new Intl.DateTimeFormat("ru-RU", {
     day: "numeric",
     month: "long",
     year: "numeric"
   }).format(date)
+  return formatted.replace(' г.', '')
+}
+
+// const formattedDate = computed(() => {
+//   if (!props.course?.start_date) return ""
+//   const date = new Date(props.course.start_date)
+
+//   if (locale.value === "uz") {
+//     return formatUzDate(date)
+//   }
+
+//   return new Intl.DateTimeFormat("ru-RU", {
+//     day: "numeric",
+//     month: "long",
+//     year: "numeric"
+//   }).format(date)
+// })
+const formattedDate = computed(() => {
+  if (!props.course?.start_date) return ""
+
+  if (locale.value === "uz") {
+    return formatUzDate(props.course.start_date)
+  }
+
+  return formatRuDate(props.course.start_date)
 })
 </script>
 

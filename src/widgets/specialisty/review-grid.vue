@@ -1,19 +1,18 @@
 <script setup lang="ts">
 import ReviewCard from "~/features/review/ui/review-card.vue"
 import AppSection from "~/widgets/layout/app-section.vue"
-import HomeCourseCard from "../../features/courses/ui/home-course-card.vue"
 import { Carousel, type CarouselConfig, type CarouselMethods, Slide } from "vue3-carousel"
 
 interface IProps {
   items: any[]
 }
 
-
-const props = defineProps<IProps>()
+defineProps<IProps>()
 
 defineEmits<{
   (e: "loadMore"): void
 }>()
+
 const { t } = useI18n({
   useScope: "local"
 })
@@ -22,23 +21,22 @@ const modal = useModal()
 
 const carouselRef = ref<CarouselMethods>()
 const carouselConfig = computed<Partial<CarouselConfig>>(() => ({
-  gap: 24,
   snapAlign: "start",
-  wrapAround: true,
+  wrapAround: false,
+  mouseDrag: true,
+  touchDrag: true,
   breakpoints: {
-    1024: {
-      enabled: false,
-      itemsToShow: 3.5
+    768: {
+      itemsToShow: 2,
+      gap: 16
     },
-    640: {
-      itemsToShow: 1.5
+    360: {
+      itemsToShow: 1.15,
+      gap: 16
     }
   }
 }))
 
-const showModal = () => {
-  modal.show("review-modal")
-}
 const showCreateReviewModal = () => {
   modal.show("review-create-modal")
 }
@@ -51,24 +49,34 @@ const showCreateReviewModal = () => {
       </span>
 
       <ui-button class="!hidden px-[20px] py-[16px] md:!flex" @click="showCreateReviewModal">
-        {{ $t("actions.add_review") }}
+        {{ t("add_review") }}
       </ui-button>
     </div>
 
-    <div v-if="items.length" class="flex flex-wrap gap-[20px]">
-      <review-card v-for="item in items" :key="item.id" :review="item" />
+    <!-- Desktop: Grid 4 columns, 2 rows max (8 items) -->
+    <div v-if="items.length" class="hidden lg:grid lg:grid-cols-4 gap-[20px] self-stretch">
+      <review-card v-for="item in items.slice(0, 8)" :key="item.id" :review="item" />
     </div>
-    <div v-else class="w-full text-center text-[#999] py-[40px]">
-      {{ $t("messages.review.no_reviews") }}
+
+    <!-- Mobile/Tablet: Carousel -->
+    <div v-if="items.length" class="lg:hidden w-full select-none">
+      <carousel v-bind="carouselConfig" ref="carouselRef">
+        <slide v-for="item in items" :key="item.id">
+          <review-card :review="item" />
+        </slide>
+      </carousel>
+    </div>
+
+    <div v-if="!items.length" class="w-full text-center text-[#999] py-[40px]">
+      {{ t("messages.no_reviews") }}
     </div>
 
     <ui-button class="flex w-full px-[20px] py-[16px] md:!hidden" color="primary" @click="showCreateReviewModal">
-      {{ $t("actions.add_review") }}
+      {{ t("add_review") }}
     </ui-button>
-    <div v-if="items.length > 0" class="flex w-full items-center justify-center">
-      <ui-button class="px-[20px] py-[16px] md:flex" variant="outline"
-        @click="$emit('loadMore')">
-        {{ $t("actions.load_more") }}
+    <div v-if="items.length > 8" class="flex w-full items-center justify-center">
+      <ui-button class="px-[20px] py-[16px] md:flex" variant="outline" @click="$emit('loadMore')">
+        {{ t("load_more") }}
       </ui-button>
     </div>
   </app-section>
@@ -78,18 +86,24 @@ const showCreateReviewModal = () => {
 {
   "ru": {
     "title": "Отзывы",
+    "add_review": "Оставить отзыв",
+    "load_more": "Загрузить еще",
     "messages": {
       "no_reviews": "Пока нет отзывов"
     }
   },
   "uz": {
     "title": "Sharhlar",
+    "add_review": "Sharh qoldirish",
+    "load_more": "Ko'proq yuklash",
     "messages": {
-      "no_reviews": "Hozircha sharhlar yo‘q"
+      "no_reviews": "Hozircha sharhlar yo'q"
     }
   },
   "en": {
     "title": "Reviews",
+    "add_review": "Add review",
+    "load_more": "Load more",
     "messages": {
       "no_reviews": "No reviews yet"
     }

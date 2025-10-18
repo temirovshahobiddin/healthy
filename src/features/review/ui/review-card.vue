@@ -9,15 +9,7 @@ const { t } = useI18n({
   useScope: "local"
 })
 const modal = useModal()
-const mockReview = {
-  reviewer_name: "John Doe",
-  reviewer_age: 30,
-  rating: 4.5,
-  comment: "This is a sample review comment that is quite long and should be truncated in the card view.",
-  specialist: {
-    name: "Dr. Smith"
-  }
-}
+
 const showReviewModal = () => {
   modal.show("review-modal", props.review)
 }
@@ -25,7 +17,7 @@ const showReviewModal = () => {
 
 <template>
   <div
-    class="flex w-full flex-col flex-nowrap items-start gap-[20px] rounded-[20px] bg-[#fff] px-[15px] py-[20px] md:w-[calc(50%-10px)] md:p-[20px] lg:w-[calc(33.333%-14px)]"
+    class="flex w-full flex-col flex-nowrap items-start gap-[20px] rounded-[20px] bg-[#fff] px-[15px] py-[20px] md:p-[20px] select-none"
   >
     <div class="flex w-full flex-col items-start gap-[10px] md:gap-[15px]">
       <div class="flex flex-col flex-nowrap items-start gap-[2px] self-stretch">
@@ -53,7 +45,7 @@ const showReviewModal = () => {
         </div>
       </div>
     </div>
-    <p class="overflow-hidden break-words text-mobile-body-15 font-normal text-[#323232] md:text-body-17">
+    <p class="overflow-hidden break-words text-mobile-body-15 font-normal text-[#323232] md:text-body-17 line-clamp-6">
       {{ review.comment }}
     </p>
     <ui-button

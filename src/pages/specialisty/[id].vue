@@ -288,8 +288,6 @@ reviews.value = _specialist?.data.reviews || []
 courses.value = _courses?.data || []
 
 
-console.log(data.value);
-
 </script>
 
 <style>
