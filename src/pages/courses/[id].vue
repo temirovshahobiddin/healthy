@@ -1,8 +1,5 @@
 <template>
   <div class="w-full overflow-hidden bg-[#f0f4f1]">
-    <div>
-      <pre>{{ course.reviews }}</pre>
-    </div>
     <course-detail-hero :course />
     <course-about :course />
     <course-format :course />

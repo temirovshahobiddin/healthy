@@ -32,7 +32,6 @@ const { t } = useI18n({
         <div class="w-[112px] shrink-0 whitespace-nowrap text-left font-['Onest'] text-[17px] font-normal">
           <span class="body-17 font-['Onest'] text-[17px] font-normal text-[#63845c] underline">
             {{ item.author.full_name }}
-            <!-- {{ item.specialist.full_name }} -->
           </span>
         </div>
         <span class="body-17 text-left font-['Onest'] text-[17px] font-normal text-[#848484]">
