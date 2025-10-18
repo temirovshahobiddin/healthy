@@ -1,12 +1,17 @@
 <template>
 
-  <div class="main-container relative mx-auto w-full overflow-hidden bg-[#f0f4f1]">
-    <specialisty-hero />
-    <specialisty-filter @on:filter="changeRoute" />
-    <specialisty-grid :items="specialists" />
-    <app-section class="mb-[120px] mt-[70px]">
-      <ui-pagination v-model="query.page" :total="pagination.total" @update:model-value="changeRoute" />
-    </app-section>
+  <div class="main-container relative mx-auto w-full overflow-hidden bg-[#f0f4f1]" >
+    <div v-if="specialists.length">
+      <specialisty-hero />
+      <specialisty-filter @on:filter="changeRoute" />
+      <specialisty-grid :items="specialists" />
+      <app-section class="mb-[120px] mt-[70px]">
+        <ui-pagination v-model="query.page" :total="pagination.total" @update:model-value="changeRoute" />
+      </app-section>
+    </div>
+    <div v-else>
+      <specialisty-hero />
+    </div>
   </div>
 </template>
 
@@ -58,6 +63,15 @@ const getSpecialists = () => {
 const getdata = async () => {
   return $http.$get("/specialists", { params: route.query })
 }
+
+const { data: posts } = await useAsyncData(
+  'posts',
+  () => $http.$get("/specialists", { params: route.query }), {
+    watch: [route.query],
+  },
+)
+
+console.log('posts', posts.value)
 
 // const { data, refresh } = await useAsyncData("specialists", () => getdata())
 

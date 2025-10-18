@@ -7,24 +7,26 @@ import { SuccessModal, OrderModal, CourseOrderModal } from "~/features/modals"
 </script>
 
 <template>
-  <teleport to="body">
-    <OrderModal />
-    <CourseOrderModal />
-  </teleport>
-
   <div>
-    <app-content>
-      <template #header>
-        <app-header />
-      </template>
-
-      <slot />
-
-      <template #footer>
-        <app-footer />
-      </template>
-    </app-content>
-    <review-modal />
-    <success-modal />
+    <teleport to="body">
+      <OrderModal />
+      <CourseOrderModal />
+    </teleport>
+  
+    <div>
+      <app-content>
+        <template #header>
+          <app-header />
+        </template>
+  
+        <slot />
+  
+        <template #footer>
+          <app-footer />
+        </template>
+      </app-content>
+      <review-modal />
+      <success-modal />
+    </div>
   </div>
 </template>

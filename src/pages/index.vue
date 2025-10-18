@@ -1,4 +1,5 @@
 <template>
+  
   <div class="main-container relative mx-auto my-0 w-full overflow-hidden bg-[#f0f4f1]">
     <home-hero :buttons="banner.buttons" :description="banner.description" :title="banner.title"
       :background="isMobile ? banner.thumbnail_mobile : banner.thumbnail_desktop" />
@@ -63,6 +64,8 @@ const { data, error } = await useAsyncData("home", async () => {
   return await Promise.all(request)
 })
 const [_banner, _specialists, _blog, _courses, _review] = data.value || []
+
+
 
 useHead({
   title: t("title"),

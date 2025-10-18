@@ -182,18 +182,18 @@
       <ui-button class="w-full" @click="orderModalOpen = true">Записаться</ui-button>
     </div>
     <review-create-modal :specialist="specialist" />
+    <ui-modal id="phone_modal" class="phone_modal" label="Записаться">
+      <div class="px-[15px] pb-[20px] md:px-[20px] flex flex-col items-start">
+        <h1 class="text-[24px] font-bold text-[#323232] md:text-[32px]">
+          {{ formatPhoneNumber(specialist.phone_number) }}
+        </h1>
+        <h3 class="text-[16px] text-gray-600 md:text-[18px]">
+          Контактный номер специалиста
+        </h3>
+        <ui-button class="mt-[20px] w-full">Контактировать</ui-button>
+      </div>
+    </ui-modal>
   </div>
-  <ui-modal id="phone_modal" class="phone_modal" label="Записаться">
-    <div class="px-[15px] pb-[20px] md:px-[20px] flex flex-col items-start">
-      <h1 class="text-[24px] font-bold text-[#323232] md:text-[32px]">
-        {{ formatPhoneNumber(specialist.phone_number) }}
-      </h1>
-      <h3 class="text-[16px] text-gray-600 md:text-[18px]">
-        Контактный номер специалиста
-      </h3>
-      <ui-button class="mt-[20px] w-full">Контактировать</ui-button>
-    </div>
-  </ui-modal>
 </template>
 
 <script lang="ts" setup>
