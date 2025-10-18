@@ -64,14 +64,6 @@ const getdata = async () => {
   return $http.$get("/specialists", { params: route.query })
 }
 
-const { data: posts } = await useAsyncData(
-  'posts',
-  () => $http.$get("/specialists", { params: route.query }), {
-    watch: [route.query],
-  },
-)
-
-console.log('posts', posts.value)
 
 // const { data, refresh } = await useAsyncData("specialists", () => getdata())
 
