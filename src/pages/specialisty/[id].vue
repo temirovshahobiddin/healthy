@@ -149,8 +149,10 @@
               <template v-if="activeTab === 'specialist'">
                 <specialist-detail-tab :specialist />
               </template>
-              <template v-if="activeTab === 'blog'"></template>
-              <template v-if="activeTab === 'blog'">
+              <template v-else-if="activeTab === 'services'">
+                <specialist-services-tab :services :specialist_id="specialist.id"/>
+              </template>
+              <template v-else-if="activeTab === 'blog'">
                 <nuxt-link-locale v-for="item in blogs"
                   class="flex w-full items-center justify-between border-b border-solid border-b-[#E8E8E8] py-[15px] md:py-[20px]"
                   :key="item.id" :to="`/blog/${item.slug}`">
@@ -208,6 +210,7 @@ import { useCoursesApi } from "~/api/courses/api"
 import ReviewCreateModal from "~/features/review/ui/review-create-modal.vue"
 import { usePostApi } from "~/api/posts/api"
 import SpecialistDetailTab from "~/features/specialisty/ui/specialist-detail-tab.vue"
+import SpecialistServicesTab from "~/features/specialisty/ui/specialist-services-tab.vue"
 import { UiModal } from "#components"
 
 const { orderModalOpen } = useModal()
@@ -244,6 +247,7 @@ const blogParams = ref({
   page: 1
 })
 
+const { $http } = useNuxtApp()
 const specialistApi = useSpecialistApi()
 const reviewApi = useReviewApi()
 const courseApi = useCoursesApi()
@@ -253,8 +257,17 @@ const specialist = ref({})
 const reviews = ref([])
 const courses = ref([])
 const blogs = ref([])
+const services = ref([])
 
-const changeTab = (tab: string) => {
+const changeTab = async (tab: string) => {
+  if(tab == 'services'){
+    services.value = []
+    const response = await $http.$get(`specialists/${specialist.value.slug}/services`)
+    if (response?.data?.length > 0) {
+      console.log('services',response.data)
+      services.value = response.data
+    }
+  }
   activeTab.value = tab
   if (tab === "blog") {
     blogParams.value.page = 1
