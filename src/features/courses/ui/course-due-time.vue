@@ -64,7 +64,7 @@ function getTimeLeft(start_date: string): TimeLeft {
 
 <template>
   <app-section class="py-[40px] md:py-[60px]">
-    <div class="pt-[40px] overflow-hidden rounded-[20px] bg-[#6f8f6e] px-[15px] py-[40px] md:h-[590px] md:py-[80px]">
+    <div class="pt-[40px] relative overflow-hidden rounded-[20px] bg-[#6f8f6e] px-[15px] py-[40px] md:h-[590px] md:py-[80px]">
       <div
         class="mx-auto flex w-full max-w-full flex-nowrap items-center justify-center gap-[6px] sm:gap-[12px] md:gap-[20px] lg:gap-[26px]">
         <course-statistics-progress progress="50" :size="circleSize">

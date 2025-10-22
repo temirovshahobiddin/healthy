@@ -86,7 +86,7 @@ const formattedDate = computed(() => {
             <span class="font-['Onest'] text-mobile-subtitle-22 font-semibold text-[#323232] md:text-headline-4">
               {{ course.title }}
             </span>
-            <span class="font-['Onest'] text-mobile-body-14 font-normal text-[#585958] md:text-body-17"
+            <span class="font-['Onest'] text-mobile-body-14 font-normal text-[#585958] pr-4 md:text-body-17"
               v-html="course.description">
             </span>
           </div>

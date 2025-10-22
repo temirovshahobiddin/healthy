@@ -6,9 +6,13 @@ import { Carousel, Slide } from "vue3-carousel"
 
 interface IProps {
   items: any[]
+  showLoadAllButton?: boolean
 }
 
 defineProps<IProps>()
+defineEmits<{
+  'load-all-courses': []
+}>()
 
 const { t } = useI18n({
   useScope: "local"
@@ -36,12 +40,18 @@ const carouselConfig = computed<Partial<CarouselConfig>>(() => ({
     >
       {{ t("title") }}
     </p>
-    <carousel v-bind="carouselConfig" ref="carouselRef">
+    <carousel v-bind="carouselConfig" ref="carouselRef" v-if="items.length">
       <slide v-for="item in items" class="h-full" :key="item.id">
         <home-course-card :course="item" />
       </slide>
     </carousel>
-    <div class="relative ml-auto mt-[21px] flex w-[130px] flex-nowrap items-center gap-[10px] md:mt-[40px]">
+    <div v-else>
+      <p class="w-full text-center text-[#999] py-[40px]">Пока нет курсов</p>
+      <div class="flex justify-center mt-[20px]">
+        <ui-button @click="$emit('load-all-courses')">Показать все курсы</ui-button>
+      </div>
+    </div>
+    <div class="relative ml-auto mt-[21px] flex w-[130px] flex-nowrap items-center gap-[10px] md:mt-[40px]" v-if="items.length">
       <div
         class="flex h-[50px] w-[50px] shrink-0 flex-nowrap items-center justify-center gap-[10px] rounded-[30px] bg-[#fff] pb-[12px] pl-[12px] pr-[12px] pt-[12px] md:h-[60px] md:w-[60px]"
         @click="carouselRef?.prev()"

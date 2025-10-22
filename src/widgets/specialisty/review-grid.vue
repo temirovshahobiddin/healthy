@@ -74,11 +74,11 @@ const showCreateReviewModal = () => {
     <ui-button class="flex w-full px-[20px] py-[16px] md:!hidden" color="primary" @click="showCreateReviewModal">
       {{ t("add_review") }}
     </ui-button>
-    <div v-if="items.length > 8" class="flex w-full items-center justify-center">
+    <!-- <div v-if="items.length > 8" class="flex w-full items-center justify-center">
       <ui-button class="px-[20px] py-[16px] md:flex" variant="outline" @click="$emit('loadMore')">
         {{ t("load_more") }}
       </ui-button>
-    </div>
+    </div> -->
   </app-section>
 </template>
 

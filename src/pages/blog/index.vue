@@ -55,6 +55,7 @@ const refreshData = () => {
 
 <template>
   <div class="main-container mx-auto w-full overflow-hidden bg-[#f0f4f1]">
+    <!-- <pre>{{ blogs[0] }}</pre> -->
     <news-hero />
     <news-filter @on:filter="refreshData" />
     <app-section class="mb-[80px] md:mb-[120px]">

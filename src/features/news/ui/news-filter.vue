@@ -4,6 +4,7 @@ import AppSection from "~/widgets/layout/app-section.vue"
 import { debounce } from "lodash-es"
 import { useSpecialistsApi } from "~/entities/specialists/specialists.api"
 import { breakpointsTailwind } from "@vueuse/core/index"
+import { getUserFullName } from "~/shared/lib/common"
 
 interface PageQuery {
   search?: string
@@ -96,7 +97,7 @@ const onSearch = () => {
 }
 const search = debounce(onSearch, 400)
 
-const filterAuthor = (author: any) => {
+const filterAuthorBySearch = (author: any) => {
   if (!authorSearch.value) return true
   return author.first_name.toLowerCase().includes(authorSearch.value.toLowerCase())
 }
@@ -112,68 +113,81 @@ onMounted(() => {
 <template>
   <app-section class="mb-[20px] md:mb-[30px] md:mt-[60px]">
     <div class="flex items-center justify-between gap-[10px] md:gap-[20px]">
-      <ui-input
-        v-model="query.search"
+      <ui-input v-model="query.search"
         class="!h-12 w-full !rounded-[100px] !border-0 !bg-[#fff] !px-[15px] py-[12px] font-['Onest'] !text-mobile-body-15 !font-medium text-[#585958] md:!h-full md:!px-[25px] md:py-[18px] md:!text-body-18"
-        placeholder="Найти статью"
-        @update:model-value="search"
-      ></ui-input>
+        placeholder="Найти статью" @update:model-value="search"></ui-input>
       <div
         class="hidden w-[223px] shrink-0 flex-nowrap items-center justify-between rounded-[100px] bg-[#fff] pb-[18px] pl-[20px] pr-[20px] pt-[18px] md:flex"
-        @click.stop="toggleAuthorsMenu"
-      >
+        @click.stop="toggleAuthorsMenu">
         <span
-          class="relative z-[156] h-[23px] shrink-0 basis-auto whitespace-nowrap text-left font-['Onest'] text-[18px] font-medium text-[#323232]"
-        >
+          class="relative z-[156] h-[23px] shrink-0 basis-auto whitespace-nowrap text-left font-['Onest'] text-[18px] font-medium text-[#323232]">
           Авторы
         </span>
         <div
-          class="relative z-[157] h-[22px] w-[22px] shrink-0 overflow-hidden bg-[url(https://codia-f2c.s3.us-west-1.amazonaws.com/image/2025-07-21/cSO8qQnqma.png)] bg-cover bg-no-repeat"
-        ></div>
+          class="relative z-[157] h-[22px] w-[22px] shrink-0 overflow-hidden bg-[url(https://codia-f2c.s3.us-west-1.amazonaws.com/image/2025-07-21/cSO8qQnqma.png)] bg-cover bg-no-repeat">
+        </div>
       </div>
-      <div
-        class="flex min-h-12 min-w-12 items-center justify-center rounded-full bg-white md:hidden"
-        @click.stop="toggleAuthorsMenu"
-      >
+      <div class="flex min-h-12 min-w-12 items-center justify-center rounded-full bg-white md:hidden"
+        @click.stop="toggleAuthorsMenu">
         <icon class="h-6 w-6" name="h-icon:filter"></icon>
       </div>
     </div>
     <transition name="authors-transition">
       <div v-if="showAuthorsMenu" class="mt-[20px] max-h-[288px] rounded-[10px] bg-white px-[20px] pb-[25px]">
         <div class="sticky top-0 z-10 bg-white pb-[20px] pt-[25px]">
-          <ui-input
-            v-model="authorSearch"
+          <ui-input v-model="authorSearch"
             class="!h-[46px] !w-full font-['Onest'] !text-mobile-body-15 !font-medium text-[#585958] md:!text-body-17"
-            placeholder="Найти автора"
-          ></ui-input>
+            placeholder="Найти автора"></ui-input>
         </div>
         <div class="flex max-h-[182px] flex-wrap gap-[10px] overflow-auto">
-          <h-tag
-            v-for="author in authorsList"
-            v-show="filter(author)"
-            class="cursor-pointer !px-[15px] !py-2 !font-medium"
-            :class="{
+          <h-tag v-for="author in authorsList" v-show="filterAuthorBySearch(author)"
+            class="cursor-pointer !px-[15px] !py-2 !font-medium" :class="{
               'bg-green-500 !text-[#fff]': checkAuthorExist(author.id),
               'bg-[#fff] text-[#585958]': !checkAuthorExist(author.id)
-            }"
-            :key="author.id"
-            @click="setAuthor(author)"
-          >
+            }" :key="author.id" @click="setAuthor(author)">
             <span class="flex items-center gap-2">
               <span>{{ getUserFullName(author) }}</span>
-              <icon
-                class="min-h-[18px] min-w-[18px]"
-                name="h-icon:close"
-                :class="{
-                  'rotate-45': !checkAuthorExist(author.id)
-                }"
-              ></icon>
+              <icon class="min-h-[18px] min-w-[18px]" name="h-icon:close" :class="{
+                'rotate-45': !checkAuthorExist(author.id)
+              }"></icon>
             </span>
           </h-tag>
         </div>
       </div>
     </transition>
+    <ui-bottom-sheet v-model="_showAuthorBottonSheet" title="Авторы">
+      <div class="pb-[20px]">
+        <ui-input v-model="authorSearch"
+          class="!h-[46px] !w-full font-['Onest'] !text-mobile-body-15 !font-medium text-[#585958]"
+          placeholder="Найти автора"></ui-input>
+      </div>
+      <div class="flex flex-wrap gap-[10px] pb-[20px]">
+        <h-tag v-for="author in authorsList" v-show="filterAuthorBySearch(author)"
+          class="cursor-pointer !px-[15px] !py-2 !font-medium" :class="{
+            'bg-green-500 !text-[#fff]': checkAuthorExist(author.id),
+            'bg-[#fff] text-[#585958]': !checkAuthorExist(author.id)
+          }" :key="author.id" @click="setAuthor(author)">
+          <span class="flex items-center gap-2">
+            <span>{{ getUserFullName(author) }}</span>
+            <icon class="min-h-[18px] min-w-[18px]" name="h-icon:close" :class="{
+              'rotate-45': !checkAuthorExist(author.id)
+            }"></icon>
+          </span>
+        </h-tag>
+      </div>
+    </ui-bottom-sheet>
   </app-section>
 </template>
 
-<style scoped></style>
+<style scoped>
+.authors-transition-enter-active,
+.authors-transition-leave-active {
+  transition: all 0.2s ease;
+}
+
+.authors-transition-enter-from,
+.authors-transition-leave-to {
+  opacity: 0;
+  transform: translateY(-4px);
+}
+</style>

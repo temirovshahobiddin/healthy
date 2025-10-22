@@ -16,7 +16,6 @@ defineProps<IProps>()
       <div class="mb-[20px] md:mb-[40px]">
         <span class="section-title font-['Onest'] font-semibold text-[#323232]">Ведущие курса</span>
       </div>
-
       <div class="z-[186] flex flex-col flex-nowrap items-center gap-[20px] md:flex-row md:gap-[60px]">
         <img class="h-[345px] w-full overflow-hidden rounded-[10px] object-cover md:h-[575px] md:w-[548px]"
           :src="course.specialist.image" alt="" />

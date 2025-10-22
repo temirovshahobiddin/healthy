@@ -13,6 +13,17 @@ const modal = useModal()
 const showReviewModal = () => {
   modal.show("review-modal", props.review)
 }
+function formatFullName(fullName: string): string {
+  const parts = fullName.trim().split(/\s+/);
+  if (parts.length === 0) return '';
+  
+  const [lastName, firstName, middleName] = parts;
+  const initials =
+    (firstName ? firstName[0].toUpperCase() + '.' : '') +
+    (middleName ? ' ' + middleName[0].toUpperCase() + '.' : '');
+  
+  return `${lastName} ${initials}`.trim();
+}
 </script>
 
 <template>
@@ -40,7 +51,7 @@ const showReviewModal = () => {
         <div class="flex w-full flex-nowrap items-center justify-end gap-[10px] text-mobile-body-14 md:text-body-16">
           <span class="font-normal text-[#848484]">{{ t("for") }}:</span>
           <div class="font-normal">
-            <span class="font-normal text-[#848484] underline cursor-pointer">{{ review.specialist_name }}</span>
+            <span class="font-normal text-[#848484] underline cursor-pointer">{{ formatFullName(review.specialist_name) }}</span>
           </div>
         </div>
       </div>

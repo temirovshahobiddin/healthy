@@ -1,7 +1,8 @@
 <template>
-  <app-section>
+  <div class="mx-auto w-full max-w-screen-2xl overflow-hidden px-4">
+    <pre>{{ course }}</pre>
     <div
-      class="flex flex-col-reverse items-center justify-between overflow-hidden pb-[20px] pt-[30px] md:h-[820px] md:flex-row md:pb-[80px] md:pt-[65px]">
+      class="flex flex-col-reverse items-center justify-between z-50 overflow-hidden pb-[20px] pt-[30px] md:h-[820px] md:flex-row md:pb-[80px] md:pt-[65px]">
       <div class="flex flex-col flex-nowrap items-start gap-[49px] md:h-[369px] md:w-[710px] md:gap-[40px]">
         <div class="z-[3] flex shrink-0 flex-col flex-nowrap items-start gap-[15px] self-stretch md:gap-[30px]">
           <div class="z-[4] flex shrink-0 flex-nowrap items-center gap-[5px] md:gap-[10px]">
@@ -26,7 +27,7 @@
             <div class="md:w-[598px]">
               <span class="font-['Onest'] text-mobile-body-15 font-normal text-[#585958] md:text-body-18"
                 v-html="course.description">
-
+  
               </span>
             </div>
           </div>
@@ -42,6 +43,8 @@
           :src="course.thumbnail" alt="" />
       </div>
     </div>
+  </div>
+  <app-section>
   </app-section>
 </template>
 

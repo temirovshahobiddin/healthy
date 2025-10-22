@@ -69,7 +69,7 @@
               class="mb-[40px] hidden h-[402px] flex-col flex-nowrap items-start gap-[30px] rounded-[20px] bg-[#fff] md:flex md:p-[30px]">
               <div class="relative flex shrink-0 flex-col flex-nowrap items-start gap-[12px] self-stretch">
                 <span
-                  class="relative h-[48px] shrink-0 basis-auto self-stretch text-left font-['Onest'] text-[40px] font-semibold text-[#323232]">
+                  class="relative shrink-0 basis-auto self-stretch text-left font-['Onest'] text-[40px] font-semibold text-[#323232]">
                   {{ specialist.full_name }}
                 </span>
                 <div class="relative flex w-[574px] items-start gap-[5px]">
@@ -150,31 +150,31 @@
                 <specialist-detail-tab :specialist />
               </template>
               <template v-else-if="activeTab === 'services'">
-                <specialist-services-tab :services :specialist_id="specialist.id"/>
+                <specialist-services-tab :services :specialist_id="specialist.id" />
               </template>
               <template v-else-if="activeTab === 'blog'">
                 <div v-if="blogs.length > 0">
                   <div v-for="item in blogs" :key="item.id" @click="router.push(`/blog/${item.slug}`)"
-                  class="flex w-full items-center justify-between border-b border-solid border-b-[#E8E8E8] py-[15px] md:py-[20px]">
-                  <div class="flex flex-col gap-[5px]">
-                    <span
-                      class="font-['Onest'] text-mobile-subtitle-18 text-[#323232] md:text-subtitle-20 md:font-semibold">
-                      {{ item.title }}
-                    </span>
-                    <span class="font-['Onest'] text-mobile-body-14 text-green-500 md:text-subtitle-16 md:font-bold">
-                      {{ formatDate(item.created_at, 'DD.MM.YYYY') }}
-                    </span>
+                    class="flex w-full items-center justify-between border-b border-solid border-b-[#E8E8E8] py-[15px] md:py-[20px]">
+                    <div class="flex flex-col gap-[5px]">
+                      <span
+                        class="font-['Onest'] text-mobile-subtitle-18 text-[#323232] md:text-subtitle-20 md:font-semibold">
+                        {{ item.title }}
+                      </span>
+                      <span class="font-['Onest'] text-mobile-body-14 text-green-500 md:text-subtitle-16 md:font-bold">
+                        {{ formatDate(item.created_at, 'DD.MM.YYYY') }}
+                      </span>
+                    </div>
+                    <icon class="h-[26px] w-[26px]" name="h-icon:arrow"></icon>
                   </div>
-                  <icon class="h-[26px] w-[26px]" name="h-icon:arrow"></icon>
+                  <div class="mt-[30px] flex w-full justify-center md:mb-[10px]">
+                    <ui-pagination v-model="blogParams.page" :total="blogsPagination.total"
+                      @update:model-value="paginateBlogs" />
+                  </div>
                 </div>
-                <div class="mt-[30px] flex w-full justify-center md:mb-[10px]">
-                  <ui-pagination v-model="blogParams.page" :total="blogsPagination.total"
-                    @update:model-value="paginateBlogs" />
+                <div v-else>
+                  <h1 class="text-[24px] font-bold text-[#323232] md:text-[32px] text-center">Нет записей</h1>
                 </div>
-              </div>
-              <div v-else>
-                <h1 class="text-[24px] font-bold text-[#323232] md:text-[32px] text-center">Нет записей</h1>
-              </div>
               </template>
             </div>
           </div>
@@ -182,7 +182,8 @@
       </div>
     </app-section>
     <review-grid :items="reviews" />
-    <home-course-grid :items="courses" />
+    <home-course-grid :items="courses" :show-load-all-button="showLoadAllCoursesButton"
+      @load-all-courses="loadAllCourses" />
     <div class="fixed bottom-0 left-0 right-0 z-30 bg-white px-4 py-[20px] md:!hidden">
       <ui-button class="w-full" @click="orderModalOpen = true">Записаться</ui-button>
     </div>
@@ -261,17 +262,18 @@ const reviews = ref([])
 const courses = ref([])
 const blogs = ref([])
 const services = ref([])
+const showLoadAllCoursesButton = ref(false)
 
 const changeTab = async (tab: string) => {
-  if(tab == 'services'){
+  if (tab == 'services') {
     services.value = []
     const response = await $http.$get(`specialists/${specialist.value.slug}/services`)
     if (response?.data?.length > 0) {
-      console.log('services',response.data)
+      console.log('services', response.data)
       services.value = response.data
     }
   }
-  else if(tab == 'blog'){
+  else if (tab == 'blog') {
     const response = await $http.$get(`posts?specialist_id=${specialist.value.id}`)
     if (response?.data?.length > 0) {
       blogs.value = response.data
@@ -303,7 +305,15 @@ const { data, error } = await useAsyncData("specialist", async () => {
 const [_specialist, _reviews, _courses] = data.value || []
 specialist.value = _specialist?.data || {}
 reviews.value = _specialist?.data.reviews || []
-courses.value = _courses?.data || []
+const filteredCourses = _courses?.data.filter((course: any) => course.specialist.id === specialist.value.id) || []
+courses.value = filteredCourses
+showLoadAllCoursesButton.value = filteredCourses.length === 0
+
+const loadAllCourses = async () => {
+  const response = await courseApi.getCoursesList({})
+  courses.value = response?.data || []
+  showLoadAllCoursesButton.value = false
+}
 
 
 </script>

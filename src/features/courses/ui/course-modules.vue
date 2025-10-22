@@ -51,12 +51,12 @@ defineProps<IProps>()
         </div>
       </template>
     </ui-accordion> -->
-    <ui-accordion v-for="module in course.modules" :key="module.id">
+    <ui-accordion v-for="(module, index) in course.modules" :key="module.id">
       <template #header>
         <div>
           <div class="mb-2 flex items-center gap-2 md:mb-[10px]">
             <h-tag class="min-w-[30px] md:!px-[10px] md:!py-[5px] md:!text-subtitle-16">{{ module.title }}</h-tag>
-            <!-- <h-tag class="min-w-[30px] md:!px-[10px] md:!py-[5px] md:!text-subtitle-16">Месяц 1</h-tag> -->
+            <h-tag class="min-w-[30px] md:!px-[10px] md:!py-[5px] md:!text-subtitle-16">Месяц {{ index + 1 }}</h-tag>
           </div>
           <h3
             class="font-['Onest'] text-mobile-subtitle-20 font-semibold text-[#323232] md:mt-[10px] md:text-headline-4"
