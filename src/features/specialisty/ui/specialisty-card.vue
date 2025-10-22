@@ -15,7 +15,7 @@ defineProps<IProps>()
     @click="$router.push(`/specialisty/${specialist.slug}`)">
     <div class="flex items-start gap-[15px]">
       <div>
-        <img class="h-[137px] w-[119px] rounded-[10px] object-cover md:h-[310px] md:min-w-[269px]" alt=""
+        <img class="h-[137px] w-[119px] rounded-[10px] object-cover md:h-[325px] md:min-w-[269px]" alt=""
           :src="specialist.photo" />
         <!-- <ui-button class="mt-[20px] w-full">Записаться</ui-button> -->
       </div>
