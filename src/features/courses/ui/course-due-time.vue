@@ -64,7 +64,8 @@ function getTimeLeft(start_date: string): TimeLeft {
 
 <template>
   <app-section class="py-[40px] md:py-[60px]">
-    <div class="pt-[40px] relative overflow-hidden rounded-[20px] bg-[#6f8f6e] px-[15px] py-[40px] md:h-[590px] md:py-[80px]">
+    <div
+      class="pt-[40px] relative overflow-hidden rounded-[20px] bg-[#6f8f6e] px-[15px] py-[40px] md:h-[590px] md:py-[80px]">
       <div
         class="mx-auto flex w-full max-w-full flex-nowrap items-center justify-center gap-[6px] sm:gap-[12px] md:gap-[20px] lg:gap-[26px]">
         <course-statistics-progress progress="50" :size="circleSize">
@@ -122,47 +123,47 @@ function getTimeLeft(start_date: string): TimeLeft {
           @click="openCourseOrderModal(course.id, course.specialist.id)">Записаться
           на курс</ui-button>
       </div>
-      <div class="absolute left-0 top-0 z-[411] h-full w-full overflow-hidden">
-        <div class="z-[416] mb-0 ml-[-13px] mr-0 mt-[28px] h-[36px] w-[180px] overflow-hidden opacity-30">
-          <div class="z-[417] mb-0 ml-[12px] mr-0 mt-[7.323px] h-[21.314px] w-[832.623px] overflow-hidden">
+      <div class="pointer-events-none absolute left-0 top-0 h-full w-full overflow-hidden">
+        <div class="mb-0 ml-[-13px] mr-0 mt-[28px] h-[36px] w-[180px] overflow-hidden opacity-30">
+          <div class="mb-0 ml-[12px] mr-0 mt-[7.323px] h-[21.314px] w-[832.623px] overflow-hidden">
             <div
-              class="absolute left-[5.36%] top-[0.01%] z-[420] h-[100.01%] w-[1.64%] bg-[url(https://codia-f2c.s3.us-west-1.amazonaws.com/image/2025-07-21/qNw70U4FMk.png)] bg-[length:100%_100%] bg-no-repeat">
+              class="absolute left-[5.36%] top-[0.01%] h-[100.01%] w-[1.64%] bg-[url(https://codia-f2c.s3.us-west-1.amazonaws.com/image/2025-07-21/qNw70U4FMk.png)] bg-[length:100%_100%] bg-no-repeat">
             </div>
             <div
-              class="absolute left-[15.98%] top-[0.01%] z-[424] h-[100.01%] w-[1.64%] bg-[url(https://codia-f2c.s3.us-west-1.amazonaws.com/image/2025-07-21/6E7OWCp30E.png)] bg-[length:100%_100%] bg-no-repeat">
+              class="absolute left-[15.98%] top-[0.01%] h-[100.01%] w-[1.64%] bg-[url(https://codia-f2c.s3.us-west-1.amazonaws.com/image/2025-07-21/6E7OWCp30E.png)] bg-[length:100%_100%] bg-no-repeat">
             </div>
             <div
-              class="absolute left-[8.05%] top-[1.41%] z-[421] h-[97.17%] w-[1.52%] bg-[url(https://codia-f2c.s3.us-west-1.amazonaws.com/image/2025-07-21/xqA12XRFrH.png)] bg-[length:100%_100%] bg-no-repeat">
+              class="absolute left-[8.05%] top-[1.41%] h-[97.17%] w-[1.52%] bg-[url(https://codia-f2c.s3.us-west-1.amazonaws.com/image/2025-07-21/xqA12XRFrH.png)] bg-[length:100%_100%] bg-no-repeat">
             </div>
             <div
-              class="absolute left-[18.68%] top-[1.41%] z-[425] h-[97.17%] w-[1.52%] bg-[url(https://codia-f2c.s3.us-west-1.amazonaws.com/image/2025-07-21/Pyc230YLZW.png)] bg-[length:100%_100%] bg-no-repeat">
+              class="absolute left-[18.68%] top-[1.41%] h-[97.17%] w-[1.52%] bg-[url(https://codia-f2c.s3.us-west-1.amazonaws.com/image/2025-07-21/Pyc230YLZW.png)] bg-[length:100%_100%] bg-no-repeat">
             </div>
             <div
-              class="absolute left-[2.62%] top-[2.03%] z-[419] h-[95.94%] w-[1.68%] bg-[url(https://codia-f2c.s3.us-west-1.amazonaws.com/image/2025-07-21/CqEecRwwSE.png)] bg-[length:100%_100%] bg-no-repeat">
+              class="absolute left-[2.62%] top-[2.03%]  h-[95.94%] w-[1.68%] bg-[url(https://codia-f2c.s3.us-west-1.amazonaws.com/image/2025-07-21/CqEecRwwSE.png)] bg-[length:100%_100%] bg-no-repeat">
             </div>
             <div
-              class="absolute left-[13.25%] top-[2.03%] z-[423] h-[95.94%] w-[1.68%] bg-[url(https://codia-f2c.s3.us-west-1.amazonaws.com/image/2025-07-21/mP8eDfp8aZ.png)] bg-[length:100%_100%] bg-no-repeat">
+              class="absolute left-[13.25%] top-[2.03%] h-[95.94%] w-[1.68%] bg-[url(https://codia-f2c.s3.us-west-1.amazonaws.com/image/2025-07-21/mP8eDfp8aZ.png)] bg-[length:100%_100%] bg-no-repeat">
             </div>
             <div
-              class="absolute left-0 top-[4.66%] z-[418] h-[90.67%] w-[1.57%] bg-[url(https://codia-f2c.s3.us-west-1.amazonaws.com/image/2025-07-21/CJY2jidV7v.png)] bg-[length:100%_100%] bg-no-repeat">
+              class="absolute left-0 top-[4.66%]  h-[90.67%] w-[1.57%] bg-[url(https://codia-f2c.s3.us-west-1.amazonaws.com/image/2025-07-21/CJY2jidV7v.png)] bg-[length:100%_100%] bg-no-repeat">
             </div>
             <div
-              class="absolute left-[10.63%] top-[4.66%] z-[422] h-[90.67%] w-[1.57%] bg-[url(https://codia-f2c.s3.us-west-1.amazonaws.com/image/2025-07-21/OUD6gH65Mo.png)] bg-[length:100%_100%] bg-no-repeat">
+              class="absolute left-[10.63%] top-[4.66%] h-[90.67%] w-[1.57%] bg-[url(https://codia-f2c.s3.us-west-1.amazonaws.com/image/2025-07-21/OUD6gH65Mo.png)] bg-[length:100%_100%] bg-no-repeat">
             </div>
           </div>
         </div>
         <div
-          class="z-[415] mb-0 ml-[1122px] mr-0 mt-[7px] h-[95.043px] w-[95.043px] bg-[url(https://codia-f2c.s3.us-west-1.amazonaws.com/image/2025-07-21/reH9DTSG6J.png)] bg-[length:100%_100%] bg-no-repeat">
+          class=" mb-0 ml-[1122px] mr-0 mt-[7px] h-[95.043px] w-[95.043px] bg-[url(https://codia-f2c.s3.us-west-1.amazonaws.com/image/2025-07-21/reH9DTSG6J.png)] bg-[length:100%_100%] bg-no-repeat">
         </div>
         <div
-          class="z-[414] mb-0 ml-[175px] mr-0 mt-[28.958px] h-[68px] w-[68px] bg-[url(https://codia-f2c.s3.us-west-1.amazonaws.com/image/2025-07-21/XKSQrnz4C1.png)] bg-[length:100%_100%] bg-no-repeat">
+          class=" mb-0 ml-[175px] mr-0 mt-[28.958px] h-[68px] w-[68px] bg-[url(https://codia-f2c.s3.us-west-1.amazonaws.com/image/2025-07-21/XKSQrnz4C1.png)] bg-[length:100%_100%] bg-no-repeat">
         </div>
-        <div class="z-[413] mb-0 ml-[243px] mr-0 mt-[168px] h-[193px] w-[1092.655px]">
+        <div class=" mb-0 ml-[243px] mr-0 mt-[168px] h-[193px] w-[1092.655px]">
           <div
-            class="absolute left-[88.04%] top-0 z-[412] h-[44.17%] w-[11.96%] bg-[url(https://codia-f2c.s3.us-west-1.amazonaws.com/image/2025-07-21/ftt8TkJGwX.png)] bg-[length:100%_100%] bg-no-repeat">
+            class="absolute left-[88.04%] top-0  h-[44.17%] w-[11.96%] bg-[url(https://codia-f2c.s3.us-west-1.amazonaws.com/image/2025-07-21/ftt8TkJGwX.png)] bg-[length:100%_100%] bg-no-repeat">
           </div>
           <div
-            class="absolute left-0 top-[28.5%] z-[413] h-[71.5%] w-[12.76%] bg-[url(https://codia-f2c.s3.us-west-1.amazonaws.com/image/2025-07-21/rR2FbRuMjD.png)] bg-[length:100%_100%] bg-no-repeat">
+            class="absolute left-0 top-[28.5%]  h-[71.5%] w-[12.76%] bg-[url(https://codia-f2c.s3.us-west-1.amazonaws.com/image/2025-07-21/rR2FbRuMjD.png)] bg-[length:100%_100%] bg-no-repeat">
           </div>
         </div>
       </div>

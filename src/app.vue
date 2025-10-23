@@ -14,9 +14,13 @@ const { data, error } = await useAsyncData("app", async () => {
 })
 const [_siteSettings] = data.value || []
 
+// Set site settings immediately after fetch, not in onMounted
+if (_siteSettings?.data) {
+  Object.assign(siteSettings, _siteSettings.data)
+}
+
 onMounted(() => {
   console.log("App mounted, site settings:", _siteSettings?.data)
-  siteSettings.value = _siteSettings?.data
 })
 
 useHead({ titleTemplate: (title) => (title ? `${title} | ${t("labels.app_name")}` : t("labels.app_name")) })

@@ -2,7 +2,8 @@
   <div class="main-container relative mx-auto my-0 overflow-hidden bg-[#f0f4f1]">
     <div v-if="blog">
       <app-section>
-        <div class="relative z-[77] mx-auto mt-[30px] md:mt-[60px] flex w-full max-w-[954px] flex-col flex-nowrap items-start gap-[30px] md:gap-[50px] rounded-[20px] bg-[#fff] pb-[20px] md:pb-[30px] px-[20px] md:px-[40px] pt-[20px] md:pt-[30px]">
+        <div
+          class="relative z-[77] mx-auto mt-[30px] md:mt-[60px] flex w-full max-w-[954px] flex-col flex-nowrap items-start gap-[30px] md:gap-[50px] rounded-[20px] bg-[#fff] pb-[20px] md:pb-[30px] px-[20px] md:px-[40px] pt-[20px] md:pt-[30px]">
           <div class="relative z-[78] flex w-full flex-col flex-nowrap items-start gap-[20px] md:gap-[30px]">
             <div class="relative z-[79] flex flex-col flex-nowrap items-start gap-[8px] md:gap-[12px] self-stretch">
               <span
@@ -17,8 +18,9 @@
               </div>
             </div>
             <div class="relative z-[83] flex flex-col flex-nowrap items-start gap-[15px] md:gap-[20px] self-stretch">
-              <div class="relative z-[84] h-[200px] sm:h-[300px] md:h-[400px] lg:h-[480px] shrink-0 self-stretch rounded-[10px] bg-[rgba(217,217,217,0.2)] bg-cover bg-no-repeat"
-                  :style="{ backgroundImage: `url(${blog?.data.thumbnail})` }">
+              <div
+                class="relative z-[84] h-[200px] sm:h-[300px] md:h-[400px] lg:h-[480px] shrink-0 self-stretch rounded-[10px] bg-[rgba(217,217,217,0.2)] bg-cover bg-no-repeat"
+                :style="{ backgroundImage: `url(${blog?.data.thumbnail})` }">
               </div>
               <div class="relative z-[85] flex flex-wrap items-center justify-between self-stretch gap-[10px]">
                 <div
@@ -41,18 +43,15 @@
             <div class="relative z-[89] flex flex-col flex-nowrap items-start gap-[12px] md:gap-[15px] self-stretch">
               <div v-html="blog.data.content"></div>
             </div>
-            
+
           </div>
         </div>
       </app-section>
       <app-section>
         <div
-          class="relative z-[104] mx-auto mt-[20px] flex w-full max-w-[954px] flex-col md:flex-row flex-nowrap items-center gap-[20px] md:gap-[40px] rounded-[20px] bg-[#fff] p-[20px] md:pb-[30px] md:pt-[30px]">
-          <div 
-          class="relative z-[105] h-[200px] md:h-[285px] w-full md:w-[271px] shrink-0 overflow-hidden rounded-[10px] bg-cover bg-no-repeat"
-            :style="{
-              backgroundImage: `url(${blog?.data.specialist?.photo || 'https://codia-f2c.s3.us-west-1.amazonaws.com/image/2025-07-21/WTkDXYkXky.png'})`
-            }">
+          class="relative z-[104] mx-auto mt-[20px] flex w-full max-w-[954px] flex-col md:flex-row flex-nowrap items-stretch gap-[20px] md:gap-[40px] rounded-[20px] bg-[#fff] p-[20px] md:pb-[30px] md:pt-[30px]">
+          <div class="relative z-[105] h-[300px] md:h-auto w-full md:w-[271px] shrink-0 overflow-hidden rounded-[10px]">
+            <img :src="blog?.data.author?.image" alt="myphoto" class="w-full h-full object-cover"></img>
           </div>
           <div
             class="relative z-[106] flex w-full md:shrink-0 md:grow md:basis-0 flex-col flex-nowrap items-start gap-[20px] md:gap-[40px]">
@@ -71,7 +70,7 @@
                 <div class="relative z-[112] flex flex-nowrap items-center justify-center gap-[10px] self-stretch">
                   <span
                     class="relative z-[113] flex items-start justify-start grow text-left font-['Onest'] text-[16px] md:text-[18px] font-normal leading-relaxed text-[#585958]">
-                    {{ blog.data.author.description || "Практикующий психотерапевт. Опыт работы 37 лет. Автор 158+ статей" }}
+                    {{ blog.data.author.description || "Практикующий психотерапевт. Опыт работы 37 лет. Автор 158+статей" }}
                   </span>
                 </div>
               </div>
@@ -123,23 +122,6 @@
                 class="relative z-[125] h-[38px] w-[38px] shrink-0 bg-[url(https://codia-f2c.s3.us-west-1.amazonaws.com/image/2025-07-21/BkFGseac4F.png)] bg-cover bg-no-repeat">
               </div>
             </a>
-            <!-- <a
-            class="relative z-[122] h-[29px] w-[29px] shrink-0 overflow-hidden bg-[url(https://codia-f2c.s3.us-west-1.amazonaws.com/image/2025-07-20/yPJLFS0Mrn.png)] bg-cover bg-no-repeat"
-            target="_blank"
-            :href="siteSettings?.telegram"
-          ></a>
-          <a
-            class="relative z-[122] h-[29px] w-[29px] shrink-0 overflow-hidden bg-[url(https://codia-f2c.s3.us-west-1.amazonaws.com/image/2025-07-20/M0xHPN9iJa.png)] bg-cover bg-no-repeat"
-            target="_blank"
-            :href="siteSettings?.facebook"
-          ></a>
-          <a
-            class="relative z-[122] h-[29px] w-[29px] shrink-0 overflow-hidden bg-[url(https://codia-f2c.s3.us-west-1.amazonaws.com/image/2025-07-20/ij44xJ0f0Q.png)] bg-cover bg-no-repeat"
-            target="_blank"
-            :href="siteSettings?.instagram"
-          ></a> -->
-            <!-- <div class="relative flex items-center gap-[20px] md:w-[160px]">
-      </div> -->
           </div>
           <div
             class="hidden md:block absolute right-0 top-0 z-[126] h-[263px] w-[345px] shrink-0 overflow-hidden bg-[url(https://codia-f2c.s3.us-west-1.amazonaws.com/image/2025-07-21/7XQhWzDSyX.png)] bg-cover bg-no-repeat">
@@ -157,11 +139,7 @@
         </div>  -->
         <div class="relative z-[48] mb-0 mr-0 mt-[20px] md:mt-[30px] w-full overflow-x-auto px-[20px] md:px-0">
           <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-[15px] md:gap-[19px]">
-            <home-news-card
-              v-for="post in filteredReadMore"
-              :key="post.id"
-              :item="post"
-            />
+            <home-news-card v-for="post in filteredReadMore" :key="post.id" :item="post" />
           </div>
         </div>
       </app-section>

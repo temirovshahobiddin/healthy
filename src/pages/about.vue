@@ -217,7 +217,7 @@
           1280: { itemsToShow: 4.5, snapAlign: 'start' }
         }">
           <Slide v-for="(specialist, index) in specialists" :key="index">
-            <div class="px-[10px]">
+            <div class="px-[10px]" @click="router.push(`/specialisty/${specialist.slug}`)">
               <img class="w-full h-[400px] object-cover rounded-[10px] max-[940px]:h-[435px]" :src="specialist.photo"
                 alt="team-img" width="345" height="400">
               <div class="flex flex-col gap-[5px] mt-5 leading-[1.2]">
@@ -378,6 +378,8 @@ const specialists = ref([])
 const getdata = async () => {
   return $http.$get("/specialists", { params: { page: 1, limit: 10 } })
 }
+
+const router = useRouter()
 
 const { data } = await useAsyncData("specialists", () => getdata())
 

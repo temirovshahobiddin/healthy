@@ -7,7 +7,7 @@
     <course-modules :course />
     <course-author :course />
     <course-places :course_id="course.id" :specialist_id="course.specialist.id" :reserved-count="4" :place-count="10" />
-    <course-address :course_id="course.id" :specialist_id="course.specialist.id" />
+    <course-address :course="course" />
     <course-review-slider :reviews="course.reviews" />
     <course-leed-form :course />
     <course-faq :course />

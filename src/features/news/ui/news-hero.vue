@@ -1,7 +1,7 @@
 <template>
   <app-section>
     <div
-      class="md:mb[60px] mb-[40px] mt-[40px] flex flex-col flex-nowrap items-start gap-[12px] md:mt-[80px] md:w-[751px]"
+      class="md:mb[30px] mb-[10px] mt-[40px] flex flex-col flex-nowrap items-start gap-[12px] md:mt-[80px] md:w-[751px]"
     >
       <h2 class="text-left font-['Onest'] text-mobile-headline-1 font-semibold text-[#323232] md:text-headline-2">
         {{ t("title") }}

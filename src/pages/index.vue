@@ -80,6 +80,9 @@ useHead({
 banner.value = _banner?.data || {}
 specialists.value = _specialists?.data || []
 blog.value = _blog?.data || []
+if(blog.value.length > 3){
+  blog.value = blog.value.slice(0, 3)
+}
 courses.value = _courses?.data || []
 reviews.value = _review?.data || []
 </script>

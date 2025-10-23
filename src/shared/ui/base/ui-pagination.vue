@@ -27,7 +27,7 @@ const defaultEachSide = computed(() => {
 
 const pageCount = computed(() => Math.ceil(props.total / props.perPage))
 const lastPage = computed(() => pageCount.value - 1)
-const size = computed(() => defaultEachSide.value * 2 + 1)
+const size = computed(() => props.total)
 const notEnoughPages = computed(() => pageCount.value < size.value)
 
 const start = computed(() => {
@@ -64,12 +64,12 @@ const loadPage = (page: number) => {
           :class="{ active: isCurrentPage(i) }"
           @click="loadPage(i)"
         >
-          {{ n }}
         </button>
       </template>
     </template>
 
     <template v-else>
+      
       <template v-for="(n, i) in size" :key="n + i">
         <button class="ui-pagination-button" :class="{ active: isCurrentPage(i) }" @click="loadPage(start + i)">
           {{ start + n }}
@@ -86,6 +86,7 @@ const loadPage = (page: number) => {
       :disabled="model === lastPage"
       @click="loadPage(lastPage)"
     >
+
       <icon class="text-xl" name="lucide:chevrons-right" />
     </button>
   </div>
