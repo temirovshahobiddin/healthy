@@ -2,6 +2,9 @@
 import AppSection from "~/widgets/layout/app-section.vue"
 import { Carousel, CarouselConfig, CarouselMethods, Slide } from "vue3-carousel"
 import ReviewCard from "~/features/review/ui/review-card.vue"
+import ReviewCreateModal from "~/features/review/ui/review-create-modal.vue"
+
+const modal = useModal()
 
 const carouselRef = ref<CarouselMethods>()
 const carouselConfig = computed<Partial<CarouselConfig>>(() => ({
@@ -26,6 +29,10 @@ const carouselConfig = computed<Partial<CarouselConfig>>(() => ({
 }))
 const { reviews } = defineProps<{ reviews: any[] }>()
 
+const openReviewModal = () => {
+  modal.show("review-create-modal")
+}
+
 </script>
 
 <template>
@@ -34,7 +41,7 @@ const { reviews } = defineProps<{ reviews: any[] }>()
     <app-section class="!px-0">
       <div class="flex w-full items-center justify-between">
         <p class="section-title">Отзывы</p>
-        <ui-button class="!hidden md:!flex md:min-w-[224px]">Оставить отзыв</ui-button>
+        <ui-button class="!hidden md:!flex md:min-w-[224px]" @click="openReviewModal">Оставить отзыв</ui-button>
       </div>
     </app-section>
     <app-section class="!px-0">
@@ -47,7 +54,7 @@ const { reviews } = defineProps<{ reviews: any[] }>()
       </div>
     </app-section>
     <app-section class="!px-0">
-      <ui-button class="mt-[20px] !flex w-full md:!hidden">Оставить отзыв</ui-button>
+      <ui-button class="mt-[20px] !flex w-full md:!hidden" @click="openReviewModal">Оставить отзыв</ui-button>
       <div class="ml-auto mt-[21px] hidden w-[130px] flex-nowrap items-center gap-[10px] md:mt-[40px] md:flex">
         <div
           class="z-[168] flex h-[50px] w-[50px] shrink-0 flex-nowrap items-center justify-center gap-[10px] rounded-[30px] bg-[#fff] pb-[12px] pl-[12px] pr-[12px] pt-[12px] md:h-[60px] md:w-[60px]"
@@ -65,6 +72,7 @@ const { reviews } = defineProps<{ reviews: any[] }>()
         </div>
       </div>
     </app-section>
+    <review-create-modal :specialist="[]" />
   </div>
 </template>
 

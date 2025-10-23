@@ -5,53 +5,18 @@ interface IProps {
   course: any
 }
 
-defineProps<IProps>()
+const props = defineProps<IProps>()
+
+const showAll = ref(false)
+const displayedModules = computed(() => {
+  return showAll.value ? props.course.modules : props.course.modules.slice(0, 2)
+})
 </script>
 
 <template>
   <app-section class="py-[40px] md:py-[60px] space-y-[20px] md:space-y-[40px]">
     <span class="section-title mb-[20px] block md:mb-[40px]">Программа курса</span>
-    <!-- <ui-accordion>
-      <template #header>
-        <div>
-          <div class="mb-2 flex items-center gap-2 md:mb-[10px]">
-            <h-tag class="min-w-[30px] md:!px-[10px] md:!py-[5px] md:!text-subtitle-16">Модуль 1</h-tag>
-            <h-tag class="min-w-[30px] md:!px-[10px] md:!py-[5px] md:!text-subtitle-16">Месяц 1</h-tag>
-          </div>
-          <h3
-            class="font-['Onest'] text-mobile-subtitle-20 font-semibold text-[#323232] md:mt-[10px] md:text-headline-4"
-          >
-            От осознания к действию
-          </h3>
-        </div>
-      </template>
-      <template #default>
-        <div class="course-module__item">
-          <div
-            class="z-[150] flex flex-col flex-nowrap items-start gap-[8px] border-t border-solid border-t-[#e7e7e7] bg-[#fff] px-[15px] py-[12px] md:px-[30px] md:py-[15px]"
-          >
-            <h6>Первое занятие</h6>
-            <ul>
-              <li>знакомство</li>
-              <li>вводная часть о природе стресса</li>
-              <li>экспресс-диагностика уровня стресса у участников</li>
-            </ul>
-          </div>
-          <div
-            class="z-[150] flex flex-col flex-nowrap items-start gap-[8px] border-t border-solid border-t-[#e7e7e7] bg-[#fff] px-[15px] py-[12px] md:px-[30px] md:py-[15px]"
-          >
-            <h6>Первое занятие</h6>
-            <ul>
-              <li>знакомство</li>
-              <li>знакомство</li>
-              <li>знакомство</li>
-              <li>знакомство</li>
-            </ul>
-          </div>
-        </div>
-      </template>
-    </ui-accordion> -->
-    <ui-accordion v-for="(module, index) in course.modules" :key="module.id">
+    <ui-accordion v-for="(module, index) in displayedModules" :key="module.id">
       <template #header>
         <div>
           <div class="mb-2 flex items-center gap-2 md:mb-[10px]">
@@ -59,23 +24,24 @@ defineProps<IProps>()
             <h-tag class="min-w-[30px] md:!px-[10px] md:!py-[5px] md:!text-subtitle-16">Месяц {{ index + 1 }}</h-tag>
           </div>
           <h3
-            class="font-['Onest'] text-mobile-subtitle-20 font-semibold text-[#323232] md:mt-[10px] md:text-headline-4"
-          >
+            class="font-['Onest'] text-mobile-subtitle-20 font-semibold text-[#323232] md:mt-[10px] md:text-headline-4">
           </h3>
         </div>
       </template>
       <template #default>
-       <div class="course-module__item">
-        <div v-for="session in module.sessions" :key="session.id" class="z-[150] flex flex-col flex-nowrap items-start gap-[8px] border-t border-solid border-t-[#e7e7e7] bg-[#fff] px-[15px] py-[12px] md:px-[30px] md:py-[15px]">
-          <h6>{{ session.title }}</h6>
-          <v-html v-html="session.content"></v-html>
+        <div class="course-module__item">
+          <div v-for="session in module.sessions" :key="session.id"
+            class="z-[150] flex flex-col flex-nowrap items-start gap-[8px] border-t border-solid border-t-[#e7e7e7] bg-[#fff] px-[15px] py-[12px] md:px-[30px] md:py-[15px]">
+            <h6>{{ session.title }}</h6>
+            <v-html v-html="session.content"></v-html>
+          </div>
         </div>
-       </div> 
       </template>
     </ui-accordion>
-    <div class="mt-[15px] flex w-full items-center justify-center md:mt-[46px]">
-      <ui-button class="!mx-auto min-w-[223px] !border-green-500 !text-green-500" variant="outline">
-        Все модули
+    <div v-if="course.modules.length > 2" class="mt-[15px] flex w-full items-center justify-center md:mt-[46px]">
+      <ui-button class="!mx-auto min-w-[223px] !border-green-500 !text-green-500" variant="outline"
+        @click="showAll = !showAll">
+        {{ showAll ? 'Скрыть' : 'Все модули' }}
       </ui-button>
     </div>
   </app-section>

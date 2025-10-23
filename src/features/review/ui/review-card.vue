@@ -56,7 +56,7 @@ function formatFullName(fullName: string): string {
         </div>
       </div>
     </div>
-    <p class="overflow-hidden break-words text-mobile-body-15 font-normal text-[#323232] md:text-body-17 line-clamp-6">
+    <p class="overflow-hidden break-words text-mobile-body-15 font-normal text-[#323232] md:text-body-17 line-clamp-2">
       {{ review.comment }}
     </p>
     <ui-button
