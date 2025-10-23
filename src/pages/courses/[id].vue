@@ -6,7 +6,7 @@
     <course-due-time :course />
     <course-modules :course />
     <course-author :course />
-    <course-places :course_id="course.id" :specialist_id="course.specialist.id" :reserved-count="4" :place-count="10" />
+    <course-places :course_id="course.id" :specialist_id="course.specialist.id" :reserved-count="course.registered_people_count" :place-count="course.max_participants" />
     <course-address :course="course" />
     <course-review-slider :reviews="course.reviews" />
     <course-leed-form :course />
@@ -15,6 +15,9 @@
 </template>
 
 <script lang="ts" setup>
+useHead({
+  title: "Courses",
+})
 import AppSection from "~/widgets/layout/app-section.vue"
 import AppSectionFluid from "~/widgets/layout/app-section-fluid.vue"
 import CourseHero from "~/features/courses/ui/course-hero.vue"

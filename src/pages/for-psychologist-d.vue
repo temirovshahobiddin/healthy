@@ -841,4 +841,8 @@
   </div>
 </template>
 
-<script lang="ts" setup></script>
+<script lang="ts" setup>
+useHead({
+  title: "For Psychologist",
+})
+</script>

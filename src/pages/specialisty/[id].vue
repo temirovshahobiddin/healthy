@@ -203,6 +203,9 @@
 </template>
 
 <script lang="ts" setup>
+useHead({
+  title: "Specialist",
+})
 import AppSection from "~/widgets/layout/app-section.vue"
 import { HomeCourseGrid } from "~/features/home/ui"
 import CertificateSlider from "~/features/specialisty/ui/certificate-slider.vue"

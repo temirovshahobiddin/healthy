@@ -2,7 +2,7 @@
 import AppSectionFluid from "~/widgets/layout/app-section-fluid.vue"
 
 interface IProps {
-  placeCount: number
+  placeCount: number | string,
   reservedCount: number,
   course_id?: string | number,
   specialist_id?: string | number
@@ -34,7 +34,7 @@ const { openCourseOrderModal } = useModal()
       </div>
       <div class="mt-[20px] flex flex-col flex-nowrap items-center gap-[5px] md:mt-[40px] md:gap-[8px]">
         <span class="font-['Onest'] text-mobile-headline-2 font-semibold text-[#323232] md:text-headline-1">
-          7 из 10 мест осталось
+          {{ reservedCount }} из {{ placeCount }} мест осталось
         </span>
         <span class="font-['Onest'] text-mobile-body-15 font-medium text-[#848484] opacity-80 md:text-body-20">
           Успейте забронировать место на курс

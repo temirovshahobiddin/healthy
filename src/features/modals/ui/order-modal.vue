@@ -53,7 +53,14 @@ const handleBackdropClick = (event: Event) => {
 const submitForm = async () => {
   loading.value = true
   try {
-    const res = await $http.$post("/order", formState)
+    let myobj = {
+      name: formState.full_name,
+      phone_number: formState.phone_number,
+      date: formState.meet_date,
+      comment: formState.comment,
+      course_id: formState.service_id,
+    }
+    const res = await $http.$post("/join-course", myobj)
     if ((res as any).success) {
       currentStep.value = 1
       formSended.value = true

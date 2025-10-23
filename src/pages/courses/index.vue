@@ -12,6 +12,9 @@
 </template>
 
 <script lang="ts" setup>
+useHead({
+  title: "Courses",
+})
 import AppSection from "~/widgets/layout/app-section.vue"
 import CourseHero from "~/features/courses/ui/course-hero.vue"
 import CourseFilter from "~/features/courses/ui/course-filter.vue"

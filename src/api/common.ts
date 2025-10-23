@@ -1,5 +1,5 @@
 export const useCommonApi = () => {
-  const baseURL = "/order"
+  const baseURL = "/join-course"
   const { $http } = useNuxtApp()
 
   const createOrder = (data: any): AsyncResponseContainer<any> => {

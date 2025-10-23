@@ -148,6 +148,9 @@
 </template>
 
 <script lang="ts" setup>
+useHead({
+  title: "Blog",
+})
 import AppSection from "~/widgets/layout/app-section.vue"
 import { useBlogApi } from "~/entities/blog/blog.api"
 import { useSiteSettingsStore } from "~/entities/site-settings/site-settings.store"

@@ -12,8 +12,9 @@ const props = withDefaults(defineProps<IProps>(), {
   modelValue: 1,
   total: 0,
   perPage: 10,
-  firstPage: 1
+  firstPage: 0
 })
+
 
 const model = defineModel<number>({ default: 1 })
 
@@ -31,15 +32,13 @@ const size = computed(() => props.total)
 const notEnoughPages = computed(() => pageCount.value < size.value)
 
 const start = computed(() => {
-  if (model.value < defaultEachSide.value) return 0
-  if (model.value >= pageCount.value - defaultEachSide.value) return pageCount.value - size.value
-  return model.value - defaultEachSide.value
+  return (model.value - 1) * props.perPage
 })
 
-const isCurrentPage = (page: number) => model.value === (notEnoughPages.value ? page : page + start.value)
+const isCurrentPage = (page: number) => model.value === page
 
 const loadPage = (page: number) => {
-  if (page >= props.firstPage && page <= lastPage.value) model.value = page
+  if (page >= props.firstPage && page <= lastPage.value+1) model.value = page
 }
 </script>
 
@@ -47,13 +46,13 @@ const loadPage = (page: number) => {
   <div v-if="lastPage > firstPage" class="ui-pagination">
     <button
       class="ui-pagination-button ui-pagination-link !hidden"
-      :disabled="model === firstPage"
-      @click="loadPage(firstPage)"
+      :disabled="model === firstPage+1"
+      @click="loadPage(firstPage+1)"
     >
       <icon class="text-xl" name="lucide:chevrons-left" />
     </button>
 
-    <button class="ui-pagination-button grid" :disabled="model === firstPage" @click="loadPage(model - 1)">
+    <button class="ui-pagination-button grid" :disabled="model === firstPage+1" @click="loadPage(firstPage+1)">
       <icon class="text-xl" name="lucide:chevron-left" />
     </button>
 
@@ -61,9 +60,10 @@ const loadPage = (page: number) => {
       <template v-for="(n, i) in pageCount" :key="n + i">
         <button
           class="ui-pagination-button ui-pagination-page"
-          :class="{ active: isCurrentPage(i) }"
+          :class="{ active: isCurrentPage(n) }"
           @click="loadPage(i)"
         >
+        {{ i + 1 }}
         </button>
       </template>
     </template>
@@ -72,19 +72,19 @@ const loadPage = (page: number) => {
       
       <template v-for="(n, i) in size" :key="n + i">
         <button class="ui-pagination-button" :class="{ active: isCurrentPage(i) }" @click="loadPage(start + i)">
-          {{ start + n }}
+          {{ start + i }}
         </button>
       </template>
     </template>
 
-    <button class="ui-pagination-button grid" :disabled="model === lastPage" @click="loadPage(model + 1)">
+    <button class="ui-pagination-button grid" :disabled="model === lastPage+1" @click="loadPage(lastPage+1)">
       <icon class="text-xl" name="lucide:chevron-right" />
     </button>
 
     <button
       class="ui-pagination-button ui-pagination-link !hidden"
-      :disabled="model === lastPage"
-      @click="loadPage(lastPage)"
+      :disabled="model === lastPage+1"
+      @click="loadPage(lastPage+1)"
     >
 
       <icon class="text-xl" name="lucide:chevrons-right" />

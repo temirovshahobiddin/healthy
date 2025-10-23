@@ -233,23 +233,6 @@
         </Carousel>
       </div>
 
-      <!-- <div class="">
-        <div v-for="specialist in specialists" :key="specialist.id"
-        class="shrink-0 w-[288px] flex-auto">
-          <img class="w-full h-[400px] object-cover rounded-[10px] max-[940px]:h-[435px]" :src="specialist.photo" alt="team-img" width="345" height="400">
-
-          <div class="flex flex-col gap-[5px] mt-5 leading-[1.2]">
-              <p class="text-[24px] font-semibold text-black/100 max-[940px]:text-[22px]">
-                {{ specialist.full_name }}
-              </p>
-
-              <span class="text-[17px] text-black/80 max-[940px]:text-[15px]">
-                {{ specialist.specializations[0].name }}
-              </span>
-          </div>
-        </div>
-      </div> -->
-
       <div
         class="relative z-[144] mb-0 mr-0 mt-[50px] flex flex-col flex-nowrap items-start overflow-hidden py-[46px] px-[30px] justify-center gap-[30px] rounded-[20px] bg-[#fff] max-[1420px]:w-[calc(100%-32px)] max-[1420px]:mx-auto max-[940px]:py-[25px] max-[940px]:px-[15px]">
         <div class="relative z-[145] flex shrink-0 flex-col flex-nowrap items-start gap-[10px]">
@@ -366,6 +349,9 @@
 </template>
 
 <script lang="ts" setup>
+useHead({
+  title: "About",
+})
 import { NuxtLink } from "#components";
 import HomeLeedForm from "~/features/home/ui/home-leed-form.vue"
 import AppSectionFluid from "~/widgets/layout/app-section-fluid.vue"

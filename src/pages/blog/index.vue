@@ -1,4 +1,7 @@
 <script lang="ts" setup>
+useHead({
+  title: "Blog",
+})
 import AppSection from "~/widgets/layout/app-section.vue"
 import NewsCard from "~/features/news/ui/news-card.vue"
 import NewsHero from "~/features/news/ui/news-hero.vue"

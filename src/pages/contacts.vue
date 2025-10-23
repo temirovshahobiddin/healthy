@@ -1,4 +1,7 @@
 <script setup lang="ts">
+useHead({
+  title: "Contacts",
+})
 import HomeLeedForm from '~/features/home/ui/home-leed-form.vue';
 import contactDetails from '~/features/contacts/contact-details.vue';
 

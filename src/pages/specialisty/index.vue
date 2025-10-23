@@ -16,6 +16,9 @@
 </template>
 
 <script lang="ts" setup>
+useHead({
+  title: "Specialists",
+})
 import SpecialistyGrid from "~/features/specialisty/ui/specialisty-grid.vue"
 import AppSection from "~/widgets/layout/app-section.vue"
 import SpecialistyFilter from "~/features/specialisty/ui/specialisty-filter.vue"
