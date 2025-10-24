@@ -26,7 +26,7 @@
             <div class="md:w-[598px]">
               <span class="font-['Onest'] text-mobile-body-15 font-normal text-[#585958] md:text-body-18"
                 v-html="course.description">
-  
+
               </span>
             </div>
           </div>
@@ -34,7 +34,8 @@
         <div class="flex w-full flex-col flex-nowrap items-start gap-[10px] md:flex-row md:gap-[20px]">
           <ui-button class="w-full cursor-pointer md:w-auto md:min-w-[223px]"
             @click="openCourseOrderModal(course.id, course.specialist.id)">Записаться на курс</ui-button>
-          <ui-button class="w-full md:w-auto md:min-w-[223px]" variant="outline">Подробнее</ui-button>
+          <ui-button class="w-full md:w-auto md:min-w-[223px]" variant="outline"
+            @click="scrollToFaq">Подробнее</ui-button>
         </div>
       </div>
       <div class="mb-[20px] h-[328px] w-[328px] overflow-hidden rounded-[20px] md:mb-0 md:h-[670px] md:w-[670px]">
@@ -119,6 +120,13 @@ const formattedDate = computed(() => {
 
   return formatRuDate(props.course.start_date)
 })
+
+const scrollToFaq = () => {
+  const faqElement = document.getElementById('faq')
+  if (faqElement) {
+    faqElement.scrollIntoView({ behavior: 'smooth', block: 'start' })
+  }
+}
 </script>
 
 

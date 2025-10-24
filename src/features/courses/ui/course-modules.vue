@@ -14,7 +14,7 @@ const displayedModules = computed(() => {
 </script>
 
 <template>
-  <app-section class="py-[40px] md:py-[60px] space-y-[20px] md:space-y-[40px]">
+  <app-section class="py-[40px] md:py-[60px] space-y-[20px] md:space-y-[40px]" id="faq">
     <span class="section-title mb-[20px] block md:mb-[40px]">Программа курса</span>
     <ui-accordion v-for="(module, index) in displayedModules" :key="module.id">
       <template #header>

@@ -15,9 +15,6 @@
 </template>
 
 <script lang="ts" setup>
-useHead({
-  title: "Courses",
-})
 import AppSection from "~/widgets/layout/app-section.vue"
 import AppSectionFluid from "~/widgets/layout/app-section-fluid.vue"
 import CourseHero from "~/features/courses/ui/course-hero.vue"
@@ -46,6 +43,9 @@ const { data } = await useAsyncData("course", async () => {
 })
 
 course.value = data.value?.data || {}
+useHead({
+  title: course.value.title,
+})
 </script>
 
 <style>

@@ -200,7 +200,13 @@
     <home-course-grid :items="courses" :show-load-all-button="showLoadAllCoursesButton"
       @load-all-courses="loadAllCourses" />
     <div class="fixed bottom-0 left-0 right-0 z-30 bg-white px-4 py-[20px] md:!hidden">
-      <ui-button class="w-full" @click="orderModalOpen = true">Записаться</ui-button>
+      <div class="flex gap-2">
+        <ui-button class="w-full" @click="orderModalOpen = true">Записаться</ui-button>
+        <button @click="modal.show('phone_modal')"
+            class="px-[12px] py-[2px] rounded-[10px] bg-gray-200 text-[#63845c] flex justify-center items-center">
+            <icon size="32" name="lets-icons:phone-fill" />
+          </button>
+      </div>
     </div>
     <review-create-modal :specialist="specialist" />
     <ui-modal id="phone_modal" class="phone_modal" label="Записаться">
@@ -218,9 +224,6 @@
 </template>
 
 <script lang="ts" setup>
-useHead({
-  title: "Specialist",
-})
 import AppSection from "~/widgets/layout/app-section.vue"
 import { HomeCourseGrid } from "~/features/home/ui"
 import CertificateSlider from "~/features/specialisty/ui/certificate-slider.vue"
@@ -333,6 +336,9 @@ const loadAllCourses = async () => {
   showLoadAllCoursesButton.value = false
 }
 
+useHead({
+  title: specialist.value.full_name,
+})
 
 </script>
 

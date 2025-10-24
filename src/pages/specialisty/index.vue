@@ -1,9 +1,9 @@
 <template>
 
   <div class="main-container relative mx-auto w-full overflow-hidden bg-[#f0f4f1]" >
+    <specialisty-filter @on:filter="changeRoute" />
     <div v-if="specialists.length">
       <specialisty-hero />
-      <specialisty-filter @on:filter="changeRoute" />
       <specialisty-grid :items="specialists" />
       <app-section class="mb-[120px] mt-[70px]">
         <ui-pagination v-model="query.page" :total="pagination.total" @update:model-value="changeRoute" />

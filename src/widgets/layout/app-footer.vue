@@ -80,7 +80,7 @@ const siteSettings = computed(() => siteSettingsStore.siteSettings)
           </span>
           <span
             class="relative font-['Onest'] text-mobile-body-16 font-normal text-[#fff] md:text-[20px] md:font-medium">
-            <nuxt-link-locale to="/about">
+            <nuxt-link-locale to="/for-psychologists">
               Специалистам
             </nuxt-link-locale>
           </span>
