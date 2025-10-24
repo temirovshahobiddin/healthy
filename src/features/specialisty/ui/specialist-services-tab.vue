@@ -23,6 +23,9 @@ function handleApply(serviceId: number | string) {
         <span class="text-mobile-body-15 font-semibold text-[#63845c] md:text-body-18">
           {{ Number(service.price).toLocaleString('ru-RU') }} сум
         </span>
+        <ui-button class="w-[160px] mt-[10px]" @click="handleApply(service.id)">
+          Записаться
+        </ui-button>
       </div>
     </template>
     <template #default>
@@ -30,9 +33,6 @@ function handleApply(serviceId: number | string) {
         <div class="mb-[15px] md:mb-[20px] p-[15px] bg-[#F9F9F9] rounded-[10px]">
           <div v-html="service.content"></div>
         </div>
-        <ui-button class="w-full md:w-auto" @click="handleApply(service.id)">
-          Записаться
-        </ui-button>
       </div>
     </template>
   </ui-accordion>

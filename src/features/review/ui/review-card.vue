@@ -16,13 +16,16 @@ const showReviewModal = () => {
 function formatFullName(fullName: string): string {
   const parts = fullName.trim().split(/\s+/);
   if (parts.length === 0) return '';
+  let [lastName, firstName, middleName] = parts;
+  firstName = firstName.charAt(0).toUpperCase();
+  middleName = middleName.charAt(0).toUpperCase();
+  return `${lastName} ${firstName}. ${middleName}.`
+  // const initials =
+  //   (firstName ? firstName[0].toUpperCase() + '.' : '') +
+  //   (middleName ? ' ' + middleName[0].toUpperCase() + '.' : '');
   
-  const [lastName, firstName, middleName] = parts;
-  const initials =
-    (firstName ? firstName[0].toUpperCase() + '.' : '') +
-    (middleName ? ' ' + middleName[0].toUpperCase() + '.' : '');
-  
-  return `${lastName} ${initials}`.trim();
+  // return `${lastName} ${initials}`;
+  // return fullName;
 }
 </script>
 
@@ -56,7 +59,7 @@ function formatFullName(fullName: string): string {
         </div>
       </div>
     </div>
-    <p class="overflow-hidden break-words text-mobile-body-15 font-normal text-[#323232] md:text-body-17 line-clamp-2">
+    <p class="overflow-hidden break-words text-mobile-body-15 font-normal text-[#323232] md:text-body-17 line-clamp-6">
       {{ review.comment }}
     </p>
     <ui-button

@@ -1,14 +1,22 @@
-<script setup lang="ts">
-import { breakpointsMasterCss } from "@vueuse/core/index"
-import ForPsychologistD from "~/pages/for-psychologist-d.vue"
-import ForPsychologistM from "~/pages/for-psychologist-m.vue"
-
-const breakpoints = useBreakpoints(breakpointsMasterCss)
-const isMobile = breakpoints.smallerOrEqual("sm")
-</script>
-
 <template>
-  <for-psychologist-m></for-psychologist-m>
+  <div class="main-container relative flex w-full grow flex-col bg-[#f0f4f1]">
+    <hero-section />
+    <benefits-section />
+    <specialists-section />
+    <requirements-section />
+    <call-to-action-section />
+    <join-team-modal />
+  </div>
 </template>
 
-<style scoped></style>
+<script lang="ts" setup>
+useHead({
+  title: "Психологам",
+})
+import HeroSection from "@/features/m/HeroSection.vue"
+import BenefitsSection from "@/features/m/BenefitsSection.vue"
+import SpecialistsSection from "@/features/m/SpecialistsSection.vue"
+import RequirementsSection from "@/features/m/RequirementsSection.vue"
+import CallToActionSection from "@/features/m/CallToActionSection.vue"
+import { JoinTeamModal } from "~/features/modals"
+</script>

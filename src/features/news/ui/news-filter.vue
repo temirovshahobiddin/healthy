@@ -113,9 +113,12 @@ onMounted(() => {
 <template>
   <app-section class="mb-[20px] md:mb-[30px] md:mt-[60px]">
     <div class="flex items-center justify-between gap-[10px] md:gap-[20px]">
-      <ui-input v-model="query.search"
-        class="!h-12 w-full !rounded-[100px] !border-0 !bg-[#fff] !px-[15px] py-[12px] font-['Onest'] !text-mobile-body-15 !font-medium text-[#585958] md:!h-full md:!px-[25px] md:py-[18px] md:!text-body-18"
-        placeholder="Найти статью" @update:model-value="search"></ui-input>
+      <div class="w-full relative">
+        <ui-input v-model="query.search"
+          class="!h-12 w-full !rounded-[100px] !border-0 !bg-[#fff] !px-[15px] py-[12px] font-['Onest'] !text-mobile-body-15 !font-medium text-[#585958] md:!h-full md:!px-[25px] md:py-[18px] md:!text-body-18"
+          placeholder="Найти статью" @update:model-value="search"></ui-input>
+        <icon class="absolute right-[20px] top-[50%] h-6 w-6 -translate-y-[50%] cursor-pointer" name="jam:search" @click="search"></icon>
+      </div>
       <div
         class="hidden w-[223px] shrink-0 flex-nowrap items-center justify-between rounded-[100px] bg-[#fff] pb-[18px] pl-[20px] pr-[20px] pt-[18px] md:flex"
         @click.stop="toggleAuthorsMenu">

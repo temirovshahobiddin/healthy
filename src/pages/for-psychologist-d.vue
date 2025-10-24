@@ -1,5 +1,5 @@
 <template>
-  <div class="main-container relative mx-auto my-0 h-[4496px] w-[1920px] overflow-hidden bg-[#f0f4f1]">
+  <div class="main-container relative mx-auto my-0 h-[4496px] w-[1920px] overflow-hidden bg-red-100">
     <div class="relative mb-0 ml-0 mr-0 mt-0 h-[820px] w-[1920px] overflow-hidden">
       <div class="absolute left-0 top-0 z-[1] h-[820px] w-[1920px]">
         <div

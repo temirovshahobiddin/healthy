@@ -16,7 +16,7 @@ defineProps<IProps>()
       <div class="mb-[20px] md:mb-[40px]">
         <span class="section-title font-['Onest'] font-semibold text-[#323232]">Ведущие курса</span>
       </div>
-      <div class="z-[186] flex flex-col flex-nowrap items-center gap-[20px] md:flex-row md:gap-[60px]">
+      <div class="z-[186] flex flex-col flex-nowrap items-start gap-[20px] md:flex-row md:gap-[60px]">
         <img class="h-[345px] w-full overflow-hidden rounded-[10px] object-cover md:h-[575px] md:w-[548px]"
           :src="course.specialist.image" alt="" />
         <div class="flex flex-col flex-nowrap items-start gap-[32px] md:w-[832px] md:gap-[129px]">
@@ -29,7 +29,8 @@ defineProps<IProps>()
                   {{course.specialist.full_name}}
                 </span>
                 <span class="font-['Onest'] text-mobile-subtitle-16 font-semibold text-[#63845c] md:text-subtitle-20">
-                  врач-психотерапевт, к.м.н., доцент с 37-летним стажем
+                  <!-- врач-психотерапевт, к.м.н., доцент с 37-летним стажем -->
+                  {{course.specialist?.short_description}}
                 </span>
               </div>
             </div>
@@ -37,7 +38,10 @@ defineProps<IProps>()
               <span class="font-['Onest'] text-mobile-subtitle-22 font-semibold text-[#323232] md:text-headline-4">
                 О менторе
               </span>
-              <span class="font-['Onest'] text-mobile-body-15 font-normal text-[#585958] md:text-body-18">
+              <span v-html="course.specialist?.description" v-if="course.specialist?.description">
+                
+              </span>
+              <!-- <span class="font-['Onest'] text-mobile-body-15 font-normal text-[#585958] md:text-body-18">
                 Автор уникальной методики стресс-менеджмента, обучил уже 200+ человек навыкам эмоциональной
                 саморегуляции.
                 <br />
@@ -45,10 +49,10 @@ defineProps<IProps>()
                 Имеет многолетний опыт индивидуальной и групповой работы. Помогает людям восстанавливать внутренний
                 ресурс, справляться с тревогой и выгоранием, выстраивать устойчивость в повседневной жизни. На курсе
                 делится только тем, что работает на практике
-              </span>
+              </span> -->
             </div>
           </div>
-          <div class="flex w-full items-end justify-between">
+          <!-- <div class="flex w-full items-end justify-between">
             <ui-button class="min-w-[158px] md:min-w-[204px]" variant="outline">Подробнее</ui-button>
             <div class="flex items-center justify-end gap-[5px] md:gap-[10px]">
               <div
@@ -60,7 +64,7 @@ defineProps<IProps>()
                 <icon class="h-full w-full" name="h-icon:arrow"></icon>
               </div>
             </div>
-          </div>
+          </div> -->
         </div>
       </div>
     </app-section>

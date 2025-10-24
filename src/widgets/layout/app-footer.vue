@@ -4,7 +4,7 @@ import AppSectionFluid from "~/widgets/layout/app-section-fluid.vue"
 import { useSiteSettingsStore } from "~/entities/site-settings/site-settings.store"
 
 const siteSettingsStore = useSiteSettingsStore()
-const { siteSettings } = storeToRefs(siteSettingsStore)
+const siteSettings = computed(() => siteSettingsStore.siteSettings)
 </script>
 
 <template>

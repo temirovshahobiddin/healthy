@@ -10,9 +10,10 @@
             </div>
             <div class="!hidden w-full gap-[10px] md:!flex">
               <ui-button class="w-full" @click="orderModalOpen = true">Записаться</ui-button>
-              <ui-button variant="outline" class="px-[2px]" @click="modal.show('phone_modal')">
+              <button @click="modal.show('phone_modal')"
+                class="px-[12px] py-[2px] rounded-[10px] bg-gray-200 text-[#63845c] flex justify-center items-center">
                 <icon size="32" name="lets-icons:phone-fill" />
-              </ui-button>
+              </button>
             </div>
           </div>
           <div class="md:w-[953px]">
@@ -154,19 +155,33 @@
               </template>
               <template v-else-if="activeTab === 'blog'">
                 <div v-if="blogs.length > 0">
-                  <div v-for="item in blogs" :key="item.id" @click="router.push(`/blog/${item.slug}`)"
-                    class="flex w-full items-center justify-between border-b border-solid border-b-[#E8E8E8] py-[15px] md:py-[20px]">
-                    <div class="flex flex-col gap-[5px]">
-                      <span
-                        class="font-['Onest'] text-mobile-subtitle-18 text-[#323232] md:text-subtitle-20 md:font-semibold">
-                        {{ item.title }}
-                      </span>
-                      <span class="font-['Onest'] text-mobile-body-14 text-green-500 md:text-subtitle-16 md:font-bold">
-                        {{ formatDate(item.created_at, 'DD.MM.YYYY') }}
-                      </span>
-                    </div>
-                    <icon class="h-[26px] w-[26px]" name="h-icon:arrow"></icon>
-                  </div>
+                  <ui-accordion v-for="item in blogs" :key="item.id"
+                    class="detail-accordion w-full !border-b border-none border-b-[#E8E8E8] !bg-white md:mb-[10px]">
+                    <template #header>
+                      <div class="flex flex-col gap-[5px]">
+                        <span class="text-mobile-subtitle-18 font-semibold text-[#323232] md:text-subtitle-20">
+                          {{ item.title }}
+                        </span>
+                        <span class="text-mobile-body-14 font-semibold text-green-500 md:text-subtitle-16">
+                          {{ formatDate(item.created_at, 'DD.MM.YYYY') }}
+                        </span>
+                      </div>
+                    </template>
+                    <template #default>
+                      <div class="pb-[10px] md:pb-[15px] border-b border-solid border-[#E8E8E8]">
+                        <div class="mb-[15px] md:mb-[20px] p-[15px] bg-[#F9F9F9] rounded-[10px]">
+                          <p v-if="item.short_description"
+                            class=" text-[#323232] mb-[15px]">
+                            {{ item.short_description }}
+                          </p>
+                          <!-- <div v-if="item.content" v-html="item.content" class="prose max-w-none"></div> -->
+                          <ui-button class="w-full md:w-auto mt-[15px]" @click="router.push(`/blog/${item.slug}`)">
+                            Читать полностью
+                          </ui-button>
+                        </div>
+                      </div>
+                    </template>
+                  </ui-accordion>
                   <div class="mt-[30px] flex w-full justify-center md:mb-[10px]">
                     <ui-pagination v-model="blogParams.page" :total="blogsPagination.total"
                       @update:model-value="paginateBlogs" />
@@ -219,7 +234,7 @@ import { usePostApi } from "~/api/posts/api"
 import SpecialistDetailTab from "~/features/specialisty/ui/specialist-detail-tab.vue"
 import SpecialistServicesTab from "~/features/specialisty/ui/specialist-services-tab.vue"
 import { UiModal } from "#components"
-
+const router = useRouter()
 const { orderModalOpen } = useModal()
 const modal = useModal()
 

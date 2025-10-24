@@ -61,11 +61,11 @@ const submit = async () => {
 <template>
   <app-section-fluid
     class="bg-[url(https://codia-f2c.s3.us-west-1.amazonaws.com/image/2025-07-20/ornGaxc2yP.png)] bg-[length:100%_100%] bg-no-repeat py-[40px] md:py-[120px]">
-    <div class="flex flex-col gap-[40px] overflow-hidden md:flex-row md:items-center md:justify-between">
-      <div class="flex flex-col flex-nowrap items-start gap-[30px] md:w-[50.63%]">
+    <div class="flex flex-col gap-[40px] overflow-hidden md:flex-row md:items-start md:justify-between md:gap-[30px]">
+      <div class="flex flex-col flex-nowrap items-start gap-[30px] md:w-[48%] lg:w-[50%]">
         <div class="relative flex shrink-0 flex-col flex-nowrap items-start gap-[10px] self-stretch md:gap-[15px]">
           <span
-            class="text-left font-['Onest'] whitespace-nowrap mb-[20px] text-mobile-headline-1 font-semibold text-[#fff] md:text-headline-2">
+            class="text-left font-['Onest'] mb-[20px] text-mobile-headline-2 font-semibold text-[#fff] md:text-headline-3 lg:text-headline-2">
             Присоединяйтесь к обучению
           </span>
           <span class="text-left font-['Onest'] text-mobile-body-16 font-normal text-[#fff] md:text-body-18">
@@ -83,7 +83,7 @@ const submit = async () => {
           </div>
         </div>
       </div>
-      <div class="flex w-full flex-col flex-nowrap items-start gap-[40px] md:w-[345px]">
+      <div class="flex w-full flex-col flex-nowrap items-start gap-[40px] md:w-[345px] lg:w-[380px]">
         <div class="relative flex shrink-0 flex-col flex-nowrap items-start gap-[10px] self-stretch">
           <ui-form-group v-bind="hasError('full_name')" v-slot="{ id }" class="w-full">
             <ui-input v-model="form.full_name"

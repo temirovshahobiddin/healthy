@@ -12,6 +12,9 @@ const props = withDefaults(defineProps<IProps>(), { size: 56, stroke: 6, offset:
 const windowWidth = ref(typeof window !== 'undefined' ? window.innerWidth : 1024)
 
 const responsiveSize = computed(() => {
+  if (windowWidth.value < 340) {
+    return Math.min(props.size, 30)
+  }
   if (windowWidth.value < 768) {
     return Math.min(props.size, 40)
   }
@@ -19,6 +22,9 @@ const responsiveSize = computed(() => {
 })
 
 const responsiveStroke = computed(() => {
+  if (windowWidth.value < 340) {
+    return Math.min(props.stroke, 3)
+  }
   if (windowWidth.value < 768) {
     return Math.min(props.stroke, 4)
   }
@@ -52,13 +58,13 @@ onMounted(() => {
 
     <div class="absolute grid place-items-center">
       <p v-if="$slots.label"
-        class="text-blue-command whitespace-nowrap text-center text-xl font-bold leading-none md:text-3xl">
+        class="text-blue-command whitespace-nowrap text-center text-sm font-bold leading-none sm:text-xl md:text-3xl">
         <slot name="label">
           {{ label }}
         </slot>
       </p>
 
-      <p v-else class="text-blue-command text-xl font-bold md:text-3xl">{{ progress }}%</p>
+      <p v-else class="text-blue-command text-sm font-bold sm:text-xl md:text-3xl">{{ progress }}%</p>
     </div>
   </div>
 </template>

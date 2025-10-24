@@ -1,26 +1,30 @@
-<script setup lang="ts">
-import { useSiteSettingsApi } from "~/api/site-settings/api"
-import { useSiteSettingsStore } from "~/entities/site-settings/site-settings.store"
-
+<script setup>
 const { t } = useI18n()
+import { useSiteSettingsApi } from '~/api/site-settings/api'
+import { useSiteSettingsStore } from '~/entities/site-settings/site-settings.store'
+
 const siteSettingsApi = useSiteSettingsApi()
 const siteSettingsStore = useSiteSettingsStore()
-const { siteSettings } = storeToRefs(siteSettingsStore)
+const { siteSettings } = storeToRefs(siteSettingsStore) // siteSettings is a ref
 
-const { data, error } = await useAsyncData("app", async () => {
-  const request = [siteSettingsApi.getSiteSettings()]
+const { data, error, status } = await useAsyncData(
+  'siteSettingsKey',
+  () => siteSettingsApi.getSiteSettings()
+)
 
-  return await Promise.all(request)
-})
-const [_siteSettings] = data.value || []
-
-// Set site settings immediately after fetch, not in onMounted
-if (_siteSettings?.data) {
-  Object.assign(siteSettings, _siteSettings.data)
+if (error.value) {
+  // handle error, maybe log or show toast
+  console.error('Failed to fetch site settings:', error.value)
+} else if (data.value && data.value.data) {
+  // update the store reactively
+  const settings = data.value.data
+  Object.keys(settings).forEach((key) => {
+    siteSettings.value[key] = settings[key]
+  })
 }
 
 onMounted(() => {
-  console.log("App mounted, site settings:", _siteSettings?.data)
+  console.log("App mounted, site settings:", siteSettings.value)
 })
 
 useHead({ titleTemplate: (title) => (title ? `${title} | ${t("labels.app_name")}` : t("labels.app_name")) })

@@ -75,7 +75,7 @@ function getTimeLeft(start_date: string): TimeLeft {
                 class="font-['Onest'] text-[22px] font-semibold text-[#fff] sm:text-[40px] md:text-[55px] lg:text-[70px]">{{
                   getTimeLeft(course.start_date).months }}</span>
               <span
-                class="font-['Onest'] text-[9px] font-medium text-[#fff] opacity-80 sm:text-[13px] md:text-[16px] lg:text-body-18">
+                class="font-['Onest'] mt-3 text-[9px] font-medium text-[#fff] opacity-80 sm:text-[13px] md:text-[16px] lg:text-body-18">
                 месяцев
               </span>
             </div>
@@ -88,7 +88,7 @@ function getTimeLeft(start_date: string): TimeLeft {
                 class="font-['Onest'] text-[22px] font-semibold text-[#fff] sm:text-[40px] md:text-[55px] lg:text-[70px]">{{
                   getTimeLeft(course.start_date).days }}</span>
               <span
-                class="font-['Onest'] text-[9px] font-medium text-[#fff] opacity-80 sm:text-[13px] md:text-[16px] lg:text-body-18">
+                class="font-['Onest'] mt-3 text-[9px] font-medium text-[#fff] opacity-80 sm:text-[13px] md:text-[16px] lg:text-body-18">
                 дней
               </span>
             </div>
@@ -101,7 +101,7 @@ function getTimeLeft(start_date: string): TimeLeft {
                 class="font-['Onest'] text-[22px] font-semibold text-[#fff] sm:text-[40px] md:text-[55px] lg:text-[70px]">{{
                   getTimeLeft(course.start_date).hours }}</span>
               <span
-                class="font-['Onest'] text-[9px] font-medium text-[#fff] opacity-80 sm:text-[13px] md:text-[16px] lg:text-body-18">
+                class="font-['Onest'] mt-3 text-[9px] font-medium text-[#fff] opacity-80 sm:text-[13px] md:text-[16px] lg:text-body-18">
                 часов
               </span>
             </div>

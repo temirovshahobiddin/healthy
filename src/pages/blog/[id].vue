@@ -100,13 +100,15 @@
             </span>
           </div>
           <div class="relative z-[120] flex flex-wrap items-center gap-[15px]">
-            <div
-              class="relative z-[121] flex h-[38px] w-[38px] shrink-0 flex-nowrap items-center justify-center gap-[10px] rounded-[22.5px] bg-[#63845c] pb-[10px] pl-[10px] pr-[10px] pt-[10px]">
+            <nuxt-link-locale to="/">
               <div
-                class="relative z-[122] h-[29px] w-[29px] shrink-0 overflow-hidden bg-[url(https://codia-f2c.s3.us-west-1.amazonaws.com/image/2025-07-21/m2beTU4hon.png)] bg-cover bg-no-repeat">
+                class="relative z-[121] flex h-[38px] w-[38px] shrink-0 flex-nowrap items-center justify-center gap-[10px] rounded-[22.5px] bg-[#63845c] pb-[10px] pl-[10px] pr-[10px] pt-[10px]">
+                <div
+                  class="relative z-[122] h-[29px] w-[29px] shrink-0 overflow-hidden bg-[url(https://codia-f2c.s3.us-west-1.amazonaws.com/image/2025-07-21/m2beTU4hon.png)] bg-cover bg-no-repeat">
+                </div>
+  
               </div>
-
-            </div>
+            </nuxt-link-locale>
             <a target="_blank" :href="siteSettings?.telegram">
               <div
                 class="relative z-[123] h-[38px] w-[38px] shrink-0 overflow-hidden bg-[url(https://codia-f2c.s3.us-west-1.amazonaws.com/image/2025-07-21/iBJHrYwWh2.png)] bg-cover bg-no-repeat">

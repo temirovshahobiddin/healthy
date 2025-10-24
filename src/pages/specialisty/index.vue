@@ -78,6 +78,21 @@ const { data, refresh } = await useAsyncData(
 
 
 specialists.value = data.value?.data || []
+specialists.value = (data.value?.data || []).sort((a: any, b: any) => {
+  // 1️⃣ is_owner: true should come first
+  if (a.is_owner !== b.is_owner) return b.is_owner - a.is_owner
+
+  // 2️⃣ review_rating: higher first
+  if (a.review_rating !== b.review_rating)
+    return b.review_rating - a.review_rating
+
+  // 3️⃣ price: lower first
+  if (a.price !== b.price) return a.price - b.price
+
+  // 4️⃣ experience: higher first
+  return b.experience - a.experience
+})
+
 pagination.value = data.value?.pagination || {
   page: 1,
   total: 0,

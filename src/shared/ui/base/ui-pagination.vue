@@ -61,7 +61,7 @@ const loadPage = (page: number) => {
         <button
           class="ui-pagination-button ui-pagination-page"
           :class="{ active: isCurrentPage(n) }"
-          @click="loadPage(i)"
+          @click="loadPage(i+1)"
         >
         {{ i + 1 }}
         </button>

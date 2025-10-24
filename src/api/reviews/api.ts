@@ -1,5 +1,5 @@
 export const useReviewApi = () => {
-  const baseURL = "/courses"
+  const baseURL = "/reviews"
   const { $http } = useNuxtApp()
 
   const getReviewList = (params?: Record<string, any>): AsyncResponseContainer<any[]> => {

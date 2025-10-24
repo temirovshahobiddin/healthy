@@ -5,7 +5,7 @@
       :background="isMobile ? banner.thumbnail_mobile : banner.thumbnail_desktop" />
     <home-specialist-grid :items="specialists" />
     <home-course-grid :items="courses" />
-    <!-- <home-review-grid :items="reviews" /> -->
+    <home-review-grid :items="reviews" />
     <home-news-grid :items="blog" />
     <home-leed-form />
     <home-about />
@@ -57,15 +57,13 @@ const { data, error } = await useAsyncData("home", async () => {
     specialistsApi.getSpecialistsList(),
     blogApi.getBlogList(),
     courseApi.getCoursesList(),
-    reviewApi.getReviewList({
-      is_home_page: true
-    })
+    reviewApi.getReviewList()
   ]
   return await Promise.all(request)
 })
 const [_banner, _specialists, _blog, _courses, _review] = data.value || []
 
-
+console.log("_review", _review)
 
 useHead({
   title: t("title"),
